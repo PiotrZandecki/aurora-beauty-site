@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { siteContent } from "@/content/siteContent";
 import { useSitePreferences } from "@/components/providers/SitePreferencesProvider";
+import { siteConfig } from "@/lib/siteConfig";
 
 export function Footer() {
   const { language } = useSitePreferences();
@@ -21,12 +22,12 @@ export function Footer() {
 
           <p className="mt-4 max-w-md leading-7">
             {language === "pl"
-              ? "Elegancka strona wizytówkowa dla salonu beauty z obsługą dwóch języków, jasnego i ciemnego motywu oraz gotową strukturą pod dalszy rozwój."
-              : "An elegant business website for a beauty studio with two languages, light and dark mode, and a clean structure for future growth."}
+              ? siteConfig.descriptionPl
+              : siteConfig.description}
           </p>
 
           <p className="mt-6 text-xs uppercase tracking-[0.25em] text-rose-600 dark:text-rose-300">
-            Beauty studio
+            {content.footer}
           </p>
         </div>
 
@@ -55,30 +56,30 @@ export function Footer() {
 
           <div className="mt-5 grid gap-3">
             <a
-              href="tel:+48123456789"
+              href={siteConfig.phoneHref}
               className="transition hover:text-rose-700 dark:hover:text-rose-200"
             >
-              +48 123 456 789
+              {siteConfig.phone}
             </a>
 
             <a
-              href="mailto:hello@aurorabeauty.pl"
+              href={`mailto:${siteConfig.email}`}
               className="transition hover:text-rose-700 dark:hover:text-rose-200"
             >
-              hello@aurorabeauty.pl
+              {siteConfig.email}
             </a>
 
             <a
-              href="https://instagram.com"
+              href={siteConfig.instagramUrl}
               className="transition hover:text-rose-700 dark:hover:text-rose-200"
             >
-              Instagram
+              {siteConfig.instagramLabel}
             </a>
 
             <p className="leading-7">
               {language === "pl"
-                ? "ul. Różana 12, Warszawa"
-                : "12 Różana Street, Warsaw"}
+                ? siteConfig.shortAddressPl
+                : siteConfig.shortAddressEn}
             </p>
           </div>
         </div>
@@ -94,8 +95,8 @@ export function Footer() {
 
         <p>
           {language === "pl"
-            ? "Wersja startowa projektu — PL/EN + light/dark mode."
-            : "Starter project version — PL/EN + light/dark mode."}
+            ? "Natural beauty, refined with care."
+            : "Natural beauty, refined with care."}
         </p>
       </div>
 

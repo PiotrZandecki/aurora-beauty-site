@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import type { ReactNode } from "react";
 import "./globals.css";
 import { SiteShell } from "@/components/layout/SiteShell";
 import { siteConfig } from "@/lib/siteConfig";
@@ -6,7 +7,7 @@ import { siteConfig } from "@/lib/siteConfig";
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} | Beauty Studio`,
+    default: `${siteConfig.name} | Premium Beauty Studio`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -28,12 +29,12 @@ export const metadata: Metadata = {
     alternateLocale: ["en_US"],
     url: "/",
     siteName: siteConfig.name,
-    title: `${siteConfig.name} | Beauty Studio`,
+    title: `${siteConfig.name} | Premium Beauty Studio`,
     description: siteConfig.description,
   },
   twitter: {
     card: "summary",
-    title: `${siteConfig.name} | Beauty Studio`,
+    title: `${siteConfig.name} | Premium Beauty Studio`,
     description: siteConfig.description,
   },
   robots: {
@@ -67,7 +68,7 @@ export const viewport: Viewport = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="pl" suppressHydrationWarning>
