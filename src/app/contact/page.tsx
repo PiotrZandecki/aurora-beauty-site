@@ -12,16 +12,22 @@ import { SectionHeader } from "@/components/sections/SectionHeader";
 type FormData = {
   name: string;
   email: string;
+  phone: string;
   service: string;
+  preferredDate: string;
   message: string;
 };
 
 const initialFormData: FormData = {
   name: "",
   email: "",
+  phone: "",
   service: "facial-care",
+  preferredDate: "",
   message: "",
 };
+
+const CONTACT_EMAIL = "hello@aurorabeauty.pl";
 
 export default function ContactPage() {
   const { language } = useSitePreferences();
@@ -47,10 +53,70 @@ export default function ContactPage() {
     setHasSubmitted(false);
   }
 
+  function getSelectedServiceLabel() {
+    const selectedOption = content.serviceOptions.find(
+      (option) => option.value === formData.service,
+    );
+
+    return selectedOption?.label ?? formData.service;
+  }
+
+  function buildEmailBody() {
+    const selectedService = getSelectedServiceLabel();
+
+    if (language === "pl") {
+      return [
+        "Dzień dobry,",
+        "",
+        "chciałabym/chciałbym zapytać o wizytę w Aurora Beauty Studio.",
+        "",
+        `Imię: ${formData.name}`,
+        `E-mail: ${formData.email}`,
+        `Telefon: ${formData.phone || "nie podano"}`,
+        `Interesująca usługa: ${selectedService}`,
+        `Preferowany termin: ${formData.preferredDate || "nie podano"}`,
+        "",
+        "Wiadomość:",
+        formData.message,
+        "",
+        "Pozdrawiam",
+      ].join("\n");
+    }
+
+    return [
+      "Hello,",
+      "",
+      "I would like to ask about an appointment at Aurora Beauty Studio.",
+      "",
+      `Name: ${formData.name}`,
+      `E-mail: ${formData.email}`,
+      `Phone: ${formData.phone || "not provided"}`,
+      `Service of interest: ${selectedService}`,
+      `Preferred date: ${formData.preferredDate || "not provided"}`,
+      "",
+      "Message:",
+      formData.message,
+      "",
+      "Best regards",
+    ].join("\n");
+  }
+
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    const selectedService = getSelectedServiceLabel();
+    const subject =
+      language === "pl"
+        ? `Zapytanie o wizytę — ${selectedService}`
+        : `Appointment inquiry — ${selectedService}`;
+
+    const mailtoUrl = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+      subject,
+    )}&body=${encodeURIComponent(buildEmailBody())}`;
+
+    window.location.href = mailtoUrl;
+
     setHasSubmitted(true);
-    setFormData(initialFormData);
   }
 
   return (
@@ -130,11 +196,13 @@ export default function ContactPage() {
             <div className="mt-5 flex aspect-video items-end rounded-3xl bg-linear-to-br from-rose-100 via-pink-100 to-stone-100 p-6 dark:from-stone-800 dark:via-stone-900 dark:to-rose-950">
               <div className="rounded-3xl bg-white/80 px-4 py-3 shadow-sm backdrop-blur dark:bg-stone-950/70">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-600 dark:text-rose-300">
-                  Map placeholder
+                  Aurora Beauty Studio
                 </p>
 
                 <p className="mt-1 text-sm font-semibold text-stone-950 dark:text-rose-50">
-                  Google Maps / location embed
+                  {language === "pl"
+                    ? "Warszawa — spokojna lokalizacja i wygodny kontakt"
+                    : "Warsaw — calm location and easy contact"}
                 </p>
               </div>
             </div>
@@ -171,46 +239,91 @@ export default function ContactPage() {
                 />
               </div>
 
-              <div>
-                <label
-                  htmlFor="email"
-                  className="mb-2 block text-sm font-semibold text-stone-700 dark:text-stone-200"
-                >
-                  {content.formLabels.email}
-                </label>
+              <div className="grid gap-5 md:grid-cols-2">
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="mb-2 block text-sm font-semibold text-stone-700 dark:text-stone-200"
+                  >
+                    {content.formLabels.email}
+                  </label>
 
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50"
-                />
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className="w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="phone"
+                    className="mb-2 block text-sm font-semibold text-stone-700 dark:text-stone-200"
+                  >
+                    {content.formLabels.phone}
+                  </label>
+
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className="w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50"
+                  />
+                </div>
               </div>
 
-              <div>
-                <label
-                  htmlFor="service"
-                  className="mb-2 block text-sm font-semibold text-stone-700 dark:text-stone-200"
-                >
-                  {content.formLabels.service}
-                </label>
+              <div className="grid gap-5 md:grid-cols-2">
+                <div>
+                  <label
+                    htmlFor="service"
+                    className="mb-2 block text-sm font-semibold text-stone-700 dark:text-stone-200"
+                  >
+                    {content.formLabels.service}
+                  </label>
 
-                <select
-                  id="service"
-                  name="service"
-                  value={formData.service}
-                  onChange={handleChange}
-                  className="w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50"
-                >
-                  {content.serviceOptions.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
+                  <select
+                    id="service"
+                    name="service"
+                    value={formData.service}
+                    onChange={handleChange}
+                    className="w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50"
+                  >
+                    {content.serviceOptions.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="preferredDate"
+                    className="mb-2 block text-sm font-semibold text-stone-700 dark:text-stone-200"
+                  >
+                    {content.formLabels.preferredDate}
+                  </label>
+
+                  <input
+                    id="preferredDate"
+                    name="preferredDate"
+                    type="text"
+                    value={formData.preferredDate}
+                    onChange={handleChange}
+                    placeholder={
+                      language === "pl"
+                        ? "np. piątek po 16:00"
+                        : "e.g. Friday after 4 PM"
+                    }
+                    className="w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50"
+                  />
+                </div>
               </div>
 
               <div>
@@ -282,13 +395,11 @@ export default function ContactPage() {
 
             <div className="rounded-4xl bg-stone-950 p-6 text-white shadow-2xl shadow-rose-200/70 dark:bg-rose-100 dark:text-stone-950 dark:shadow-black/30 md:p-8">
               <h3 className="text-2xl font-semibold">
-                {content.formLabels.demoNote}
+                {content.formLabels.noteTitle}
               </h3>
 
               <p className="mt-4 leading-7 text-stone-300 dark:text-stone-700">
-                {language === "pl"
-                  ? "Dzięki temu możemy dopracować wygląd i UX formularza, zanim podepniemy prawdziwą obsługę wiadomości."
-                  : "This lets us refine the form design and UX before connecting real message handling."}
+                {content.formLabels.noteDescription}
               </p>
             </div>
           </div>

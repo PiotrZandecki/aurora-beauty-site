@@ -22,25 +22,32 @@ type ContactContent = {
   detailsTitle: string;
   detailsDescription: string;
   contactMethods: ContactMethod[];
+
   addressTitle: string;
   address: string;
   addressDescription: string;
+
   openingHoursTitle: string;
   openingHours: OpeningHour[];
+
   formEyebrow: string;
   formTitle: string;
   formDescription: string;
   formLabels: {
     name: string;
     email: string;
+    phone: string;
     service: string;
+    preferredDate: string;
     message: string;
     submit: string;
     successTitle: string;
     successMessage: string;
-    demoNote: string;
+    noteTitle: string;
+    noteDescription: string;
   };
   serviceOptions: FormOption[];
+
   visitEyebrow: string;
   visitTitle: string;
   visitDescription: string;
@@ -50,141 +57,163 @@ type ContactContent = {
 export const contactContent: Record<Language, ContactContent> = {
   pl: {
     detailsEyebrow: "Kontakt",
-    detailsTitle: "Masz pytanie albo chcesz umówić wizytę?",
+    detailsTitle: "Umów wizytę albo zapytaj, która usługa będzie najlepsza.",
     detailsDescription:
-      "Ta podstrona zbiera wszystkie najważniejsze sposoby kontaktu. Później możemy podpiąć tutaj prawdziwy formularz, mapę Google, WhatsApp, Booksy albo inny system rezerwacji.",
+      "Skontaktuj się w najwygodniejszy dla siebie sposób. W wiadomości warto opisać, jakiej usługi szukasz, jaki efekt chcesz uzyskać i jaki termin byłby dla Ciebie najlepszy.",
     contactMethods: [
       {
         label: "Telefon",
         value: "+48 123 456 789",
         href: "tel:+48123456789",
-        description: "Najlepszy wybór przy szybkich pytaniach i rezerwacji.",
+        description:
+          "Najlepszy wybór przy szybkich pytaniach, zmianie terminu albo pilnej rezerwacji.",
       },
       {
         label: "E-mail",
         value: "hello@aurorabeauty.pl",
         href: "mailto:hello@aurorabeauty.pl",
-        description: "Dobry kanał do dłuższych pytań i współpracy.",
+        description:
+          "Dobry kanał do opisania oczekiwań, zapytania o usługę lub ustalenia szczegółów przed wizytą.",
       },
       {
         label: "Instagram",
         value: "@aurora.beauty",
         href: "https://instagram.com",
-        description: "Miejsce na efekty pracy, relacje i aktualności salonu.",
+        description:
+          "Miejsce na aktualności, inspiracje, efekty pracy i szybki kontakt przez wiadomość prywatną.",
       },
     ],
+
     addressTitle: "Adres salonu",
     address: "ul. Różana 12, 00-001 Warszawa",
     addressDescription:
-      "To przykładowy adres. W kolejnym etapie możemy dodać prawdziwą lokalizację, mapę i wskazówki dojazdu.",
+      "Salon znajduje się w spokojnej lokalizacji z wygodnym dostępem komunikacyjnym. Przed pierwszą wizytą możesz poprosić o dodatkowe wskazówki dojazdu.",
+
     openingHoursTitle: "Godziny otwarcia",
     openingHours: [
       { days: "Poniedziałek — Piątek", hours: "10:00 — 19:00" },
       { days: "Sobota", hours: "10:00 — 15:00" },
       { days: "Niedziela", hours: "Zamknięte" },
     ],
-    formEyebrow: "Formularz",
+
+    formEyebrow: "Zapytanie",
     formTitle: "Napisz, czego potrzebujesz.",
     formDescription:
-      "Formularz na tym etapie działa jako element frontendu. Po wysłaniu pokazuje komunikat, ale jeszcze nie wysyła wiadomości na e-mail.",
+      "Wypełnij krótki formularz, a strona przygotuje gotową wiadomość e-mail z Twoim zapytaniem. Dzięki temu łatwiej będzie dobrać usługę, zakres pracy i możliwy termin.",
     formLabels: {
       name: "Imię",
       email: "Adres e-mail",
+      phone: "Telefon",
       service: "Interesująca usługa",
+      preferredDate: "Preferowany termin",
       message: "Wiadomość",
-      submit: "Wyślij wiadomość",
-      successTitle: "Wiadomość gotowa",
+      submit: "Przygotuj wiadomość e-mail",
+      successTitle: "Wiadomość została przygotowana",
       successMessage:
-        "To wersja demonstracyjna formularza. W kolejnym kroku możemy podłączyć prawdziwą wysyłkę.",
-      demoNote:
-        "Na razie formularz nie wysyła danych poza stronę. To bezpieczny frontendowy placeholder.",
+        "Jeśli aplikacja pocztowa nie otworzyła się automatycznie, możesz skopiować treść zapytania i wysłać ją bezpośrednio na adres hello@aurorabeauty.pl.",
+      noteTitle: "Co warto napisać?",
+      noteDescription:
+        "Najlepiej podać interesującą usługę, preferowany termin, oczekiwany efekt oraz informację, czy jest to pierwsza wizyta.",
     },
     serviceOptions: [
       { value: "facial-care", label: "Pielęgnacja twarzy" },
       { value: "brows-lashes", label: "Brwi i rzęsy" },
-      { value: "makeup", label: "Makijaż" },
+      { value: "makeup", label: "Makijaż okazjonalny" },
+      { value: "signature-glow", label: "Signature Glow Treatment" },
       { value: "consultation", label: "Konsultacja" },
-      { value: "other", label: "Inne pytanie" },
+      { value: "other", label: "Nie wiem / potrzebuję pomocy w wyborze" },
     ],
+
     visitEyebrow: "Przed wizytą",
-    visitTitle: "Kilka informacji, które mogą ułatwić pierwszy kontakt.",
+    visitTitle: "Kilka informacji, które ułatwią dobór usługi.",
     visitDescription:
-      "Taka sekcja pomaga ograniczyć niepewność i skraca drogę od zainteresowania do rezerwacji.",
+      "Im dokładniej opiszesz potrzeby, tym łatwiej będzie zaproponować usługę, czas trwania i najlepszy sposób przygotowania do wizyty.",
     visitHighlights: [
-      "opisz krótko, jakiej usługi szukasz",
-      "napisz preferowany dzień lub zakres godzin",
-      "w przypadku pielęgnacji twarzy wspomnij o potrzebach skóry",
-      "przy makijażu warto podać okazję i stylizację",
+      "opisz, jaki efekt chcesz uzyskać",
+      "podaj preferowany dzień lub zakres godzin",
+      "przy pielęgnacji twarzy wspomnij o aktualnych potrzebach skóry",
+      "przy makijażu napisz, na jaką okazję jest przygotowywany",
     ],
   },
 
   en: {
     detailsEyebrow: "Contact",
-    detailsTitle: "Have a question or want to book a visit?",
+    detailsTitle: "Book a visit or ask which service will suit you best.",
     detailsDescription:
-      "This page gathers the most important contact options. Later we can connect a real form, Google Map, WhatsApp, Booksy or another booking system.",
+      "Choose the contact method that feels most convenient. In your message, describe the service you are looking for, the result you want and your preferred appointment time.",
     contactMethods: [
       {
         label: "Phone",
         value: "+48 123 456 789",
         href: "tel:+48123456789",
-        description: "Best for quick questions and booking requests.",
+        description:
+          "Best for quick questions, appointment changes or urgent booking requests.",
       },
       {
         label: "E-mail",
         value: "hello@aurorabeauty.pl",
         href: "mailto:hello@aurorabeauty.pl",
-        description: "Good for longer questions and cooperation.",
+        description:
+          "A good option for describing expectations, asking about a service or arranging details before the visit.",
       },
       {
         label: "Instagram",
         value: "@aurora.beauty",
         href: "https://instagram.com",
-        description: "A place for results, stories and studio updates.",
+        description:
+          "A place for updates, inspiration, work results and quick contact through direct message.",
       },
     ],
+
     addressTitle: "Studio address",
     address: "12 Różana Street, 00-001 Warsaw",
     addressDescription:
-      "This is a sample address. In the next stage, we can add a real location, map and directions.",
+      "The studio is located in a calm area with convenient transport access. Before your first visit, you can ask for additional directions.",
+
     openingHoursTitle: "Opening hours",
     openingHours: [
       { days: "Monday — Friday", hours: "10:00 — 19:00" },
       { days: "Saturday", hours: "10:00 — 15:00" },
       { days: "Sunday", hours: "Closed" },
     ],
-    formEyebrow: "Form",
+
+    formEyebrow: "Inquiry",
     formTitle: "Tell us what you need.",
     formDescription:
-      "At this stage, the form works as a frontend element. After submitting, it shows a message, but it does not send an e-mail yet.",
+      "Fill in a short form and the website will prepare an e-mail message with your inquiry. This makes it easier to choose the right service, scope and possible appointment time.",
     formLabels: {
       name: "Name",
       email: "E-mail address",
+      phone: "Phone",
       service: "Service of interest",
+      preferredDate: "Preferred date",
       message: "Message",
-      submit: "Send message",
-      successTitle: "Message ready",
+      submit: "Prepare e-mail message",
+      successTitle: "Message has been prepared",
       successMessage:
-        "This is a demo version of the form. In the next step, we can connect real sending.",
-      demoNote:
-        "For now, the form does not send data outside the website. It is a safe frontend placeholder.",
+        "If your e-mail app did not open automatically, you can copy the inquiry and send it directly to hello@aurorabeauty.pl.",
+      noteTitle: "What should you include?",
+      noteDescription:
+        "It is best to include the service, preferred date, desired result and whether this is your first visit.",
     },
     serviceOptions: [
       { value: "facial-care", label: "Facial care" },
       { value: "brows-lashes", label: "Brows and lashes" },
-      { value: "makeup", label: "Makeup" },
+      { value: "makeup", label: "Occasion makeup" },
+      { value: "signature-glow", label: "Signature Glow Treatment" },
       { value: "consultation", label: "Consultation" },
-      { value: "other", label: "Other question" },
+      { value: "other", label: "Not sure / need help choosing" },
     ],
+
     visitEyebrow: "Before your visit",
-    visitTitle: "A few details that can make first contact easier.",
+    visitTitle: "A few details that help select the right service.",
     visitDescription:
-      "This section helps reduce uncertainty and shortens the path from interest to booking.",
+      "The more clearly you describe your needs, the easier it is to suggest a service, duration and the best way to prepare for your visit.",
     visitHighlights: [
-      "briefly describe the service you are looking for",
-      "mention your preferred day or time range",
-      "for facial care, add a short note about your skin needs",
-      "for makeup, it helps to mention the occasion and styling",
+      "describe the result you want to achieve",
+      "include your preferred day or time range",
+      "for facial care, mention your current skin needs",
+      "for makeup, write what occasion it is for",
     ],
   },
 };
