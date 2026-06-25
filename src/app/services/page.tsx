@@ -54,8 +54,8 @@ export default function ServicesPage() {
 
                       <p className="mt-2 text-sm leading-6 text-stone-600 dark:text-stone-300">
                         {language === "pl"
-                          ? "Ta kategoria może później dostać osobne zdjęcie, ikonę albo wyróżniony zabieg."
-                          : "This category can later receive its own image, icon or featured treatment."}
+                          ? "Każda usługa może zostać dopasowana do potrzeb skóry, urody, okazji i oczekiwanego poziomu intensywności."
+                          : "Each service can be adjusted to skin needs, natural features, occasion and the desired level of intensity."}
                       </p>
                     </div>
                   </div>
