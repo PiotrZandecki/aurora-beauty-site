@@ -26,7 +26,7 @@ export function Footer() {
           </p>
 
           <p className="mt-6 text-xs uppercase tracking-[0.25em] text-rose-600 dark:text-rose-300">
-            {language === "pl" ? "Beauty studio" : "Beauty studio"}
+            Beauty studio
           </p>
         </div>
 
@@ -96,6 +96,14 @@ export function Footer() {
           {language === "pl"
             ? "Wersja startowa projektu — PL/EN + light/dark mode."
             : "Starter project version — PL/EN + light/dark mode."}
+        </p>
+      </div>
+
+      <div className="mx-auto mt-6 max-w-6xl border-t border-rose-200/70 pt-6 text-center text-xs text-stone-500 dark:border-stone-800 dark:text-stone-500">
+        <p>
+          {language === "pl"
+            ? "Strona wykonana przez Z-TECH Piotr Zandecki."
+            : "Website created by Z-TECH Piotr Zandecki."}
         </p>
       </div>
     </footer>
