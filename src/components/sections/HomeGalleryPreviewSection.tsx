@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 
@@ -5,6 +6,8 @@ type GalleryPreviewItem = {
   title: string;
   category: string;
   description: string;
+  imageSrc: string;
+  imageAlt: string;
 };
 
 type HomeGalleryPreviewSectionProps = {
@@ -48,15 +51,27 @@ export function HomeGalleryPreviewSection({
               key={item.title}
               className="overflow-hidden rounded-4xl border border-rose-200 bg-rose-50 shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-950 dark:hover:shadow-black/30"
             >
-              <div className="flex aspect-4/5 items-end bg-linear-to-br from-rose-100 via-pink-100 to-stone-100 p-5 dark:from-stone-800 dark:via-stone-900 dark:to-rose-950">
-                <div className="rounded-3xl bg-white/80 px-4 py-3 shadow-sm backdrop-blur dark:bg-stone-950/70">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-600 dark:text-rose-300">
-                    {item.category}
-                  </p>
+              <div className="relative aspect-4/5 overflow-hidden">
+                <Image
+                  src={item.imageSrc}
+                  alt={item.imageAlt}
+                  fill
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  className="object-cover transition duration-500 hover:scale-105"
+                />
 
-                  <p className="mt-1 text-sm font-semibold text-stone-950 dark:text-rose-50">
-                    {item.title}
-                  </p>
+                <div className="absolute inset-0 bg-linear-to-t from-stone-950/55 via-stone-950/5 to-transparent" />
+
+                <div className="absolute inset-x-0 bottom-0 p-5">
+                  <div className="rounded-3xl bg-white/85 px-4 py-3 shadow-sm backdrop-blur dark:bg-stone-950/75">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-600 dark:text-rose-300">
+                      {item.category}
+                    </p>
+
+                    <p className="mt-1 text-sm font-semibold text-stone-950 dark:text-rose-50">
+                      {item.title}
+                    </p>
+                  </div>
                 </div>
               </div>
 

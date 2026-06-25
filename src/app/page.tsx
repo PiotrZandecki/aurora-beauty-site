@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { clientValuesContent } from "@/content/clientValuesContent";
 import { faqContent } from "@/content/faqContent";
@@ -73,10 +74,25 @@ export default function Home() {
           </dl>
         </div>
 
-        <div className="rounded-4xl border border-rose-200 bg-white p-6 shadow-2xl shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-900 dark:shadow-black/30">
-          <div className="aspect-4/5 rounded-3xl bg-linear-to-br from-rose-100 via-pink-100 to-stone-100 p-6 dark:from-stone-800 dark:via-stone-900 dark:to-rose-950">
-            <div className="flex h-full flex-col justify-end rounded-[1.2rem] border border-white/60 p-6 backdrop-blur dark:border-white/10">
-              <p className="text-sm uppercase tracking-[0.25em] text-stone-500 dark:text-stone-300">
+        <div className="rounded-4xl border border-rose-200 bg-white p-4 shadow-2xl shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-900 dark:shadow-black/30">
+          <div className="relative aspect-4/5 overflow-hidden rounded-3xl">
+            <Image
+              src="/images/hero-treatment.png"
+              alt={
+                language === "pl"
+                  ? "Spokojny zabieg pielęgnacji twarzy w premium beauty studio"
+                  : "Calm facial-care treatment in a premium beauty studio"
+              }
+              fill
+              priority
+              sizes="(min-width: 768px) 45vw, 100vw"
+              className="object-cover"
+            />
+
+            <div className="absolute inset-0 bg-linear-to-t from-stone-950/55 via-stone-950/10 to-transparent" />
+
+            <div className="absolute inset-x-0 bottom-0 p-6">
+              <p className="text-sm uppercase tracking-[0.25em] text-white/75">
                 Signature care
               </p>
 
@@ -84,7 +100,7 @@ export default function Home() {
                 {content.highlights.map((highlight) => (
                   <li
                     key={highlight}
-                    className="rounded-full bg-white/80 px-4 py-3 text-sm font-medium text-stone-800 shadow-sm dark:bg-stone-950/70 dark:text-rose-50"
+                    className="rounded-full bg-white/85 px-4 py-3 text-sm font-medium text-stone-800 shadow-sm backdrop-blur dark:bg-stone-950/75 dark:text-rose-50"
                   >
                     {highlight}
                   </li>
