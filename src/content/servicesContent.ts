@@ -4,11 +4,15 @@ type ServiceItem = {
   title: string;
   description: string;
   duration: string;
+  idealFor: string;
+  result: string;
+  tag: string;
 };
 
 type ServiceCategory = {
   title: string;
   description: string;
+  accent: string;
   services: ServiceItem[];
 };
 
@@ -21,6 +25,11 @@ type ServicesContent = {
   categoriesEyebrow: string;
   categoriesTitle: string;
   categoriesDescription: string;
+  categoryLabel: string;
+  durationLabel: string;
+  idealForLabel: string;
+  resultLabel: string;
+  detailsButton: string;
   categories: ServiceCategory[];
   processEyebrow: string;
   processTitle: string;
@@ -34,229 +43,302 @@ type ServicesContent = {
 export const servicesContent: Record<Language, ServicesContent> = {
   pl: {
     categoriesEyebrow: "Oferta",
-    categoriesTitle: "Usługi beauty dopasowane do Twoich potrzeb.",
+    categoriesTitle:
+      "Zabiegi beauty dopasowane do potrzeb skóry, okazji i stylu.",
     categoriesDescription:
-      "Poniżej znajduje się przykładowa struktura oferty. Później możemy podmienić nazwy, ceny, czasy trwania i opisy na prawdziwe dane salonu.",
+      "Sekcja usług ma szybko pokazać, czym zajmuje się salon, jakie efekty można uzyskać i która usługa będzie najlepszym pierwszym wyborem.",
+    categoryLabel: "Kategoria",
+    durationLabel: "Czas",
+    idealForLabel: "Dla kogo",
+    resultLabel: "Efekt",
+    detailsButton: "Zapytaj o usługę",
     categories: [
       {
         title: "Pielęgnacja twarzy",
         description:
-          "Zabiegi skupione na oczyszczeniu, regeneracji i poprawie kondycji skóry.",
+          "Zabiegi skupione na odświeżeniu, oczyszczeniu i poprawie kondycji skóry.",
+        accent: "Skin care",
         services: [
           {
             title: "Zabieg oczyszczający",
             description:
-              "Delikatne oczyszczenie skóry, odświeżenie i przygotowanie do dalszej pielęgnacji.",
+              "Delikatne oczyszczenie skóry połączone z pielęgnacją, która przywraca lekkość, świeżość i komfort.",
             duration: "60 min",
+            idealFor: "skóra zmęczona, szara, zanieczyszczona",
+            result: "uczucie świeżości i gładsza struktura skóry",
+            tag: "Popularne",
           },
           {
             title: "Zabieg regenerujący",
             description:
-              "Pielęgnacja nastawiona na komfort, ukojenie i poprawę wyglądu skóry.",
+              "Spokojna, odżywcza pielęgnacja dla skóry wymagającej ukojenia, nawilżenia i delikatnego wzmocnienia.",
             duration: "75 min",
+            idealFor: "skóra sucha, wrażliwa lub przeciążona",
+            result: "bardziej miękka, ukojona i promienna skóra",
+            tag: "Regeneracja",
           },
           {
             title: "Konsultacja pielęgnacyjna",
             description:
-              "Omówienie potrzeb skóry i dobranie odpowiedniej ścieżki pielęgnacji.",
+              "Krótka rozmowa i analiza potrzeb skóry, aby dobrać odpowiedni zabieg oraz prostą pielęgnację domową.",
             duration: "30 min",
+            idealFor: "pierwsza wizyta lub niepewność wyboru",
+            result: "jasny plan dalszej pielęgnacji",
+            tag: "Na start",
           },
         ],
       },
       {
         title: "Brwi i rzęsy",
         description:
-          "Stylizacja oprawy oczu z naciskiem na naturalny, elegancki efekt.",
+          "Stylizacja oprawy oczu z naciskiem na naturalny, schludny i elegancki efekt.",
+        accent: "Brows & lashes",
         services: [
           {
             title: "Laminacja brwi",
             description:
-              "Ułożenie i podkreślenie brwi dla bardziej uporządkowanego wyglądu.",
+              "Ułożenie, optyczne zagęszczenie i ujarzmienie brwi, które nadaje twarzy bardziej dopracowany wygląd.",
             duration: "45 min",
+            idealFor: "niesforne, opadające lub nierówne brwi",
+            result: "uporządkowane i naturalnie podkreślone brwi",
+            tag: "Natural look",
           },
           {
             title: "Koloryzacja brwi",
             description:
-              "Subtelne podbicie koloru dopasowane do urody i oczekiwanego efektu.",
+              "Subtelne podbicie koloru brwi z dopasowaniem do urody, włosów i oczekiwanego poziomu intensywności.",
             duration: "30 min",
+            idealFor: "jasne lub mało widoczne brwi",
+            result: "wyraźniejsza oprawa oczu bez ciężkiego efektu",
+            tag: "Szybki efekt",
           },
           {
             title: "Stylizacja rzęs",
             description:
-              "Podkreślenie spojrzenia w sposób lekki, estetyczny i codzienny.",
+              "Podkreślenie spojrzenia w estetyczny sposób, tak aby efekt pasował zarówno na co dzień, jak i na specjalne okazje.",
             duration: "60 min",
+            idealFor: "osoby chcące delikatnie otworzyć spojrzenie",
+            result: "bardziej świeży i wypoczęty wygląd oczu",
+            tag: "Soft glam",
           },
         ],
       },
       {
         title: "Makijaż",
         description:
-          "Makijaże na ważne okazje, sesje zdjęciowe i wyjątkowe wydarzenia.",
+          "Makijaże dopasowane do okazji, urody, stylizacji i oczekiwanego poziomu intensywności.",
+        accent: "Makeup",
         services: [
           {
             title: "Makijaż dzienny",
             description:
-              "Świeży, lekki efekt odpowiedni do pracy, spotkań i codziennych okazji.",
+              "Lekki, świeży makijaż podkreślający urodę bez efektu przeciążenia. Dobry na spotkania, pracę i sesje lifestyle.",
             duration: "45 min",
+            idealFor: "codzienne okazje, spotkania, zdjęcia biznesowe",
+            result: "świeży, czysty i naturalny wygląd",
+            tag: "Fresh look",
           },
           {
             title: "Makijaż wieczorowy",
             description:
-              "Bardziej wyrazisty efekt z zachowaniem elegancji i dopasowania do urody.",
+              "Bardziej wyrazisty makijaż z dopracowanym okiem, cerą i detalami, który dobrze prezentuje się na żywo i na zdjęciach.",
             duration: "75 min",
+            idealFor: "uroczystości, imprezy, kolacje, sesje",
+            result: "elegancki efekt z większą intensywnością",
+            tag: "Evening",
           },
           {
             title: "Makijaż ślubny próbny",
             description:
-              "Próba makijażu przed ważnym dniem, z możliwością dopracowania detali.",
+              "Próba makijażu przed ważnym dniem, z czasem na omówienie preferencji, trwałości i dopracowanie szczegółów.",
             duration: "90 min",
+            idealFor: "przygotowania do ślubu lub dużej uroczystości",
+            result: "spokojna decyzja i przetestowany efekt",
+            tag: "Bridal",
           },
         ],
       },
     ],
     processEyebrow: "Jak wygląda wizyta",
-    processTitle: "Prosta ścieżka od wyboru usługi do efektu końcowego.",
+    processTitle: "Prosty proces, który buduje komfort przed pierwszą wizytą.",
     processDescription:
-      "Ta sekcja pomaga klientce lub klientowi zrozumieć, czego może się spodziewać przed wizytą.",
+      "Dzięki tej sekcji klient wie, czego może się spodziewać — od wyboru usługi aż po zalecenia po zabiegu.",
     processSteps: [
       {
         title: "Wybór usługi",
         description:
-          "Klient wybiera kategorię zabiegu albo kontaktuje się z salonem w celu konsultacji.",
+          "Klient wybiera kategorię albo kontaktuje się z salonem, jeśli nie wie, która opcja będzie najlepsza.",
       },
       {
         title: "Krótka konsultacja",
         description:
-          "Przed usługą ustalane są oczekiwania, potrzeby skóry i ewentualne przeciwwskazania.",
+          "Przed zabiegiem omawiane są oczekiwania, potrzeby skóry i ewentualne przeciwwskazania.",
       },
       {
         title: "Wykonanie usługi",
         description:
-          "Zabieg odbywa się w spokojnej atmosferze, z naciskiem na komfort i estetykę.",
+          "Zabieg odbywa się w spokojnej atmosferze, z naciskiem na komfort, higienę i estetyczny efekt.",
       },
       {
         title: "Zalecenia po wizycie",
         description:
-          "Klient otrzymuje krótkie wskazówki dotyczące pielęgnacji i utrzymania efektu.",
+          "Po usłudze klient otrzymuje wskazówki dotyczące pielęgnacji i utrzymania efektu.",
       },
     ],
     ctaTitle: "Nie wiesz, którą usługę wybrać?",
     ctaDescription:
-      "Przejdź do kontaktu i opisz, czego potrzebujesz. Później możemy tutaj dodać formularz wyboru usługi albo link do systemu rezerwacji.",
-    ctaButton: "Skontaktuj się",
+      "Opisz, czego potrzebujesz, a salon pomoże dobrać odpowiednią usługę. Później możemy podpiąć tutaj formularz, WhatsApp, Booksy albo inny system rezerwacji.",
+    ctaButton: "Przejdź do kontaktu",
   },
 
   en: {
     categoriesEyebrow: "Services",
-    categoriesTitle: "Beauty services tailored to your needs.",
+    categoriesTitle:
+      "Beauty treatments tailored to skin needs, occasions and personal style.",
     categoriesDescription:
-      "Below is a sample offer structure. Later we can replace names, prices, durations and descriptions with real studio data.",
+      "The services section should quickly show what the studio offers, what results clients can expect and which treatment is the best first choice.",
+    categoryLabel: "Category",
+    durationLabel: "Duration",
+    idealForLabel: "Best for",
+    resultLabel: "Result",
+    detailsButton: "Ask about service",
     categories: [
       {
         title: "Facial care",
         description:
-          "Treatments focused on cleansing, regeneration and improving skin condition.",
+          "Treatments focused on refreshing, cleansing and improving the condition of the skin.",
+        accent: "Skin care",
         services: [
           {
             title: "Cleansing treatment",
             description:
-              "Gentle skin cleansing, refreshment and preparation for further care.",
+              "Gentle skin cleansing combined with care that restores freshness, lightness and comfort.",
             duration: "60 min",
+            idealFor: "tired, dull or congested skin",
+            result: "a fresher feel and smoother skin texture",
+            tag: "Popular",
           },
           {
             title: "Regenerating treatment",
             description:
-              "Care focused on comfort, soothing and improving the appearance of the skin.",
+              "A calm, nourishing treatment for skin that needs soothing, hydration and gentle support.",
             duration: "75 min",
+            idealFor: "dry, sensitive or stressed skin",
+            result: "softer, calmer and more radiant skin",
+            tag: "Recovery",
           },
           {
             title: "Skincare consultation",
             description:
-              "A short discussion of skin needs and the right care path.",
+              "A short discussion and skin-needs review to choose the right treatment and simple home care plan.",
             duration: "30 min",
+            idealFor: "first visit or uncertainty about choosing",
+            result: "a clear next-step care plan",
+            tag: "Start here",
           },
         ],
       },
       {
         title: "Brows and lashes",
         description:
-          "Eye-area styling focused on a natural, elegant final effect.",
+          "Eye-area styling focused on a natural, polished and elegant final effect.",
+        accent: "Brows & lashes",
         services: [
           {
             title: "Brow lamination",
             description:
-              "Shaping and enhancing brows for a more polished appearance.",
+              "Shaping and taming the brows to give the face a cleaner and more polished appearance.",
             duration: "45 min",
+            idealFor: "unruly, uneven or downward-growing brows",
+            result: "neatly shaped and naturally enhanced brows",
+            tag: "Natural look",
           },
           {
             title: "Brow tinting",
             description:
-              "Subtle color enhancement adjusted to natural features and desired results.",
+              "Subtle color enhancement adjusted to natural features, hair color and desired intensity.",
             duration: "30 min",
+            idealFor: "light or barely visible brows",
+            result: "more defined brows without a heavy look",
+            tag: "Quick effect",
           },
           {
             title: "Lash styling",
             description:
-              "A light and aesthetic way to enhance the look of the eyes.",
+              "Aesthetic eye enhancement designed to work for everyday wear as well as special occasions.",
             duration: "60 min",
+            idealFor: "clients who want a softer open-eye effect",
+            result: "a fresher and more rested eye appearance",
+            tag: "Soft glam",
           },
         ],
       },
       {
         title: "Makeup",
         description:
-          "Makeup for special occasions, photoshoots and important events.",
+          "Makeup tailored to the occasion, natural features, outfit and desired intensity.",
+        accent: "Makeup",
         services: [
           {
             title: "Day makeup",
             description:
-              "A fresh, light effect suitable for work, meetings and everyday occasions.",
+              "A light, fresh makeup look that enhances beauty without feeling heavy. Great for meetings, work and lifestyle shoots.",
             duration: "45 min",
+            idealFor: "everyday occasions, meetings and business photos",
+            result: "a clean, fresh and natural look",
+            tag: "Fresh look",
           },
           {
             title: "Evening makeup",
             description:
-              "A more expressive result while keeping elegance and balance.",
+              "A more expressive makeup look with polished eyes, skin and details that photograph well.",
             duration: "75 min",
+            idealFor: "events, dinners, parties and photoshoots",
+            result: "an elegant look with more intensity",
+            tag: "Evening",
           },
           {
             title: "Trial bridal makeup",
             description:
-              "A makeup trial before the big day, with time to refine details.",
+              "A makeup trial before the big day, with time to discuss preferences, durability and final details.",
             duration: "90 min",
+            idealFor: "wedding or major event preparation",
+            result: "a tested look and a calmer final decision",
+            tag: "Bridal",
           },
         ],
       },
     ],
     processEyebrow: "Visit process",
-    processTitle: "A simple path from choosing a service to the final result.",
+    processTitle:
+      "A simple process that builds comfort before the first visit.",
     processDescription:
-      "This section helps visitors understand what they can expect before booking a visit.",
+      "This section helps visitors understand what to expect — from choosing a service to aftercare tips.",
     processSteps: [
       {
         title: "Choose a service",
         description:
-          "The client chooses a treatment category or contacts the studio for consultation.",
+          "The client chooses a category or contacts the studio if they are unsure which option is best.",
       },
       {
         title: "Short consultation",
         description:
-          "Before the service, expectations, skin needs and possible contraindications are discussed.",
+          "Before the treatment, expectations, skin needs and possible contraindications are discussed.",
       },
       {
         title: "Service delivery",
         description:
-          "The treatment takes place in a calm atmosphere focused on comfort and aesthetics.",
+          "The treatment takes place in a calm atmosphere focused on comfort, hygiene and aesthetics.",
       },
       {
         title: "Aftercare tips",
         description:
-          "The client receives short guidance on care and maintaining the final effect.",
+          "After the service, the client receives guidance on care and maintaining the final effect.",
       },
     ],
     ctaTitle: "Not sure which service to choose?",
     ctaDescription:
-      "Go to contact and describe what you need. Later we can add a service selection form or a booking system link here.",
-    ctaButton: "Contact us",
+      "Describe what you need and the studio will help choose the right service. Later we can connect this with a form, WhatsApp, Booksy or another booking system.",
+    ctaButton: "Go to contact",
   },
 };

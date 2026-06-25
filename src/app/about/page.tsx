@@ -1,10 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { aboutContent } from "@/content/aboutContent";
 import { siteContent } from "@/content/siteContent";
 import { useSitePreferences } from "@/components/providers/SitePreferencesProvider";
+import { CtaBanner } from "@/components/sections/CtaBanner";
 import { PageIntro } from "@/components/sections/PageIntro";
+import { SectionHeader } from "@/components/sections/SectionHeader";
 
 export default function AboutPage() {
   const { language } = useSitePreferences();
@@ -35,6 +36,7 @@ export default function AboutPage() {
                   <dt className="text-2xl font-semibold text-stone-950 dark:text-rose-50">
                     {stat.value}
                   </dt>
+
                   <dd className="mt-1 text-xs leading-5 text-stone-500 dark:text-stone-400">
                     {stat.label}
                   </dd>
@@ -60,21 +62,11 @@ export default function AboutPage() {
 
       <section className="px-5 py-20">
         <div className="mx-auto max-w-6xl">
-          <div className="grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-end">
-            <div>
-              <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-rose-600 dark:text-rose-300">
-                {content.valuesEyebrow}
-              </p>
-
-              <h2 className="text-3xl font-semibold tracking-tight text-stone-950 md:text-5xl dark:text-rose-50">
-                {content.valuesTitle}
-              </h2>
-            </div>
-
-            <p className="text-lg leading-8 text-stone-600 dark:text-stone-300">
-              {content.valuesDescription}
-            </p>
-          </div>
+          <SectionHeader
+            eyebrow={content.valuesEyebrow}
+            title={content.valuesTitle}
+            description={content.valuesDescription}
+          />
 
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {content.values.map((value, index) => (
@@ -101,21 +93,11 @@ export default function AboutPage() {
 
       <section className="border-y border-rose-200/70 bg-white/60 px-5 py-20 dark:border-stone-800 dark:bg-stone-900/40">
         <div className="mx-auto max-w-6xl">
-          <div className="grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-end">
-            <div>
-              <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-rose-600 dark:text-rose-300">
-                {content.teamEyebrow}
-              </p>
-
-              <h2 className="text-3xl font-semibold tracking-tight text-stone-950 md:text-5xl dark:text-rose-50">
-                {content.teamTitle}
-              </h2>
-            </div>
-
-            <p className="text-lg leading-8 text-stone-600 dark:text-stone-300">
-              {content.teamDescription}
-            </p>
-          </div>
+          <SectionHeader
+            eyebrow={content.teamEyebrow}
+            title={content.teamTitle}
+            description={content.teamDescription}
+          />
 
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {content.team.map((member) => (
@@ -128,6 +110,7 @@ export default function AboutPage() {
                     <p className="text-sm font-semibold text-stone-950 dark:text-rose-50">
                       {member.name}
                     </p>
+
                     <p className="mt-1 text-xs text-stone-500 dark:text-stone-400">
                       {member.role}
                     </p>
@@ -187,24 +170,12 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="px-5 pb-20">
-        <div className="mx-auto max-w-6xl rounded-4xl bg-stone-950 px-6 py-14 text-center shadow-2xl shadow-rose-200/70 md:px-12 dark:bg-rose-100 dark:shadow-black/30">
-          <h2 className="mx-auto max-w-3xl text-3xl font-semibold tracking-tight text-white md:text-5xl dark:text-stone-950">
-            {content.ctaTitle}
-          </h2>
-
-          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-stone-300 dark:text-stone-700">
-            {content.ctaDescription}
-          </p>
-
-          <Link
-            href="/services"
-            className="mt-8 inline-flex rounded-full bg-white px-6 py-3 text-sm font-semibold text-stone-950 transition hover:bg-rose-100 dark:bg-stone-950 dark:text-white dark:hover:bg-stone-800"
-          >
-            {content.ctaButton}
-          </Link>
-        </div>
-      </section>
+      <CtaBanner
+        title={content.ctaTitle}
+        description={content.ctaDescription}
+        buttonLabel={content.ctaButton}
+        buttonHref="/services"
+      />
     </>
   );
 }
