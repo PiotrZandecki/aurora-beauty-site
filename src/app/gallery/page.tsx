@@ -43,7 +43,7 @@ export default function GalleryPage() {
               >
                 <div
                   className={`flex items-end bg-linear-to-br from-rose-100 via-pink-100 to-stone-100 p-5 dark:from-stone-800 dark:via-stone-900 dark:to-rose-950 ${
-                    index === 0 ? "aspect-16/9" : "aspect-4/5"
+                    index === 0 ? "aspect-video" : "aspect-4/5"
                   }`}
                 >
                   <div className="rounded-3xl bg-white/80 px-4 py-3 shadow-sm backdrop-blur dark:bg-stone-950/70">
