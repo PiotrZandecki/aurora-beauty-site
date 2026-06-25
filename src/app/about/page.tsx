@@ -20,11 +20,11 @@ export default function AboutPage() {
         <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-start">
           <div>
             <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-rose-600 dark:text-rose-300">
-              {content.storyEyebrow}
+              {content.approachEyebrow}
             </p>
 
             <h2 className="text-3xl font-semibold tracking-tight text-stone-950 md:text-5xl dark:text-rose-50">
-              {content.storyTitle}
+              {content.approachTitle}
             </h2>
 
             <dl className="mt-10 grid grid-cols-3 gap-3">
@@ -47,7 +47,7 @@ export default function AboutPage() {
 
           <div className="rounded-4xl border border-rose-200 bg-rose-50 p-6 shadow-sm dark:border-stone-800 dark:bg-stone-950 md:p-8">
             <div className="space-y-5">
-              {content.storyParagraphs.map((paragraph) => (
+              {content.approachParagraphs.map((paragraph) => (
                 <p
                   key={paragraph}
                   className="text-lg leading-8 text-stone-600 dark:text-stone-300"
@@ -63,15 +63,15 @@ export default function AboutPage() {
       <section className="px-5 py-20">
         <div className="mx-auto max-w-6xl">
           <SectionHeader
-            eyebrow={content.valuesEyebrow}
-            title={content.valuesTitle}
-            description={content.valuesDescription}
+            eyebrow={content.standardsEyebrow}
+            title={content.standardsTitle}
+            description={content.standardsDescription}
           />
 
           <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {content.values.map((value, index) => (
+            {content.standards.map((standard, index) => (
               <article
-                key={value.title}
+                key={standard.title}
                 className="rounded-4xl border border-rose-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-900 dark:hover:shadow-black/30"
               >
                 <div className="mb-6 flex size-12 items-center justify-center rounded-full bg-rose-100 text-sm font-semibold text-rose-700 dark:bg-rose-950 dark:text-rose-200">
@@ -79,11 +79,11 @@ export default function AboutPage() {
                 </div>
 
                 <h3 className="text-xl font-semibold text-stone-950 dark:text-rose-50">
-                  {value.title}
+                  {standard.title}
                 </h3>
 
                 <p className="mt-3 leading-7 text-stone-600 dark:text-stone-300">
-                  {value.description}
+                  {standard.description}
                 </p>
               </article>
             ))}
@@ -94,34 +94,28 @@ export default function AboutPage() {
       <section className="border-y border-rose-200/70 bg-white/60 px-5 py-20 dark:border-stone-800 dark:bg-stone-900/40">
         <div className="mx-auto max-w-6xl">
           <SectionHeader
-            eyebrow={content.teamEyebrow}
-            title={content.teamTitle}
-            description={content.teamDescription}
+            eyebrow={content.specializationEyebrow}
+            title={content.specializationTitle}
+            description={content.specializationDescription}
           />
 
           <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {content.team.map((member) => (
+            {content.specializations.map((specialization) => (
               <article
-                key={member.name}
-                className="overflow-hidden rounded-4xl border border-rose-200 bg-rose-50 shadow-sm dark:border-stone-800 dark:bg-stone-950"
+                key={specialization.title}
+                className="rounded-4xl border border-rose-200 bg-rose-50 p-6 shadow-sm dark:border-stone-800 dark:bg-stone-950"
               >
-                <div className="flex aspect-4/3 items-end bg-linear-to-br from-rose-100 via-pink-100 to-stone-100 p-6 dark:from-stone-800 dark:via-stone-900 dark:to-rose-950">
-                  <div className="rounded-3xl bg-white/80 px-4 py-3 shadow-sm backdrop-blur dark:bg-stone-950/70">
-                    <p className="text-sm font-semibold text-stone-950 dark:text-rose-50">
-                      {member.name}
-                    </p>
-
-                    <p className="mt-1 text-xs text-stone-500 dark:text-stone-400">
-                      {member.role}
-                    </p>
-                  </div>
+                <div className="mb-6 flex size-12 items-center justify-center rounded-full bg-white text-xl shadow-sm dark:bg-stone-900">
+                  ✨
                 </div>
 
-                <div className="p-6">
-                  <p className="leading-7 text-stone-600 dark:text-stone-300">
-                    {member.description}
-                  </p>
-                </div>
+                <h3 className="text-xl font-semibold text-stone-950 dark:text-rose-50">
+                  {specialization.title}
+                </h3>
+
+                <p className="mt-3 leading-7 text-stone-600 dark:text-stone-300">
+                  {specialization.description}
+                </p>
               </article>
             ))}
           </div>
@@ -129,6 +123,37 @@ export default function AboutPage() {
       </section>
 
       <section className="px-5 py-20">
+        <div className="mx-auto max-w-6xl">
+          <SectionHeader
+            eyebrow={content.processEyebrow}
+            title={content.processTitle}
+            description={content.processDescription}
+          />
+
+          <div className="mt-10 grid gap-4 md:grid-cols-4">
+            {content.processSteps.map((step, index) => (
+              <article
+                key={step.title}
+                className="rounded-4xl border border-rose-200 bg-white p-6 shadow-sm dark:border-stone-800 dark:bg-stone-900"
+              >
+                <div className="mb-6 flex size-12 items-center justify-center rounded-full bg-rose-100 text-sm font-semibold text-rose-700 dark:bg-rose-950 dark:text-rose-200">
+                  0{index + 1}
+                </div>
+
+                <h3 className="text-lg font-semibold text-stone-950 dark:text-rose-50">
+                  {step.title}
+                </h3>
+
+                <p className="mt-3 leading-7 text-stone-600 dark:text-stone-300">
+                  {step.description}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-rose-200/70 bg-white/60 px-5 py-20 dark:border-stone-800 dark:bg-stone-900/40">
         <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[1fr_1fr] md:items-center">
           <div className="rounded-4xl border border-rose-200 bg-white p-6 shadow-sm dark:border-stone-800 dark:bg-stone-900 md:p-8">
             <h2 className="text-3xl font-semibold tracking-tight text-stone-950 md:text-5xl dark:text-rose-50">
@@ -161,8 +186,8 @@ export default function AboutPage() {
 
                 <p className="mt-4 text-2xl font-semibold text-stone-950 dark:text-rose-50">
                   {language === "pl"
-                    ? "Tutaj później możemy dodać zdjęcie salonu."
-                    : "Later we can add a real studio photo here."}
+                    ? "Naturalny efekt. Spokojna atmosfera. Dopracowany detal."
+                    : "Natural result. Calm atmosphere. Refined detail."}
                 </p>
               </div>
             </div>

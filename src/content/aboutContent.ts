@@ -5,33 +5,46 @@ type AboutStat = {
   label: string;
 };
 
-type AboutValue = {
+type AboutStandard = {
   title: string;
   description: string;
 };
 
-type TeamMember = {
-  name: string;
-  role: string;
+type AboutSpecialization = {
+  title: string;
+  description: string;
+};
+
+type AboutProcessStep = {
+  title: string;
   description: string;
 };
 
 type AboutContent = {
-  storyEyebrow: string;
-  storyTitle: string;
-  storyParagraphs: string[];
+  approachEyebrow: string;
+  approachTitle: string;
+  approachParagraphs: string[];
   stats: AboutStat[];
-  valuesEyebrow: string;
-  valuesTitle: string;
-  valuesDescription: string;
-  values: AboutValue[];
-  teamEyebrow: string;
-  teamTitle: string;
-  teamDescription: string;
-  team: TeamMember[];
+
+  standardsEyebrow: string;
+  standardsTitle: string;
+  standardsDescription: string;
+  standards: AboutStandard[];
+
+  specializationEyebrow: string;
+  specializationTitle: string;
+  specializationDescription: string;
+  specializations: AboutSpecialization[];
+
+  processEyebrow: string;
+  processTitle: string;
+  processDescription: string;
+  processSteps: AboutProcessStep[];
+
   studioTitle: string;
   studioDescription: string;
   studioHighlights: string[];
+
   ctaTitle: string;
   ctaDescription: string;
   ctaButton: string;
@@ -39,148 +52,212 @@ type AboutContent = {
 
 export const aboutContent: Record<Language, AboutContent> = {
   pl: {
-    storyEyebrow: "Nasza historia",
-    storyTitle: "Beauty studio stworzone wokół spokoju, estetyki i uważności.",
-    storyParagraphs: [
-      "Aurora Beauty Studio to przykładowa marka salonu beauty, którą wykorzystujemy jako bazę do dalszego dopracowania projektu. Strona ma od początku komunikować elegancję, zaufanie i prostą ścieżkę do kontaktu.",
-      "Ta podstrona może później opowiadać prawdziwą historię firmy: kiedy powstał salon, kto go tworzy, w czym się specjalizuje i dlaczego klientki wybierają właśnie to miejsce.",
-      "Zależy nam na układzie, który nie jest przeładowany tekstem, ale daje wystarczająco dużo informacji, żeby użytkownik poczuł, że trafia do profesjonalnego, spokojnego i dopracowanego miejsca.",
+    approachEyebrow: "Filozofia salonu",
+    approachTitle:
+      "Aurora Beauty Studio powstało z myślą o naturalnym efekcie, spokojnej atmosferze i świadomej pielęgnacji.",
+    approachParagraphs: [
+      "Wizyta w salonie beauty powinna być czymś więcej niż tylko wykonaniem usługi. To moment, w którym klientka może poczuć się zaopiekowana, wysłuchana i pewna, że wybrany efekt naprawdę do niej pasuje.",
+      "Dlatego w Aurora Beauty Studio stawiamy na subtelne rezultaty, jasną komunikację i dopasowanie usługi do indywidualnych potrzeb. Nie chodzi o przerysowanie urody, ale o jej uporządkowanie, odświeżenie i podkreślenie.",
+      "Nasze podejście łączy estetykę premium z praktycznym komfortem: spokojnym przebiegiem wizyty, zrozumiałym opisem usługi i wskazówkami, które pomagają utrzymać efekt po wyjściu z salonu.",
     ],
     stats: [
-      { value: "3", label: "główne obszary usług" },
-      { value: "2", label: "wersje językowe strony" },
-      { value: "100%", label: "responsywny layout" },
+      { value: "3", label: "obszary specjalizacji" },
+      { value: "1:1", label: "indywidualna konsultacja" },
+      { value: "Soft", label: "naturalny kierunek efektu" },
     ],
-    valuesEyebrow: "Wartości",
-    valuesTitle: "Podejście, które widać w każdym detalu.",
-    valuesDescription:
-      "Ta sekcja pomaga pokazać charakter salonu i odróżnić go od zwykłej listy usług.",
-    values: [
+
+    standardsEyebrow: "Standard pracy",
+    standardsTitle:
+      "Detale, które budują zaufanie przed, w trakcie i po wizycie.",
+    standardsDescription:
+      "Profesjonalne doświadczenie zaczyna się już przed pierwszym kontaktem. Strona, komunikacja i usługa powinny prowadzić klientkę bez chaosu i niepewności.",
+    standards: [
       {
-        title: "Komfort klienta",
+        title: "Jasna komunikacja",
         description:
-          "Od pierwszego kontaktu po zakończenie wizyty najważniejsze jest spokojne doświadczenie, jasna komunikacja i brak presji.",
+          "Przed wizytą łatwo sprawdzić zakres usług, orientacyjny czas trwania i sposób kontaktu. Dzięki temu decyzja o rezerwacji jest prostsza.",
       },
       {
-        title: "Naturalny efekt",
+        title: "Dobór do potrzeb",
         description:
-          "Usługi mają podkreślać urodę, a nie ją przytłaczać. Strona również idzie w stronę subtelnej, eleganckiej estetyki.",
+          "Usługa jest dobierana do skóry, urody, okazji i oczekiwanego efektu — bez schematycznego podejścia do każdej osoby.",
       },
       {
-        title: "Dbałość o szczegóły",
+        title: "Spokojna atmosfera",
         description:
-          "W branży beauty detale budują zaufanie. Dlatego layout, treści i podstrony tworzymy tak, żeby wyglądały spójnie.",
-      },
-    ],
-    teamEyebrow: "Zespół",
-    teamTitle: "Miejsce tworzone przez osoby, które lubią piękno i porządek.",
-    teamDescription:
-      "Na razie to przykładowa sekcja zespołu. Później możemy dodać prawdziwe zdjęcia, opisy specjalistek, certyfikaty i linki do social mediów.",
-    team: [
-      {
-        name: "Anna",
-        role: "Beauty specialist",
-        description:
-          "Specjalizuje się w pielęgnacji twarzy i spokojnej pracy z klientem. Dba o dobór zabiegów do potrzeb skóry.",
-      },
-      {
-        name: "Maja",
-        role: "Brows & lashes stylist",
-        description:
-          "Odpowiada za naturalną stylizację brwi i rzęs oraz dopracowany efekt bez przerysowania.",
-      },
-      {
-        name: "Klara",
-        role: "Makeup artist",
-        description:
-          "Tworzy makijaże dzienne, wieczorowe i okazjonalne, dopasowane do urody, światła i charakteru wydarzenia.",
+          "Wizyta ma być komfortowa, uporządkowana i przewidywalna. Klientka wie, co się dzieje i dlaczego dana metoda została wybrana.",
       },
     ],
-    studioTitle: "Klimat salonu ma znaczenie.",
+
+    specializationEyebrow: "Specjalizacja",
+    specializationTitle:
+      "Skupiamy się na usługach, które dają świeży, elegancki efekt.",
+    specializationDescription:
+      "Oferta została zaprojektowana wokół trzech obszarów, które najczęściej budują kompletny, dopracowany wygląd: skóra, oprawa oczu i makijaż.",
+    specializations: [
+      {
+        title: "Pielęgnacja twarzy",
+        description:
+          "Zabiegi oczyszczające, regenerujące i odżywcze dla skóry, która potrzebuje odświeżenia, ukojenia lub poprawy kondycji.",
+      },
+      {
+        title: "Brwi i rzęsy",
+        description:
+          "Stylizacja oprawy oczu, która nadaje twarzy wyrazistości, ale pozostaje lekka, naturalna i dopasowana do rysów.",
+      },
+      {
+        title: "Makijaż okazjonalny",
+        description:
+          "Makijaż tworzony z myślą o wydarzeniu, świetle, stylizacji i trwałości — tak, aby dobrze wyglądał na żywo i na zdjęciach.",
+      },
+    ],
+
+    processEyebrow: "Jak pracujemy",
+    processTitle:
+      "Prosty proces, który daje klientce poczucie kontroli i spokoju.",
+    processDescription:
+      "Każda usługa powinna mieć jasny przebieg — od pierwszego pytania, przez dobór metody, aż po zalecenia po wizycie.",
+    processSteps: [
+      {
+        title: "Rozpoznanie potrzeb",
+        description:
+          "Zaczynamy od krótkiej rozmowy: czego potrzebujesz, jaki efekt lubisz i czy są kwestie, które trzeba uwzględnić.",
+      },
+      {
+        title: "Dobór usługi",
+        description:
+          "Na podstawie oczekiwań i aktualnych potrzeb dobieramy usługę, zakres pracy oraz odpowiedni kierunek estetyczny.",
+      },
+      {
+        title: "Spokojna realizacja",
+        description:
+          "Usługa przebiega w uporządkowany sposób, z naciskiem na komfort, higienę, precyzję i naturalny efekt.",
+      },
+      {
+        title: "Zalecenia po wizycie",
+        description:
+          "Po zakończeniu otrzymujesz jasne wskazówki, które pomagają utrzymać efekt i świadomie planować kolejne wizyty.",
+      },
+    ],
+
+    studioTitle: "Miejsce, które ma wspierać decyzję, a nie ją przyspieszać.",
     studioDescription:
-      "Ta część może później opisywać wnętrze, lokalizację, atmosferę i standard obsługi. Dobrze sprawdzi się też jako miejsce na zdjęcie salonu.",
+      "Aurora Beauty Studio to przestrzeń dla osób, które szukają estetyki premium bez presji i przesady. Strona, oferta i komunikacja mają pomóc spokojnie wybrać usługę, zrozumieć jej efekt i skontaktować się wtedy, gdy decyzja jest gotowa.",
     studioHighlights: [
-      "spokojna, elegancka przestrzeń",
-      "jasna komunikacja przed wizytą",
-      "usługi dopasowane do potrzeb",
-      "możliwość rozbudowy o zdjęcia i certyfikaty",
+      "subtelna estetyka i naturalny kierunek pracy",
+      "jasne opisy usług i orientacyjny zakres cen",
+      "komunikacja nastawiona na komfort klientki",
+      "możliwość dobrania usługi przed wizytą",
     ],
-    ctaTitle: "Chcesz poznać ofertę bliżej?",
+
+    ctaTitle:
+      "Chcesz zobaczyć, która usługa najlepiej pasuje do Twoich potrzeb?",
     ctaDescription:
-      "Po poznaniu historii i podejścia salonu użytkownik powinien mieć prostą drogę do usług albo kontaktu.",
+      "Przejdź do oferty i sprawdź główne obszary pracy salonu. Jeśli nie masz pewności, możesz od razu skontaktować się i opisać oczekiwany efekt.",
     ctaButton: "Zobacz usługi",
   },
 
   en: {
-    storyEyebrow: "Our story",
-    storyTitle: "A beauty studio built around calm, aesthetics and attention.",
-    storyParagraphs: [
-      "Aurora Beauty Studio is a sample beauty brand used as a base for further project refinement. From the start, the website should communicate elegance, trust and a simple path to contact.",
-      "Later, this page can tell the real story of the business: when the studio was created, who stands behind it, what it specializes in and why clients choose this place.",
-      "The goal is a layout that is not overloaded with text, but gives enough information for visitors to feel that they are entering a professional, calm and carefully designed space.",
+    approachEyebrow: "Studio philosophy",
+    approachTitle:
+      "Aurora Beauty Studio was created around natural results, a calm atmosphere and thoughtful beauty care.",
+    approachParagraphs: [
+      "A beauty visit should be more than just completing a service. It should be a moment when the client feels taken care of, listened to and confident that the chosen result truly suits them.",
+      "That is why Aurora Beauty Studio focuses on subtle results, clear communication and services tailored to individual needs. The goal is not to overpower natural beauty, but to refine, refresh and enhance it.",
+      "Our approach combines premium aesthetics with practical comfort: a calm visit, a clear explanation of the service and aftercare guidance that helps maintain the result beyond the studio.",
     ],
     stats: [
-      { value: "3", label: "main service areas" },
-      { value: "2", label: "website languages" },
-      { value: "100%", label: "responsive layout" },
+      { value: "3", label: "specialized service areas" },
+      { value: "1:1", label: "individual consultation" },
+      { value: "Soft", label: "natural result direction" },
     ],
-    valuesEyebrow: "Values",
-    valuesTitle: "An approach visible in every detail.",
-    valuesDescription:
-      "This section helps show the studio character and makes it more than just a list of services.",
-    values: [
+
+    standardsEyebrow: "Work standard",
+    standardsTitle:
+      "Details that build trust before, during and after the visit.",
+    standardsDescription:
+      "A professional experience begins before the first contact. The website, communication and service should guide the client without confusion or uncertainty.",
+    standards: [
       {
-        title: "Client comfort",
+        title: "Clear communication",
         description:
-          "From the first contact to the end of the visit, the focus is a calm experience, clear communication and no pressure.",
+          "Before the visit, it is easy to check the service scope, approximate duration and contact options. This makes the booking decision simpler.",
       },
       {
-        title: "Natural results",
+        title: "Needs-based selection",
         description:
-          "Services are meant to enhance beauty, not overwhelm it. The website follows the same subtle and elegant direction.",
+          "The service is selected according to skin, natural features, occasion and expected result — without a one-size-fits-all approach.",
       },
       {
-        title: "Attention to detail",
+        title: "Calm atmosphere",
         description:
-          "In beauty, details build trust. That is why the layout, content and subpages are designed to feel consistent.",
-      },
-    ],
-    teamEyebrow: "Team",
-    teamTitle: "A place created by people who appreciate beauty and clarity.",
-    teamDescription:
-      "For now, this is a sample team section. Later we can add real photos, specialist descriptions, certificates and social media links.",
-    team: [
-      {
-        name: "Anna",
-        role: "Beauty specialist",
-        description:
-          "Specializes in facial care and calm client work. Focuses on choosing treatments according to skin needs.",
-      },
-      {
-        name: "Maja",
-        role: "Brows & lashes stylist",
-        description:
-          "Responsible for natural brow and lash styling with a polished effect that does not feel exaggerated.",
-      },
-      {
-        name: "Klara",
-        role: "Makeup artist",
-        description:
-          "Creates day, evening and occasional makeup adjusted to natural features, lighting and the event character.",
+          "The visit should feel comfortable, structured and predictable. The client knows what is happening and why a given method was chosen.",
       },
     ],
-    studioTitle: "The studio atmosphere matters.",
+
+    specializationEyebrow: "Specialization",
+    specializationTitle:
+      "We focus on services that create a fresh, elegant result.",
+    specializationDescription:
+      "The offer is built around three areas that most often create a complete, polished appearance: skin, eye-area styling and makeup.",
+    specializations: [
+      {
+        title: "Facial care",
+        description:
+          "Cleansing, regenerating and nourishing treatments for skin that needs refreshment, comfort or improved condition.",
+      },
+      {
+        title: "Brows and lashes",
+        description:
+          "Eye-area styling that adds definition to the face while staying light, natural and adjusted to individual features.",
+      },
+      {
+        title: "Occasion makeup",
+        description:
+          "Makeup created with the event, lighting, outfit and durability in mind — designed to look good in person and in photos.",
+      },
+    ],
+
+    processEyebrow: "How we work",
+    processTitle: "A simple process that gives the client clarity and calm.",
+    processDescription:
+      "Every service should have a clear flow — from the first question, through method selection, to aftercare guidance.",
+    processSteps: [
+      {
+        title: "Understanding needs",
+        description:
+          "We start with a short conversation: what you need, what result you like and whether there are any details to consider.",
+      },
+      {
+        title: "Choosing the service",
+        description:
+          "Based on expectations and current needs, the service, work scope and aesthetic direction are selected.",
+      },
+      {
+        title: "Calm delivery",
+        description:
+          "The service is performed in a structured way, with focus on comfort, hygiene, precision and natural results.",
+      },
+      {
+        title: "Aftercare guidance",
+        description:
+          "After the visit, you receive clear guidance to help maintain the result and plan future visits consciously.",
+      },
+    ],
+
+    studioTitle: "A place designed to support the decision, not rush it.",
     studioDescription:
-      "This section can later describe the interior, location, atmosphere and service standard. It is also a good place for a studio photo.",
+      "Aurora Beauty Studio is a space for people looking for premium aesthetics without pressure or exaggeration. The website, offer and communication are designed to help clients calmly choose a service, understand the result and get in touch when they are ready.",
     studioHighlights: [
-      "calm and elegant space",
-      "clear communication before the visit",
-      "services adjusted to client needs",
-      "ready to expand with photos and certificates",
+      "subtle aesthetics and natural result direction",
+      "clear service descriptions and approximate pricing",
+      "communication focused on client comfort",
+      "support in choosing the right service before the visit",
     ],
-    ctaTitle: "Want to explore the offer?",
+
+    ctaTitle: "Want to see which service best matches your needs?",
     ctaDescription:
-      "After learning about the studio story and approach, visitors should have a simple path to services or contact.",
+      "Explore the offer and check the studio’s main service areas. If you are not sure, you can get in touch and describe the result you want.",
     ctaButton: "View services",
   },
 };
