@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { faqContent } from "@/content/faqContent";
+import { featuredContent } from "@/content/featuredContent";
 import { siteContent } from "@/content/siteContent";
 import { testimonialsContent } from "@/content/testimonialsContent";
 import { useSitePreferences } from "@/components/providers/SitePreferencesProvider";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { FaqSection } from "@/components/sections/FaqSection";
+import { FeaturedTreatmentSection } from "@/components/sections/FeaturedTreatmentSection";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 
@@ -15,6 +17,7 @@ export default function Home() {
   const content = siteContent[language].home;
   const faq = faqContent[language];
   const testimonials = testimonialsContent[language];
+  const featured = featuredContent[language];
 
   return (
     <>
@@ -128,7 +131,16 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="px-5 py-20">
+      <FeaturedTreatmentSection
+        eyebrow={featured.eyebrow}
+        title={featured.title}
+        description={featured.description}
+        badge={featured.badge}
+        details={featured.details}
+        buttonLabel={featured.buttonLabel}
+      />
+
+      <section className="border-y border-rose-200/70 bg-white/60 px-5 py-20 dark:border-stone-800 dark:bg-stone-900/40">
         <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-start">
           <SectionHeader
             eyebrow={content.benefitsEyebrow}
