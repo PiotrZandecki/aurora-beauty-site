@@ -42,21 +42,28 @@ type PricingContent = {
 export const pricingContent: Record<Language, PricingContent> = {
   pl: {
     introEyebrow: "Cennik",
-    introTitle: "Przejrzyste ceny dla najważniejszych usług beauty.",
+    introTitle: "Przejrzyste ceny dla usług beauty w naturalnym stylu premium.",
     introDescription:
-      "To przykładowy cennik startowy. Później możemy podmienić ceny, dodać warianty usług, promocje, pakiety albo integrację z systemem rezerwacji.",
+      "Cennik pokazuje podstawowy zakres usług, orientacyjny czas trwania oraz ceny od. Finalny dobór usługi może zostać doprecyzowany po krótkiej konsultacji, szczególnie przy pielęgnacji twarzy i makijażu okazjonalnym.",
     durationLabel: "Czas",
     priceNote: "Cena od",
     categories: [
       {
         title: "Pielęgnacja twarzy",
         description:
-          "Zabiegi oczyszczające, regenerujące i konsultacje pielęgnacyjne.",
+          "Zabiegi dobierane do aktualnych potrzeb skóry: oczyszczenie, regeneracja, ukojenie i przywrócenie naturalnego blasku.",
         items: [
+          {
+            name: "Konsultacja pielęgnacyjna",
+            description:
+              "Krótka analiza potrzeb skóry, rozmowa o codziennej pielęgnacji i rekomendacja najlepszego kierunku zabiegowego.",
+            duration: "30 min",
+            price: "90 zł",
+          },
           {
             name: "Zabieg oczyszczający",
             description:
-              "Odświeżenie skóry, delikatne oczyszczenie i podstawowa pielęgnacja.",
+              "Odświeżenie skóry, delikatne oczyszczenie i pielęgnacja dobrana do kondycji cery.",
             duration: "60 min",
             price: "180 zł",
             highlighted: true,
@@ -64,64 +71,65 @@ export const pricingContent: Record<Language, PricingContent> = {
           {
             name: "Zabieg regenerujący",
             description:
-              "Odżywcza pielęgnacja dla skóry wymagającej ukojenia i nawilżenia.",
+              "Odżywcza pielęgnacja dla skóry suchej, zmęczonej, wrażliwej lub wymagającej ukojenia.",
             duration: "75 min",
             price: "240 zł",
           },
           {
-            name: "Konsultacja pielęgnacyjna",
+            name: "Signature Glow Treatment",
             description:
-              "Omówienie potrzeb skóry i dobranie odpowiedniego planu pielęgnacji.",
-            duration: "30 min",
-            price: "90 zł",
+              "Wyróżniona usługa łącząca konsultację, delikatne oczyszczenie i regenerującą pielęgnację dla świeższego efektu.",
+            duration: "75 min",
+            price: "280 zł",
+            highlighted: true,
           },
         ],
       },
       {
         title: "Brwi i rzęsy",
         description:
-          "Stylizacja oprawy oczu z naciskiem na naturalny, estetyczny efekt.",
+          "Stylizacja oprawy oczu nastawiona na naturalny, schludny i elegancki efekt bez przerysowania.",
         items: [
+          {
+            name: "Koloryzacja brwi",
+            description:
+              "Subtelne podkreślenie koloru i kształtu brwi z dopasowaniem do urody.",
+            duration: "30 min",
+            price: "80 zł",
+          },
           {
             name: "Laminacja brwi",
             description:
-              "Ułożenie i podkreślenie brwi dla bardziej dopracowanego wyglądu.",
+              "Ułożenie i uporządkowanie brwi dla bardziej dopracowanego, naturalnego efektu.",
             duration: "45 min",
             price: "140 zł",
             highlighted: true,
           },
           {
-            name: "Koloryzacja brwi",
-            description:
-              "Subtelne podbicie koloru i kształtu dopasowane do urody.",
-            duration: "30 min",
-            price: "80 zł",
-          },
-          {
             name: "Stylizacja rzęs",
             description:
-              "Delikatne podkreślenie spojrzenia i naturalnej oprawy oczu.",
+              "Delikatne podkreślenie spojrzenia dopasowane do naturalnej oprawy oczu.",
             duration: "60 min",
             price: "170 zł",
           },
         ],
       },
       {
-        title: "Makijaż",
+        title: "Makijaż okazjonalny",
         description:
-          "Makijaże dopasowane do okazji, stylu i oczekiwanego efektu.",
+          "Makijaż dopasowany do urody, stylizacji, światła i charakteru wydarzenia.",
         items: [
           {
             name: "Makijaż dzienny",
             description:
-              "Lekki, świeży makijaż na spotkania, pracę albo sesję zdjęciową.",
+              "Lekki, świeży makijaż na spotkania, sesje zdjęciowe, ważne dni i wydarzenia dzienne.",
             duration: "45 min",
             price: "160 zł",
           },
           {
             name: "Makijaż wieczorowy",
             description:
-              "Bardziej wyrazisty efekt na wydarzenia, kolacje i uroczystości.",
+              "Bardziej wyrazisty, elegancki makijaż na uroczystości, kolacje, imprezy i sesje.",
             duration: "75 min",
             price: "240 zł",
             highlighted: true,
@@ -129,65 +137,81 @@ export const pricingContent: Record<Language, PricingContent> = {
           {
             name: "Makijaż ślubny próbny",
             description:
-              "Próba makijażu z omówieniem preferencji i dopracowaniem detali.",
+              "Próba makijażu przed ważnym dniem z omówieniem preferencji, trwałości i finalnego efektu.",
             duration: "90 min",
             price: "300 zł",
+          },
+          {
+            name: "Makijaż ślubny",
+            description:
+              "Makijaż dopasowany do urody, stylizacji, światła, zdjęć oraz charakteru ceremonii.",
+            duration: "90 min",
+            price: "350 zł",
+            highlighted: true,
           },
         ],
       },
     ],
     packagesEyebrow: "Pakiety",
-    packagesTitle: "Pakiety dla osób, które chcą połączyć kilka usług.",
+    packagesTitle: "Pakiety dla pełniejszego efektu i spokojniejszej wizyty.",
     packagesDescription:
-      "Pakiety pomagają uporządkować ofertę i zachęcają klientki do wyboru pełniejszej wizyty zamiast pojedynczej usługi.",
+      "Pakiety pomagają połączyć kilka usług w jedną wizytę. To dobre rozwiązanie przed ważnym wydarzeniem, sesją zdjęciową albo wtedy, gdy chcesz zadbać o kilka elementów naraz.",
     packages: [
       {
         title: "Fresh Start",
         description:
-          "Konsultacja pielęgnacyjna + zabieg oczyszczający dla pierwszej wizyty.",
+          "Konsultacja pielęgnacyjna oraz zabieg oczyszczający dla osób, które chcą rozpocząć świadomą pielęgnację skóry.",
         price: "240 zł",
         badge: "Na start",
       },
       {
         title: "Soft Glow",
         description:
-          "Zabieg regenerujący + delikatna stylizacja brwi dla świeżego efektu.",
+          "Zabieg regenerujący oraz delikatna stylizacja brwi dla świeżego, naturalnie dopracowanego efektu.",
         price: "340 zł",
         badge: "Popularne",
       },
       {
         title: "Event Ready",
         description:
-          "Makijaż wieczorowy + stylizacja rzęs przed ważnym wydarzeniem.",
+          "Makijaż wieczorowy oraz stylizacja rzęs przed ważnym wydarzeniem, kolacją, sesją albo uroczystością.",
         price: "380 zł",
         badge: "Okazja",
       },
     ],
     noteTitle: "Ważna informacja",
     noteDescription:
-      "Ceny są przykładowe i mogą zależeć od zakresu usługi, kondycji skóry, użytych produktów oraz indywidualnych potrzeb klientki lub klienta.",
-    ctaTitle: "Chcesz dobrać usługę do swoich potrzeb?",
+      "Podane ceny są cenami bazowymi. Finalny koszt może zależeć od zakresu pracy, wybranego wariantu usługi, kondycji skóry, oczekiwanego efektu oraz dodatkowych elementów ustalonych przed wizytą.",
+    ctaTitle: "Nie wiesz, która usługa albo pakiet będzie najlepszy?",
     ctaDescription:
-      "Przejdź do kontaktu i opisz, czego szukasz. W kolejnym etapie możemy dodać formularz, wybór usługi albo link do rezerwacji.",
-    ctaButton: "Skontaktuj się",
+      "Napisz, czego potrzebujesz, jaki efekt chcesz uzyskać i kiedy planujesz wizytę. Pomożemy dobrać odpowiedni zakres usługi.",
+    ctaButton: "Zapytaj o termin",
   },
 
   en: {
     introEyebrow: "Pricing",
-    introTitle: "Clear prices for the most important beauty services.",
+    introTitle: "Clear pricing for natural premium beauty services.",
     introDescription:
-      "This is a sample starter price list. Later we can replace prices, add service variants, promotions, packages or booking system integration.",
+      "The price list shows the basic service scope, approximate duration and starting prices. The final service selection can be adjusted after a short consultation, especially for facial care and occasion makeup.",
     durationLabel: "Duration",
     priceNote: "From",
     categories: [
       {
         title: "Facial care",
         description:
-          "Cleansing, regenerating treatments and skincare consultations.",
+          "Treatments selected according to current skin needs: cleansing, regeneration, comfort and natural glow.",
         items: [
           {
+            name: "Skincare consultation",
+            description:
+              "A short review of skin needs, daily care and recommendation for the best treatment direction.",
+            duration: "30 min",
+            price: "90 PLN",
+          },
+          {
             name: "Cleansing treatment",
-            description: "Skin refreshment, gentle cleansing and basic care.",
+            description:
+              "Skin refreshment, gentle cleansing and care selected according to the current condition of the skin.",
             duration: "60 min",
             price: "180 PLN",
             highlighted: true,
@@ -195,32 +219,25 @@ export const pricingContent: Record<Language, PricingContent> = {
           {
             name: "Regenerating treatment",
             description:
-              "Nourishing care for skin that needs soothing and hydration.",
+              "Nourishing care for dry, tired, sensitive skin or skin that needs soothing.",
             duration: "75 min",
             price: "240 PLN",
           },
           {
-            name: "Skincare consultation",
+            name: "Signature Glow Treatment",
             description:
-              "A short discussion of skin needs and a simple care plan.",
-            duration: "30 min",
-            price: "90 PLN",
+              "A featured service combining consultation, gentle cleansing and regenerating care for a fresher result.",
+            duration: "75 min",
+            price: "280 PLN",
+            highlighted: true,
           },
         ],
       },
       {
         title: "Brows and lashes",
         description:
-          "Eye-area styling focused on a natural and polished effect.",
+          "Eye-area styling focused on a natural, clean and elegant result without overdoing the effect.",
         items: [
-          {
-            name: "Brow lamination",
-            description:
-              "Shaping and enhancing brows for a cleaner appearance.",
-            duration: "45 min",
-            price: "140 PLN",
-            highlighted: true,
-          },
           {
             name: "Brow tinting",
             description:
@@ -229,30 +246,38 @@ export const pricingContent: Record<Language, PricingContent> = {
             price: "80 PLN",
           },
           {
+            name: "Brow lamination",
+            description:
+              "Shaping and organizing brows for a more polished, natural effect.",
+            duration: "45 min",
+            price: "140 PLN",
+            highlighted: true,
+          },
+          {
             name: "Lash styling",
             description:
-              "Gentle enhancement of the eyes and natural lash area.",
+              "Gentle eye enhancement adjusted to the natural lash and eye area.",
             duration: "60 min",
             price: "170 PLN",
           },
         ],
       },
       {
-        title: "Makeup",
+        title: "Occasion makeup",
         description:
-          "Makeup tailored to the occasion, style and expected result.",
+          "Makeup tailored to natural features, outfit, lighting and the character of the event.",
         items: [
           {
             name: "Day makeup",
             description:
-              "A light, fresh look for meetings, work or photo sessions.",
+              "A light, fresh makeup look for meetings, photoshoots, important days and daytime events.",
             duration: "45 min",
             price: "160 PLN",
           },
           {
             name: "Evening makeup",
             description:
-              "A more expressive effect for events, dinners and celebrations.",
+              "A more expressive, elegant makeup look for events, dinners, parties and photo sessions.",
             duration: "75 min",
             price: "240 PLN",
             highlighted: true,
@@ -260,45 +285,54 @@ export const pricingContent: Record<Language, PricingContent> = {
           {
             name: "Trial bridal makeup",
             description:
-              "A makeup trial with time to discuss preferences and details.",
+              "A makeup trial before the big day, with time to discuss preferences, durability and final effect.",
             duration: "90 min",
             price: "300 PLN",
+          },
+          {
+            name: "Bridal makeup",
+            description:
+              "Makeup adjusted to natural features, outfit, lighting, photos and the ceremony character.",
+            duration: "90 min",
+            price: "350 PLN",
+            highlighted: true,
           },
         ],
       },
     ],
     packagesEyebrow: "Packages",
-    packagesTitle: "Packages for clients who want to combine services.",
+    packagesTitle: "Packages for a fuller result and calmer visit.",
     packagesDescription:
-      "Packages help organize the offer and encourage visitors to choose a fuller visit instead of a single service.",
+      "Packages help combine several services into one visit. They work well before an important event, photoshoot or when you want to take care of several elements at once.",
     packages: [
       {
         title: "Fresh Start",
         description:
-          "Skincare consultation + cleansing treatment for the first visit.",
+          "Skincare consultation and cleansing treatment for clients who want to start more conscious skin care.",
         price: "240 PLN",
         badge: "Start here",
       },
       {
         title: "Soft Glow",
         description:
-          "Regenerating treatment + gentle brow styling for a fresh effect.",
+          "Regenerating treatment and gentle brow styling for a fresh, naturally polished result.",
         price: "340 PLN",
         badge: "Popular",
       },
       {
         title: "Event Ready",
-        description: "Evening makeup + lash styling before an important event.",
+        description:
+          "Evening makeup and lash styling before an important event, dinner, photoshoot or celebration.",
         price: "380 PLN",
         badge: "Occasion",
       },
     ],
     noteTitle: "Important note",
     noteDescription:
-      "Prices are examples and may depend on the service scope, skin condition, products used and individual client needs.",
-    ctaTitle: "Want to choose the right service for your needs?",
+      "The listed prices are base prices. The final cost may depend on the work scope, selected service variant, skin condition, desired result and additional elements agreed before the visit.",
+    ctaTitle: "Not sure which service or package is best?",
     ctaDescription:
-      "Go to contact and describe what you are looking for. In the next step, we can add a form, service selection or booking link.",
-    ctaButton: "Contact us",
+      "Describe what you need, what result you want and when you plan to visit. We will help choose the right service scope.",
+    ctaButton: "Ask about availability",
   },
 };
