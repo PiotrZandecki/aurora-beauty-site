@@ -1,10 +1,12 @@
 import type { Language } from "@/types/site";
 
 type GalleryItem = {
+  id: string;
   title: string;
   categoryId: string;
   category: string;
   description: string;
+  detail: string;
 };
 
 type GalleryHighlight = {
@@ -16,9 +18,15 @@ type GalleryContent = {
   introEyebrow: string;
   introTitle: string;
   introDescription: string;
-  featuredLabel: string;
+  visualLabel: string;
   allFilterLabel: string;
   filtersTitle: string;
+  openLabel: string;
+  closeLabel: string;
+  modalCategoryLabel: string;
+  modalDescriptionLabel: string;
+  modalDetailLabel: string;
+  modalCtaLabel: string;
   items: GalleryItem[];
   highlightsEyebrow: string;
   highlightsTitle: string;
@@ -34,168 +42,214 @@ type GalleryContent = {
 export const galleryContent: Record<Language, GalleryContent> = {
   pl: {
     introEyebrow: "Galeria",
-    introTitle:
-      "Miejsce na efekty pracy, klimat salonu i wizualną historię marki.",
+    introTitle: "Efekty, klimat i detale, które pokazują styl salonu.",
     introDescription:
-      "Galeria pomaga użytkownikowi szybko poczuć styl salonu. Później możemy tutaj dodać prawdziwe zdjęcia wnętrza, realizacje, metamorfozy i materiały z social mediów.",
-    featuredLabel: "Przykładowe ujęcie",
+      "Galeria pomaga zobaczyć kierunek estetyczny Aurora Beauty Studio: naturalne efekty, subtelne detale, spokojną atmosferę i dopracowaną prezentację usług.",
+    visualLabel: "Kierunek estetyczny",
     allFilterLabel: "Wszystkie",
     filtersTitle: "Filtruj galerię",
+    openLabel: "Otwórz podgląd",
+    closeLabel: "Zamknij podgląd",
+    modalCategoryLabel: "Kategoria",
+    modalDescriptionLabel: "Opis",
+    modalDetailLabel: "Na co zwrócić uwagę",
+    modalCtaLabel: "Zapytaj o podobny efekt",
     items: [
       {
+        id: "natural-glow",
         title: "Natural glow",
         categoryId: "facial-care",
         category: "Pielęgnacja twarzy",
         description:
-          "Placeholder pod zdjęcie efektu zabiegu pielęgnacyjnego lub detalu skóry po wizycie.",
+          "Świeży, promienny kierunek pielęgnacji dla skóry, która potrzebuje odświeżenia i komfortu.",
+        detail:
+          "Ten typ efektu dobrze komunikuje naturalność, lekkość i zadbaną skórę bez ciężkiego, przerysowanego rezultatu.",
       },
       {
+        id: "soft-brows",
         title: "Soft brows",
         categoryId: "brows-lashes",
         category: "Brwi i rzęsy",
         description:
-          "Miejsce na zdjęcie stylizacji brwi, laminacji albo subtelnego podkreślenia oprawy oczu.",
+          "Subtelnie uporządkowana oprawa oczu, która podkreśla rysy twarzy i nie dominuje całego wyglądu.",
+        detail:
+          "W galerii warto pokazywać zbliżenia brwi i rzęs, aby użytkowniczka mogła ocenić precyzję oraz poziom naturalności.",
       },
       {
-        title: "Evening makeup",
+        id: "occasion-makeup",
+        title: "Occasion makeup",
         categoryId: "makeup",
         category: "Makijaż",
         description:
-          "Układ pod zdjęcie makijażu wieczorowego, ślubnego albo sesyjnego.",
+          "Makijaż dopasowany do okazji, stylizacji, światła i oczekiwanego poziomu intensywności.",
+        detail:
+          "Najlepiej sprawdzają się ujęcia pokazujące cerę, oko i całościowy balans makijażu — zarówno na żywo, jak i na zdjęciach.",
       },
       {
+        id: "studio-details",
         title: "Studio details",
         categoryId: "studio",
         category: "Wnętrze salonu",
         description:
-          "Tutaj może pojawić się zdjęcie stanowiska pracy, recepcji, kosmetyków albo detali wystroju.",
+          "Detale przestrzeni, które budują poczucie spokoju, estetyki i profesjonalnego standardu.",
+        detail:
+          "Zdjęcia wnętrza pomagają zmniejszyć niepewność przed pierwszą wizytą i pokazują charakter miejsca.",
       },
       {
+        id: "before-after",
         title: "Before & after",
         categoryId: "transformation",
         category: "Metamorfoza",
         description:
-          "Placeholder pod zestawienie przed i po, które później możemy rozbudować o slider.",
+          "Porównanie kierunku przed i po, pokazujące zmianę w sposób czytelny, elegancki i uczciwy.",
+        detail:
+          "Przy metamorfozach kluczowe jest podobne światło, kadr i neutralna prezentacja, aby efekt był wiarygodny.",
       },
       {
+        id: "beauty-ritual",
         title: "Beauty ritual",
         categoryId: "atmosphere",
         category: "Atmosfera",
         description:
-          "Miejsce na zdjęcie pokazujące spokojny, elegancki klimat wizyty.",
+          "Ujęcia pokazujące spokojny rytm wizyty, komfort klientki i dopracowany charakter usługi.",
+        detail:
+          "Takie zdjęcia dobrze wspierają markę premium, bo pokazują nie tylko efekt, ale też doświadczenie wizyty.",
       },
     ],
-    highlightsEyebrow: "Co pokazać",
+    highlightsEyebrow: "Rola galerii",
     highlightsTitle:
       "Galeria powinna budować zaufanie, nie tylko wyglądać ładnie.",
     highlightsDescription:
-      "Dobrze dobrane zdjęcia pomagają klientce lub klientowi zrozumieć styl salonu jeszcze przed pierwszą wizytą.",
+      "Dobrze dobrane zdjęcia pomagają klientce zrozumieć styl salonu, poziom naturalności efektów i atmosferę miejsca jeszcze przed pierwszym kontaktem.",
     highlights: [
       {
         title: "Efekty usług",
         description:
-          "Zdjęcia po zabiegach pokazują jakość pracy i pomagają wybrać odpowiednią usługę.",
+          "Zdjęcia po zabiegach i stylizacjach pokazują jakość pracy oraz pomagają wybrać właściwy kierunek usługi.",
       },
       {
         title: "Wnętrze salonu",
         description:
-          "Kilka ujęć przestrzeni buduje poczucie bezpieczeństwa i pokazuje standard miejsca.",
+          "Ujęcia przestrzeni budują poczucie bezpieczeństwa i pokazują standard miejsca, do którego klientka przychodzi.",
       },
       {
         title: "Detale i atmosfera",
         description:
-          "Ujęcia produktów, stanowiska i spokojnych detali wzmacniają premium charakter strony.",
+          "Produkty, światło, stanowisko pracy i spokojne detale wzmacniają premium charakter marki.",
       },
     ],
-    noteTitle: "W kolejnym etapie",
+    noteTitle: "Jak korzystać z galerii",
     noteDescription:
-      "Możemy dodać prawdziwe zdjęcia, filtrowanie galerii, powiększanie zdjęć po kliknięciu, sekcję Instagram albo slider metamorfoz przed/po.",
-    ctaTitle: "Podoba Ci się styl galerii?",
+      "Kliknij wybrany element, aby zobaczyć większy podgląd i krótki opis. Przy realnych zdjęciach ten układ można wykorzystać do prezentacji efektów, wnętrza, metamorfoz i materiałów z sesji.",
+    ctaTitle: "Podoba Ci się kierunek estetyczny salonu?",
     ctaDescription:
-      "Po dodaniu prawdziwych zdjęć ta podstrona będzie jednym z najmocniejszych elementów zaufania na stronie.",
+      "Jeśli szukasz naturalnego efektu, spokojnej atmosfery i dopracowanej usługi, przejdź do kontaktu i opisz, czego potrzebujesz.",
     ctaButton: "Przejdź do kontaktu",
   },
 
   en: {
     introEyebrow: "Gallery",
-    introTitle:
-      "A place for results, studio atmosphere and the visual story of the brand.",
+    introTitle: "Results, atmosphere and details that show the studio style.",
     introDescription:
-      "The gallery helps visitors quickly understand the studio style. Later we can add real interior photos, work results, transformations and social media materials.",
-    featuredLabel: "Sample shot",
+      "The gallery helps present the aesthetic direction of Aurora Beauty Studio: natural results, subtle details, calm atmosphere and polished service presentation.",
+    visualLabel: "Aesthetic direction",
     allFilterLabel: "All",
     filtersTitle: "Filter gallery",
+    openLabel: "Open preview",
+    closeLabel: "Close preview",
+    modalCategoryLabel: "Category",
+    modalDescriptionLabel: "Description",
+    modalDetailLabel: "What to notice",
+    modalCtaLabel: "Ask about a similar result",
     items: [
       {
+        id: "natural-glow",
         title: "Natural glow",
         categoryId: "facial-care",
         category: "Facial care",
         description:
-          "A placeholder for a treatment result photo or skin detail after a visit.",
+          "A fresh, radiant care direction for skin that needs refreshment and comfort.",
+        detail:
+          "This type of result communicates naturalness, lightness and well-cared-for skin without a heavy or overdone effect.",
       },
       {
+        id: "soft-brows",
         title: "Soft brows",
         categoryId: "brows-lashes",
         category: "Brows and lashes",
         description:
-          "A place for brow styling, lamination or subtle eye-area enhancement photos.",
+          "Subtly refined eye-area styling that enhances facial features without dominating the entire look.",
+        detail:
+          "Close-up shots of brows and lashes help visitors judge precision and the level of naturalness.",
       },
       {
-        title: "Evening makeup",
+        id: "occasion-makeup",
+        title: "Occasion makeup",
         categoryId: "makeup",
         category: "Makeup",
         description:
-          "A layout for evening, bridal or photoshoot makeup images.",
+          "Makeup adjusted to the occasion, outfit, lighting and desired level of intensity.",
+        detail:
+          "The best visuals show skin, eyes and the overall makeup balance — both in person and in photos.",
       },
       {
+        id: "studio-details",
         title: "Studio details",
         categoryId: "studio",
         category: "Studio interior",
         description:
-          "This can show the workstation, reception, cosmetics or interior details.",
+          "Space details that build a sense of calm, aesthetics and professional standard.",
+        detail:
+          "Interior photos reduce uncertainty before the first visit and show the character of the place.",
       },
       {
+        id: "before-after",
         title: "Before & after",
         categoryId: "transformation",
         category: "Transformation",
         description:
-          "A placeholder for before-and-after comparison that can later become a slider.",
+          "A clear and elegant comparison showing the direction before and after the service.",
+        detail:
+          "For transformations, similar light, framing and honest presentation are key to making the result credible.",
       },
       {
+        id: "beauty-ritual",
         title: "Beauty ritual",
         categoryId: "atmosphere",
         category: "Atmosphere",
         description:
-          "A place for a photo showing the calm and elegant atmosphere of a visit.",
+          "Visuals showing the calm rhythm of the visit, client comfort and the refined character of the service.",
+        detail:
+          "These visuals support a premium brand because they show not only the result, but also the experience.",
       },
     ],
-    highlightsEyebrow: "What to show",
+    highlightsEyebrow: "Gallery purpose",
     highlightsTitle: "A gallery should build trust, not just look pretty.",
     highlightsDescription:
-      "Well-selected photos help visitors understand the studio style before their first visit.",
+      "Well-selected photos help clients understand the studio style, the natural level of results and the atmosphere of the place before first contact.",
     highlights: [
       {
         title: "Service results",
         description:
-          "After-treatment photos show work quality and help visitors choose the right service.",
+          "After-service visuals show work quality and help visitors choose the right direction.",
       },
       {
         title: "Studio interior",
         description:
-          "A few photos of the space build comfort and show the standard of the place.",
+          "Photos of the space build comfort and show the standard of the place the client is visiting.",
       },
       {
-        title: "Details and mood",
+        title: "Details and atmosphere",
         description:
-          "Product, workstation and calm detail shots strengthen the premium character of the website.",
+          "Products, lighting, workstation and calm detail shots strengthen the premium character of the brand.",
       },
     ],
-    noteTitle: "Next stage",
+    noteTitle: "How to use the gallery",
     noteDescription:
-      "We can add real photos, gallery filtering, image enlargement on click, Instagram section or a before-and-after transformation slider.",
-    ctaTitle: "Do you like the gallery direction?",
+      "Click an item to see a larger preview and short description. With real photos, this layout can present results, interiors, transformations and session materials.",
+    ctaTitle: "Do you like the studio’s aesthetic direction?",
     ctaDescription:
-      "After adding real photos, this page can become one of the strongest trust-building parts of the website.",
+      "If you are looking for a natural result, calm atmosphere and refined service, go to contact and describe what you need.",
     ctaButton: "Go to contact",
   },
 };

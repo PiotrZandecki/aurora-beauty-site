@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+import { useMemo, useState } from "react";
 import { galleryContent } from "@/content/galleryContent";
 import { siteContent } from "@/content/siteContent";
 import { useSitePreferences } from "@/components/providers/SitePreferencesProvider";
@@ -14,9 +15,7 @@ export default function GalleryPage() {
   const content = galleryContent[language];
 
   const [selectedCategoryId, setSelectedCategoryId] = useState("all");
-  const [selectedItemTitle, setSelectedItemTitle] = useState<string | null>(
-    null,
-  );
+  const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
 
   const filters = useMemo(() => {
     const uniqueFilters = content.items.reduce<
@@ -53,29 +52,11 @@ export default function GalleryPage() {
       ? content.items
       : content.items.filter((item) => item.categoryId === selectedCategoryId);
 
-  const selectedItem = selectedItemTitle
-    ? content.items.find((item) => item.title === selectedItemTitle)
-    : null;
+  const selectedItem = content.items.find((item) => item.id === selectedItemId);
 
-  useEffect(() => {
-    if (!selectedItem) {
-      return;
-    }
-
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        setSelectedItemTitle(null);
-      }
-    }
-
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [selectedItem]);
+  const closeLightbox = () => {
+    setSelectedItemId(null);
+  };
 
   return (
     <>
@@ -119,25 +100,26 @@ export default function GalleryPage() {
           <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {visibleItems.map((item, index) => (
               <button
-                key={item.title}
+                key={item.id}
                 type="button"
-                onClick={() => setSelectedItemTitle(item.title)}
-                className={`group overflow-hidden rounded-4xl border border-rose-200 bg-rose-50 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-950 dark:hover:shadow-black/30 ${
+                onClick={() => setSelectedItemId(item.id)}
+                className={`group overflow-hidden rounded-4xl border border-rose-200 bg-rose-50 text-left shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-rose-200/60 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 focus:ring-offset-rose-50 dark:border-stone-800 dark:bg-stone-950 dark:hover:shadow-black/30 dark:focus:ring-rose-300 dark:focus:ring-offset-stone-950 ${
                   selectedCategoryId === "all" && index === 0
                     ? "md:col-span-2 lg:col-span-2"
                     : ""
                 }`}
+                aria-label={`${content.openLabel}: ${item.title}`}
               >
                 <div
                   className={`flex items-end bg-linear-to-br from-rose-100 via-pink-100 to-stone-100 p-5 dark:from-stone-800 dark:via-stone-900 dark:to-rose-950 ${
                     selectedCategoryId === "all" && index === 0
-                      ? "aspect-16/9"
+                      ? "aspect-video"
                       : "aspect-4/5"
                   }`}
                 >
                   <div className="rounded-3xl bg-white/80 px-4 py-3 shadow-sm backdrop-blur dark:bg-stone-950/70">
                     <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-600 dark:text-rose-300">
-                      {content.featuredLabel}
+                      {content.visualLabel}
                     </p>
 
                     <p className="mt-1 text-sm font-semibold text-stone-950 dark:text-rose-50">
@@ -211,63 +193,82 @@ export default function GalleryPage() {
 
       {selectedItem && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-stone-950/80 px-5 py-8 backdrop-blur-sm"
+          className="fixed inset-0 z-100 flex items-center justify-center bg-stone-950/70 px-5 py-8 backdrop-blur-sm"
           role="dialog"
           aria-modal="true"
-          aria-label={`${content.previewTitle}: ${selectedItem.title}`}
-          onClick={() => setSelectedItemTitle(null)}
+          aria-label={selectedItem.title}
+          onClick={closeLightbox}
         >
           <div
-            className="max-h-full w-full max-w-5xl overflow-y-auto rounded-4xl border border-rose-200 bg-rose-50 p-5 shadow-2xl dark:border-stone-800 dark:bg-stone-950 md:p-6"
+            className="max-h-[90vh] w-full max-w-5xl overflow-y-auto rounded-4xl border border-rose-200 bg-rose-50 p-5 shadow-2xl dark:border-stone-800 dark:bg-stone-950 md:p-6"
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-rose-600 dark:text-rose-300">
-                  {content.previewTitle}
-                </p>
-
-                <h2 className="mt-2 text-2xl font-semibold text-stone-950 dark:text-rose-50 md:text-4xl">
-                  {selectedItem.title}
-                </h2>
-              </div>
-
-              <button
-                type="button"
-                onClick={() => setSelectedItemTitle(null)}
-                className="rounded-full border border-rose-200 bg-white px-4 py-2 text-sm font-semibold text-stone-950 shadow-sm transition hover:border-rose-400 dark:border-stone-700 dark:bg-stone-900 dark:text-rose-50"
-              >
-                {content.closeLabel}
-              </button>
-            </div>
-
-            <div className="mt-6 grid gap-6 md:grid-cols-[1.15fr_0.85fr] md:items-stretch">
-              <div className="flex min-h-[320px] items-end rounded-3xl bg-linear-to-br from-rose-100 via-pink-100 to-stone-100 p-6 dark:from-stone-800 dark:via-stone-900 dark:to-rose-950">
+            <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+              <div className="flex min-h-90 items-end rounded-3xl bg-linear-to-br from-rose-100 via-pink-100 to-stone-100 p-6 dark:from-stone-800 dark:via-stone-900 dark:to-rose-950">
                 <div className="rounded-3xl bg-white/80 px-4 py-3 shadow-sm backdrop-blur dark:bg-stone-950/70">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-600 dark:text-rose-300">
-                    {content.featuredLabel}
+                    {content.visualLabel}
                   </p>
 
                   <p className="mt-1 text-sm font-semibold text-stone-950 dark:text-rose-50">
-                    {selectedItem.category}
+                    {selectedItem.title}
                   </p>
                 </div>
               </div>
 
               <div className="rounded-3xl bg-white p-6 dark:bg-stone-900">
-                <p className="rounded-full bg-rose-100 px-4 py-2 text-sm font-semibold text-rose-700 dark:bg-rose-950 dark:text-rose-200">
-                  {selectedItem.category}
-                </p>
+                <div className="flex items-start justify-between gap-5">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.25em] text-rose-600 dark:text-rose-300">
+                      {content.modalCategoryLabel}
+                    </p>
 
-                <p className="mt-6 text-lg leading-8 text-stone-600 dark:text-stone-300">
-                  {selectedItem.description}
-                </p>
+                    <p className="mt-2 text-sm font-semibold text-stone-600 dark:text-stone-300">
+                      {selectedItem.category}
+                    </p>
 
-                <p className="mt-6 leading-7 text-stone-500 dark:text-stone-400">
-                  {language === "pl"
-                    ? "W finalnej wersji to miejsce może pokazywać prawdziwe zdjęcie, metamorfozę przed/po albo większy podgląd realizacji."
-                    : "In the final production version, this area can show a real photo, before-and-after transformation or a larger work preview."}
-                </p>
+                    <h2 className="mt-5 text-3xl font-semibold tracking-tight text-stone-950 dark:text-rose-50">
+                      {selectedItem.title}
+                    </h2>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={closeLightbox}
+                    className="rounded-full border border-rose-200 bg-rose-50 px-4 py-2 text-sm font-semibold text-stone-700 transition hover:border-rose-400 hover:text-rose-700 dark:border-stone-700 dark:bg-stone-950 dark:text-stone-300 dark:hover:border-rose-300 dark:hover:text-rose-200"
+                  >
+                    {content.closeLabel}
+                  </button>
+                </div>
+
+                <div className="mt-8 grid gap-5">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.25em] text-rose-600 dark:text-rose-300">
+                      {content.modalDescriptionLabel}
+                    </p>
+
+                    <p className="mt-3 leading-7 text-stone-600 dark:text-stone-300">
+                      {selectedItem.description}
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.25em] text-rose-600 dark:text-rose-300">
+                      {content.modalDetailLabel}
+                    </p>
+
+                    <p className="mt-3 leading-7 text-stone-600 dark:text-stone-300">
+                      {selectedItem.detail}
+                    </p>
+                  </div>
+
+                  <Link
+                    href="/contact"
+                    className="mt-2 inline-flex w-fit rounded-full bg-stone-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-rose-700 dark:bg-rose-100 dark:text-stone-950 dark:hover:bg-rose-200"
+                  >
+                    {content.modalCtaLabel}
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
