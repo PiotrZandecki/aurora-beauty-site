@@ -13,6 +13,8 @@ type ServiceCategory = {
   title: string;
   description: string;
   accent: string;
+  imageSrc: string;
+  imageAlt: string;
   services: ServiceItem[];
 };
 
@@ -58,6 +60,8 @@ export const servicesContent: Record<Language, ServicesContent> = {
         description:
           "Zabiegi dla skóry, która potrzebuje oczyszczenia, ukojenia, regeneracji albo przywrócenia naturalnego blasku.",
         accent: "Skin care",
+        imageSrc: "/images/facial-care.png",
+        imageAlt: "Profesjonalny zabieg pielęgnacji twarzy w beauty studio",
         services: [
           {
             title: "Zabieg oczyszczający",
@@ -93,6 +97,8 @@ export const servicesContent: Record<Language, ServicesContent> = {
         description:
           "Stylizacja oprawy oczu nastawiona na naturalny, schludny i elegancki efekt bez przerysowania.",
         accent: "Brows & lashes",
+        imageSrc: "/images/brows-lashes.png",
+        imageAlt: "Stylizacja brwi i rzęs w premium beauty studio",
         services: [
           {
             title: "Laminacja brwi",
@@ -128,6 +134,8 @@ export const servicesContent: Record<Language, ServicesContent> = {
         description:
           "Makijaż dopasowany do urody, stylizacji, światła i charakteru wydarzenia — tak, aby dobrze wyglądał na żywo i na zdjęciach.",
         accent: "Makeup",
+        imageSrc: "/images/occasion-makeup.png",
+        imageAlt: "Elegancki makijaż okazjonalny w beauty studio",
         services: [
           {
             title: "Makijaż dzienny",
@@ -209,6 +217,8 @@ export const servicesContent: Record<Language, ServicesContent> = {
         description:
           "Treatments for skin that needs cleansing, comfort, regeneration or a natural glow boost.",
         accent: "Skin care",
+        imageSrc: "/images/facial-care.png",
+        imageAlt: "Professional facial-care treatment in a beauty studio",
         services: [
           {
             title: "Cleansing treatment",
@@ -244,6 +254,8 @@ export const servicesContent: Record<Language, ServicesContent> = {
         description:
           "Eye-area styling focused on a natural, clean and elegant effect without overdoing the result.",
         accent: "Brows & lashes",
+        imageSrc: "/images/brows-lashes.png",
+        imageAlt: "Brows and lashes styling in a premium beauty studio",
         services: [
           {
             title: "Brow lamination",
@@ -279,6 +291,8 @@ export const servicesContent: Record<Language, ServicesContent> = {
         description:
           "Makeup tailored to natural features, outfit, lighting and the character of the event — designed to look good in person and in photos.",
         accent: "Makeup",
+        imageSrc: "/images/occasion-makeup.png",
+        imageAlt: "Elegant occasion makeup in a beauty studio",
         services: [
           {
             title: "Day makeup",

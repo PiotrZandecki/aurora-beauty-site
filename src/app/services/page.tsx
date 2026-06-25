@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { siteContent } from "@/content/siteContent";
 import { servicesContent } from "@/content/servicesContent";
@@ -45,6 +46,24 @@ export default function ServicesPage() {
                       <p className="mt-4 leading-7 text-stone-600 dark:text-stone-300">
                         {category.description}
                       </p>
+
+                      <div className="relative mt-8 aspect-4/5 overflow-hidden rounded-3xl">
+                        <Image
+                          src={category.imageSrc}
+                          alt={category.imageAlt}
+                          fill
+                          sizes="(min-width: 1024px) 35vw, 100vw"
+                          className="object-cover"
+                        />
+
+                        <div className="absolute inset-0 bg-linear-to-t from-stone-950/55 via-stone-950/10 to-transparent" />
+
+                        <div className="absolute inset-x-0 bottom-0 p-5">
+                          <span className="rounded-full bg-white/85 px-4 py-2 text-sm font-semibold text-rose-700 shadow-sm backdrop-blur dark:bg-stone-950/75 dark:text-rose-200">
+                            {category.accent}
+                          </span>
+                        </div>
+                      </div>
                     </div>
 
                     <div className="mt-8 rounded-3xl bg-rose-100 p-5 dark:bg-rose-950/50">

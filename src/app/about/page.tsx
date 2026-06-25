@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { aboutContent } from "@/content/aboutContent";
 import { siteContent } from "@/content/siteContent";
 import { useSitePreferences } from "@/components/providers/SitePreferencesProvider";
@@ -177,14 +178,28 @@ export default function AboutPage() {
             </ul>
           </div>
 
-          <div className="rounded-4xl border border-rose-200 bg-rose-50 p-5 shadow-2xl shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-950 dark:shadow-black/30">
-            <div className="aspect-4/5 rounded-3xl bg-linear-to-br from-rose-100 via-pink-100 to-stone-100 p-6 dark:from-stone-800 dark:via-stone-900 dark:to-rose-950">
-              <div className="flex h-full flex-col justify-end rounded-[1.2rem] border border-white/60 p-6 backdrop-blur dark:border-white/10">
-                <p className="text-sm uppercase tracking-[0.25em] text-stone-500 dark:text-stone-300">
+          <div className="rounded-4xl border border-rose-200 bg-white p-4 shadow-2xl shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-900 dark:shadow-black/30">
+            <div className="relative aspect-4/5 overflow-hidden rounded-3xl">
+              <Image
+                src="/images/studio-interior.png"
+                alt={
+                  language === "pl"
+                    ? "Eleganckie wnętrze premium beauty studio"
+                    : "Elegant interior of a premium beauty studio"
+                }
+                fill
+                sizes="(min-width: 768px) 50vw, 100vw"
+                className="object-cover"
+              />
+
+              <div className="absolute inset-0 bg-linear-to-t from-stone-950/55 via-stone-950/10 to-transparent" />
+
+              <div className="absolute inset-x-0 bottom-0 p-6">
+                <p className="text-sm uppercase tracking-[0.25em] text-white/75">
                   Aurora Beauty Studio
                 </p>
 
-                <p className="mt-4 text-2xl font-semibold text-stone-950 dark:text-rose-50">
+                <p className="mt-4 text-2xl font-semibold text-white">
                   {language === "pl"
                     ? "Naturalny efekt. Spokojna atmosfera. Dopracowany detal."
                     : "Natural result. Calm atmosphere. Refined detail."}
