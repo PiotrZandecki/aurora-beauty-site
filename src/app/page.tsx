@@ -1,14 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import { faqContent } from "@/content/faqContent";
 import { siteContent } from "@/content/siteContent";
 import { useSitePreferences } from "@/components/providers/SitePreferencesProvider";
 import { CtaBanner } from "@/components/sections/CtaBanner";
+import { FaqSection } from "@/components/sections/FaqSection";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 
 export default function Home() {
   const { language } = useSitePreferences();
   const content = siteContent[language].home;
+  const faq = faqContent[language];
 
   return (
     <>
@@ -152,6 +155,13 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <FaqSection
+        eyebrow={faq.eyebrow}
+        title={faq.title}
+        description={faq.description}
+        items={faq.items}
+      />
 
       <CtaBanner
         title={content.ctaTitle}

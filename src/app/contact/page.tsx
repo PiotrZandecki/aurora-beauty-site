@@ -2,8 +2,10 @@
 
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { contactContent } from "@/content/contactContent";
+import { faqContent } from "@/content/faqContent";
 import { siteContent } from "@/content/siteContent";
 import { useSitePreferences } from "@/components/providers/SitePreferencesProvider";
+import { FaqSection } from "@/components/sections/FaqSection";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 
@@ -25,6 +27,7 @@ export default function ContactPage() {
   const { language } = useSitePreferences();
   const page = siteContent[language].pages.contact;
   const content = contactContent[language];
+  const faq = faqContent[language];
 
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -291,6 +294,13 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      <FaqSection
+        eyebrow={faq.eyebrow}
+        title={faq.title}
+        description={faq.description}
+        items={faq.items}
+      />
     </>
   );
 }
