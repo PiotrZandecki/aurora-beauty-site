@@ -1,11 +1,67 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { SiteShell } from "@/components/layout/SiteShell";
+import { siteConfig } from "@/lib/siteConfig";
 
 export const metadata: Metadata = {
-  title: "Aurora Beauty Studio",
-  description:
-    "Modern beauty studio website with Polish and English language versions.",
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: `${siteConfig.name} | Beauty Studio`,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
+  authors: [
+    {
+      name: siteConfig.creator,
+    },
+  ],
+  creator: siteConfig.creator,
+  publisher: siteConfig.name,
+  keywords: siteConfig.keywords,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "pl_PL",
+    alternateLocale: ["en_US"],
+    url: "/",
+    siteName: siteConfig.name,
+    title: `${siteConfig.name} | Beauty Studio`,
+    description: siteConfig.description,
+  },
+  twitter: {
+    card: "summary",
+    title: `${siteConfig.name} | Beauty Studio`,
+    description: siteConfig.description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: [
+    {
+      media: "(prefers-color-scheme: light)",
+      color: "#fff1f2",
+    },
+    {
+      media: "(prefers-color-scheme: dark)",
+      color: "#0c0a09",
+    },
+  ],
 };
 
 export default function RootLayout({
