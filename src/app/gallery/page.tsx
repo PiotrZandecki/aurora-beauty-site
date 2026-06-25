@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { galleryContent } from "@/content/galleryContent";
@@ -111,20 +112,36 @@ export default function GalleryPage() {
                 aria-label={`${content.openLabel}: ${item.title}`}
               >
                 <div
-                  className={`flex items-end bg-linear-to-br from-rose-100 via-pink-100 to-stone-100 p-5 dark:from-stone-800 dark:via-stone-900 dark:to-rose-950 ${
+                  className={`relative overflow-hidden ${
                     selectedCategoryId === "all" && index === 0
                       ? "aspect-video"
                       : "aspect-4/5"
                   }`}
                 >
-                  <div className="rounded-3xl bg-white/80 px-4 py-3 shadow-sm backdrop-blur dark:bg-stone-950/70">
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-600 dark:text-rose-300">
-                      {content.visualLabel}
-                    </p>
+                  <Image
+                    src={item.imageSrc}
+                    alt={item.imageAlt}
+                    fill
+                    sizes={
+                      selectedCategoryId === "all" && index === 0
+                        ? "(min-width: 1024px) 66vw, 100vw"
+                        : "(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                    }
+                    className="object-cover transition duration-500 group-hover:scale-105"
+                  />
 
-                    <p className="mt-1 text-sm font-semibold text-stone-950 dark:text-rose-50">
-                      {item.category}
-                    </p>
+                  <div className="absolute inset-0 bg-linear-to-t from-stone-950/60 via-stone-950/10 to-transparent" />
+
+                  <div className="absolute inset-x-0 bottom-0 p-5">
+                    <div className="rounded-3xl bg-white/85 px-4 py-3 shadow-sm backdrop-blur dark:bg-stone-950/75">
+                      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-600 dark:text-rose-300">
+                        {content.visualLabel}
+                      </p>
+
+                      <p className="mt-1 text-sm font-semibold text-stone-950 dark:text-rose-50">
+                        {item.category}
+                      </p>
+                    </div>
                   </div>
                 </div>
 
@@ -204,15 +221,27 @@ export default function GalleryPage() {
             onClick={(event) => event.stopPropagation()}
           >
             <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-              <div className="flex min-h-90 items-end rounded-3xl bg-linear-to-br from-rose-100 via-pink-100 to-stone-100 p-6 dark:from-stone-800 dark:via-stone-900 dark:to-rose-950">
-                <div className="rounded-3xl bg-white/80 px-4 py-3 shadow-sm backdrop-blur dark:bg-stone-950/70">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-600 dark:text-rose-300">
-                    {content.visualLabel}
-                  </p>
+              <div className="relative min-h-90 overflow-hidden rounded-3xl md:min-h-130">
+                <Image
+                  src={selectedItem.imageSrc}
+                  alt={selectedItem.imageAlt}
+                  fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="object-cover"
+                />
 
-                  <p className="mt-1 text-sm font-semibold text-stone-950 dark:text-rose-50">
-                    {selectedItem.title}
-                  </p>
+                <div className="absolute inset-0 bg-linear-to-t from-stone-950/60 via-stone-950/10 to-transparent" />
+
+                <div className="absolute inset-x-0 bottom-0 p-6">
+                  <div className="w-fit rounded-3xl bg-white/85 px-4 py-3 shadow-sm backdrop-blur dark:bg-stone-950/75">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-600 dark:text-rose-300">
+                      {content.visualLabel}
+                    </p>
+
+                    <p className="mt-1 text-sm font-semibold text-stone-950 dark:text-rose-50">
+                      {selectedItem.title}
+                    </p>
+                  </div>
                 </div>
               </div>
 
@@ -235,7 +264,7 @@ export default function GalleryPage() {
                   <button
                     type="button"
                     onClick={closeLightbox}
-                    className="rounded-full border border-rose-200 bg-rose-50 px-4 py-2 text-sm font-semibold text-stone-700 transition hover:border-rose-400 hover:text-rose-700 dark:border-stone-700 dark:bg-stone-950 dark:text-stone-300 dark:hover:border-rose-300 dark:hover:text-rose-200"
+                    className="shrink-0 rounded-full border border-rose-200 bg-rose-50 px-4 py-2 text-sm font-semibold text-stone-700 transition hover:border-rose-400 hover:text-rose-700 dark:border-stone-700 dark:bg-stone-950 dark:text-stone-300 dark:hover:border-rose-300 dark:hover:text-rose-200"
                   >
                     {content.closeLabel}
                   </button>

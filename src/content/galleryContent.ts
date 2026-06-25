@@ -7,6 +7,8 @@ type GalleryItem = {
   category: string;
   description: string;
   detail: string;
+  imageSrc: string;
+  imageAlt: string;
 };
 
 type GalleryHighlight = {
@@ -64,6 +66,9 @@ export const galleryContent: Record<Language, GalleryContent> = {
           "Świeży, promienny kierunek pielęgnacji dla skóry, która potrzebuje odświeżenia i komfortu.",
         detail:
           "Ten typ efektu dobrze komunikuje naturalność, lekkość i zadbaną skórę bez ciężkiego, przerysowanego rezultatu.",
+        imageSrc: "/images/natural-glow.png",
+        imageAlt:
+          "Naturalny efekt glow po pielęgnacji twarzy w premium beauty studio",
       },
       {
         id: "soft-brows",
@@ -74,6 +79,8 @@ export const galleryContent: Record<Language, GalleryContent> = {
           "Subtelnie uporządkowana oprawa oczu, która podkreśla rysy twarzy i nie dominuje całego wyglądu.",
         detail:
           "W galerii warto pokazywać zbliżenia brwi i rzęs, aby użytkowniczka mogła ocenić precyzję oraz poziom naturalności.",
+        imageSrc: "/images/soft-brows.png",
+        imageAlt: "Naturalnie podkreślone brwi i rzęsy w premium beauty studio",
       },
       {
         id: "occasion-makeup",
@@ -84,6 +91,8 @@ export const galleryContent: Record<Language, GalleryContent> = {
           "Makijaż dopasowany do okazji, stylizacji, światła i oczekiwanego poziomu intensywności.",
         detail:
           "Najlepiej sprawdzają się ujęcia pokazujące cerę, oko i całościowy balans makijażu — zarówno na żywo, jak i na zdjęciach.",
+        imageSrc: "/images/occasion-makeup.png",
+        imageAlt: "Elegancki makijaż okazjonalny w premium beauty studio",
       },
       {
         id: "studio-details",
@@ -94,6 +103,8 @@ export const galleryContent: Record<Language, GalleryContent> = {
           "Detale przestrzeni, które budują poczucie spokoju, estetyki i profesjonalnego standardu.",
         detail:
           "Zdjęcia wnętrza pomagają zmniejszyć niepewność przed pierwszą wizytą i pokazują charakter miejsca.",
+        imageSrc: "/images/studio-interior.png",
+        imageAlt: "Eleganckie wnętrze premium beauty studio",
       },
       {
         id: "before-after",
@@ -104,6 +115,8 @@ export const galleryContent: Record<Language, GalleryContent> = {
           "Porównanie kierunku przed i po, pokazujące zmianę w sposób czytelny, elegancki i uczciwy.",
         detail:
           "Przy metamorfozach kluczowe jest podobne światło, kadr i neutralna prezentacja, aby efekt był wiarygodny.",
+        imageSrc: "/images/before-after.png",
+        imageAlt: "Subtelna metamorfoza przed i po w premium beauty studio",
       },
       {
         id: "beauty-ritual",
@@ -114,6 +127,8 @@ export const galleryContent: Record<Language, GalleryContent> = {
           "Ujęcia pokazujące spokojny rytm wizyty, komfort klientki i dopracowany charakter usługi.",
         detail:
           "Takie zdjęcia dobrze wspierają markę premium, bo pokazują nie tylko efekt, ale też doświadczenie wizyty.",
+        imageSrc: "/images/beauty-ritual.png",
+        imageAlt: "Spokojna atmosfera rytuału beauty w premium studio",
       },
     ],
     highlightsEyebrow: "Rola galerii",
@@ -140,7 +155,7 @@ export const galleryContent: Record<Language, GalleryContent> = {
     ],
     noteTitle: "Jak korzystać z galerii",
     noteDescription:
-      "Kliknij wybrany element, aby zobaczyć większy podgląd i krótki opis. Przy realnych zdjęciach ten układ można wykorzystać do prezentacji efektów, wnętrza, metamorfoz i materiałów z sesji.",
+      "Kliknij wybrany element, aby zobaczyć większy podgląd i krótki opis. Ten układ pozwala przejrzyście pokazać efekty, wnętrze, metamorfozy i atmosferę salonu.",
     ctaTitle: "Podoba Ci się kierunek estetyczny salonu?",
     ctaDescription:
       "Jeśli szukasz naturalnego efektu, spokojnej atmosfery i dopracowanej usługi, przejdź do kontaktu i opisz, czego potrzebujesz.",
@@ -171,6 +186,9 @@ export const galleryContent: Record<Language, GalleryContent> = {
           "A fresh, radiant care direction for skin that needs refreshment and comfort.",
         detail:
           "This type of result communicates naturalness, lightness and well-cared-for skin without a heavy or overdone effect.",
+        imageSrc: "/images/natural-glow.png",
+        imageAlt:
+          "Natural glow result after facial care in a premium beauty studio",
       },
       {
         id: "soft-brows",
@@ -181,6 +199,9 @@ export const galleryContent: Record<Language, GalleryContent> = {
           "Subtly refined eye-area styling that enhances facial features without dominating the entire look.",
         detail:
           "Close-up shots of brows and lashes help visitors judge precision and the level of naturalness.",
+        imageSrc: "/images/soft-brows.png",
+        imageAlt:
+          "Naturally enhanced brows and lashes in a premium beauty studio",
       },
       {
         id: "occasion-makeup",
@@ -191,6 +212,8 @@ export const galleryContent: Record<Language, GalleryContent> = {
           "Makeup adjusted to the occasion, outfit, lighting and desired level of intensity.",
         detail:
           "The best visuals show skin, eyes and the overall makeup balance — both in person and in photos.",
+        imageSrc: "/images/occasion-makeup.png",
+        imageAlt: "Elegant occasion makeup in a premium beauty studio",
       },
       {
         id: "studio-details",
@@ -201,6 +224,8 @@ export const galleryContent: Record<Language, GalleryContent> = {
           "Space details that build a sense of calm, aesthetics and professional standard.",
         detail:
           "Interior photos reduce uncertainty before the first visit and show the character of the place.",
+        imageSrc: "/images/studio-interior.png",
+        imageAlt: "Elegant interior of a premium beauty studio",
       },
       {
         id: "before-after",
@@ -211,6 +236,8 @@ export const galleryContent: Record<Language, GalleryContent> = {
           "A clear and elegant comparison showing the direction before and after the service.",
         detail:
           "For transformations, similar light, framing and honest presentation are key to making the result credible.",
+        imageSrc: "/images/before-after.png",
+        imageAlt: "Subtle before and after transformation in a beauty studio",
       },
       {
         id: "beauty-ritual",
@@ -221,6 +248,8 @@ export const galleryContent: Record<Language, GalleryContent> = {
           "Visuals showing the calm rhythm of the visit, client comfort and the refined character of the service.",
         detail:
           "These visuals support a premium brand because they show not only the result, but also the experience.",
+        imageSrc: "/images/beauty-ritual.png",
+        imageAlt: "Calm beauty ritual atmosphere in a premium studio",
       },
     ],
     highlightsEyebrow: "Gallery purpose",
@@ -246,7 +275,7 @@ export const galleryContent: Record<Language, GalleryContent> = {
     ],
     noteTitle: "How to use the gallery",
     noteDescription:
-      "Click an item to see a larger preview and short description. With real photos, this layout can present results, interiors, transformations and session materials.",
+      "Click an item to see a larger preview and short description. This layout clearly presents results, interiors, transformations and the studio atmosphere.",
     ctaTitle: "Do you like the studio’s aesthetic direction?",
     ctaDescription:
       "If you are looking for a natural result, calm atmosphere and refined service, go to contact and describe what you need.",
