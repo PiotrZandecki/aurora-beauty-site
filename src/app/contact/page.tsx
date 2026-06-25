@@ -5,6 +5,7 @@ import { contactContent } from "@/content/contactContent";
 import { siteContent } from "@/content/siteContent";
 import { useSitePreferences } from "@/components/providers/SitePreferencesProvider";
 import { PageIntro } from "@/components/sections/PageIntro";
+import { SectionHeader } from "@/components/sections/SectionHeader";
 
 type FormData = {
   name: string;
@@ -56,17 +57,11 @@ export default function ContactPage() {
       <section className="border-y border-rose-200/70 bg-white/60 px-5 py-20 dark:border-stone-800 dark:bg-stone-900/40">
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div>
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-rose-600 dark:text-rose-300">
-              {content.detailsEyebrow}
-            </p>
-
-            <h2 className="text-3xl font-semibold tracking-tight text-stone-950 md:text-5xl dark:text-rose-50">
-              {content.detailsTitle}
-            </h2>
-
-            <p className="mt-5 text-lg leading-8 text-stone-600 dark:text-stone-300">
-              {content.detailsDescription}
-            </p>
+            <SectionHeader
+              eyebrow={content.detailsEyebrow}
+              title={content.detailsTitle}
+              description={content.detailsDescription}
+            />
 
             <div className="mt-10 grid gap-4">
               {content.contactMethods.map((method) => (
@@ -134,6 +129,7 @@ export default function ContactPage() {
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-600 dark:text-rose-300">
                   Map placeholder
                 </p>
+
                 <p className="mt-1 text-sm font-semibold text-stone-950 dark:text-rose-50">
                   Google Maps / location embed
                 </p>
@@ -146,17 +142,11 @@ export default function ContactPage() {
       <section className="px-5 py-20">
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
           <div className="rounded-4xl border border-rose-200 bg-white p-6 shadow-sm dark:border-stone-800 dark:bg-stone-900 md:p-8">
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-rose-600 dark:text-rose-300">
-              {content.formEyebrow}
-            </p>
-
-            <h2 className="text-3xl font-semibold tracking-tight text-stone-950 md:text-5xl dark:text-rose-50">
-              {content.formTitle}
-            </h2>
-
-            <p className="mt-5 text-lg leading-8 text-stone-600 dark:text-stone-300">
-              {content.formDescription}
-            </p>
+            <SectionHeader
+              eyebrow={content.formEyebrow}
+              title={content.formTitle}
+              description={content.formDescription}
+            />
 
             <form onSubmit={handleSubmit} className="mt-8 grid gap-5">
               <div>
