@@ -2,6 +2,7 @@ import type { Language } from "@/types/site";
 
 type GalleryItem = {
   title: string;
+  categoryId: string;
   category: string;
   description: string;
 };
@@ -16,6 +17,8 @@ type GalleryContent = {
   introTitle: string;
   introDescription: string;
   featuredLabel: string;
+  allFilterLabel: string;
+  filtersTitle: string;
   items: GalleryItem[];
   highlightsEyebrow: string;
   highlightsTitle: string;
@@ -36,39 +39,47 @@ export const galleryContent: Record<Language, GalleryContent> = {
     introDescription:
       "Galeria pomaga użytkownikowi szybko poczuć styl salonu. Później możemy tutaj dodać prawdziwe zdjęcia wnętrza, realizacje, metamorfozy i materiały z social mediów.",
     featuredLabel: "Przykładowe ujęcie",
+    allFilterLabel: "Wszystkie",
+    filtersTitle: "Filtruj galerię",
     items: [
       {
         title: "Natural glow",
+        categoryId: "facial-care",
         category: "Pielęgnacja twarzy",
         description:
           "Placeholder pod zdjęcie efektu zabiegu pielęgnacyjnego lub detalu skóry po wizycie.",
       },
       {
         title: "Soft brows",
+        categoryId: "brows-lashes",
         category: "Brwi i rzęsy",
         description:
           "Miejsce na zdjęcie stylizacji brwi, laminacji albo subtelnego podkreślenia oprawy oczu.",
       },
       {
         title: "Evening makeup",
+        categoryId: "makeup",
         category: "Makijaż",
         description:
           "Układ pod zdjęcie makijażu wieczorowego, ślubnego albo sesyjnego.",
       },
       {
         title: "Studio details",
+        categoryId: "studio",
         category: "Wnętrze salonu",
         description:
           "Tutaj może pojawić się zdjęcie stanowiska pracy, recepcji, kosmetyków albo detali wystroju.",
       },
       {
         title: "Before & after",
+        categoryId: "transformation",
         category: "Metamorfoza",
         description:
           "Placeholder pod zestawienie przed i po, które później możemy rozbudować o slider.",
       },
       {
         title: "Beauty ritual",
+        categoryId: "atmosphere",
         category: "Atmosfera",
         description:
           "Miejsce na zdjęcie pokazujące spokojny, elegancki klimat wizyty.",
@@ -112,39 +123,47 @@ export const galleryContent: Record<Language, GalleryContent> = {
     introDescription:
       "The gallery helps visitors quickly understand the studio style. Later we can add real interior photos, work results, transformations and social media materials.",
     featuredLabel: "Sample shot",
+    allFilterLabel: "All",
+    filtersTitle: "Filter gallery",
     items: [
       {
         title: "Natural glow",
+        categoryId: "facial-care",
         category: "Facial care",
         description:
           "A placeholder for a treatment result photo or skin detail after a visit.",
       },
       {
         title: "Soft brows",
+        categoryId: "brows-lashes",
         category: "Brows and lashes",
         description:
           "A place for brow styling, lamination or subtle eye-area enhancement photos.",
       },
       {
         title: "Evening makeup",
+        categoryId: "makeup",
         category: "Makeup",
         description:
           "A layout for evening, bridal or photoshoot makeup images.",
       },
       {
         title: "Studio details",
+        categoryId: "studio",
         category: "Studio interior",
         description:
           "This can show the workstation, reception, cosmetics or interior details.",
       },
       {
         title: "Before & after",
+        categoryId: "transformation",
         category: "Transformation",
         description:
           "A placeholder for before-and-after comparison that can later become a slider.",
       },
       {
         title: "Beauty ritual",
+        categoryId: "atmosphere",
         category: "Atmosphere",
         description:
           "A place for a photo showing the calm and elegant atmosphere of a visit.",

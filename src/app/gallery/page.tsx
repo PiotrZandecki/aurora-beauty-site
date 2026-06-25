@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import { galleryContent } from "@/content/galleryContent";
 import { siteContent } from "@/content/siteContent";
 import { useSitePreferences } from "@/components/providers/SitePreferencesProvider";
@@ -11,6 +12,43 @@ export default function GalleryPage() {
   const { language } = useSitePreferences();
   const page = siteContent[language].pages.gallery;
   const content = galleryContent[language];
+
+  const [selectedCategoryId, setSelectedCategoryId] = useState("all");
+
+  const filters = useMemo(() => {
+    const uniqueFilters = content.items.reduce<
+      Array<{ id: string; label: string }>
+    >((filtersList, item) => {
+      const alreadyExists = filtersList.some(
+        (filter) => filter.id === item.categoryId,
+      );
+
+      if (alreadyExists) {
+        return filtersList;
+      }
+
+      return [
+        ...filtersList,
+        {
+          id: item.categoryId,
+          label: item.category,
+        },
+      ];
+    }, []);
+
+    return [
+      {
+        id: "all",
+        label: content.allFilterLabel,
+      },
+      ...uniqueFilters,
+    ];
+  }, [content.allFilterLabel, content.items]);
+
+  const visibleItems =
+    selectedCategoryId === "all"
+      ? content.items
+      : content.items.filter((item) => item.categoryId === selectedCategoryId);
 
   return (
     <>
@@ -24,17 +62,48 @@ export default function GalleryPage() {
             description={content.introDescription}
           />
 
-          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {content.items.map((item, index) => (
+          <div className="mt-10 rounded-4xl border border-rose-200 bg-white p-4 shadow-sm dark:border-stone-800 dark:bg-stone-900 md:p-5">
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-rose-600 dark:text-rose-300">
+              {content.filtersTitle}
+            </p>
+
+            <div className="flex flex-wrap gap-3">
+              {filters.map((filter) => {
+                const isActive = selectedCategoryId === filter.id;
+
+                return (
+                  <button
+                    key={filter.id}
+                    type="button"
+                    onClick={() => setSelectedCategoryId(filter.id)}
+                    className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                      isActive
+                        ? "bg-stone-950 text-white dark:bg-rose-100 dark:text-stone-950"
+                        : "border border-rose-200 bg-rose-50 text-stone-700 hover:border-rose-400 hover:text-rose-700 dark:border-stone-700 dark:bg-stone-950 dark:text-stone-300 dark:hover:border-rose-300 dark:hover:text-rose-200"
+                    }`}
+                  >
+                    {filter.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {visibleItems.map((item, index) => (
               <article
                 key={item.title}
                 className={`group overflow-hidden rounded-4xl border border-rose-200 bg-rose-50 shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-950 dark:hover:shadow-black/30 ${
-                  index === 0 ? "md:col-span-2 lg:col-span-2" : ""
+                  selectedCategoryId === "all" && index === 0
+                    ? "md:col-span-2 lg:col-span-2"
+                    : ""
                 }`}
               >
                 <div
                   className={`flex items-end bg-linear-to-br from-rose-100 via-pink-100 to-stone-100 p-5 dark:from-stone-800 dark:via-stone-900 dark:to-rose-950 ${
-                    index === 0 ? "aspect-video" : "aspect-4/5"
+                    selectedCategoryId === "all" && index === 0
+                      ? "aspect-video"
+                      : "aspect-4/5"
                   }`}
                 >
                   <div className="rounded-3xl bg-white/80 px-4 py-3 shadow-sm backdrop-blur dark:bg-stone-950/70">
