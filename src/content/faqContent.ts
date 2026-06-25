@@ -17,27 +17,27 @@ export const faqContent: Record<Language, FaqContent> = {
     eyebrow: "FAQ",
     title: "Najczęstsze pytania przed pierwszą wizytą.",
     description:
-      "Ta sekcja pomaga szybko odpowiedzieć na podstawowe wątpliwości i skraca drogę do kontaktu lub rezerwacji.",
+      "Krótka sekcja, która pomaga szybko rozwiać wątpliwości i ułatwia podjęcie decyzji o kontakcie lub rezerwacji.",
     items: [
       {
         question: "Czy muszę wiedzieć dokładnie, którą usługę wybrać?",
         answer:
-          "Nie. Możesz napisać, czego potrzebujesz albo jaki efekt chcesz uzyskać, a salon pomoże dobrać odpowiednią usługę.",
+          "Nie. Wystarczy opisać, czego potrzebujesz albo jaki efekt chcesz uzyskać. Na tej podstawie można dobrać najlepszą usługę lub zaproponować krótką konsultację.",
       },
       {
         question: "Czy ceny na stronie są ostateczne?",
         answer:
-          "Na tym etapie ceny są przykładowe. W finalnej wersji można podać prawdziwy cennik, zakresy cen albo informację o wycenie indywidualnej.",
+          "Cennik pokazuje podstawowe ceny i orientacyjny zakres usług. Finalna cena może zależeć od wybranego wariantu, czasu pracy, kondycji skóry lub dodatkowych elementów usługi.",
       },
       {
-        question: "Czy formularz kontaktowy już wysyła wiadomości?",
+        question: "Jak przygotować się do pierwszej wizyty?",
         answer:
-          "Aktualnie formularz działa jako bezpieczny placeholder frontendu. Pokazuje komunikat po wysłaniu, ale nie przesyła danych na e-mail.",
+          "Najlepiej przyjść bez pośpiechu i, jeśli to możliwe, bez ciężkiego makijażu przy usługach pielęgnacyjnych. Przy makijażu okazjonalnym warto zabrać inspiracje lub zdjęcie stylizacji.",
       },
       {
-        question: "Czy strona może zostać połączona z systemem rezerwacji?",
+        question: "Jak najlepiej umówić termin?",
         answer:
-          "Tak. W kolejnym etapie można dodać link do Booksy, WhatsApp, Calendly, Google Forms albo własny formularz z backendem.",
+          "Najprościej skorzystać z formularza kontaktowego, telefonu, wiadomości e-mail albo Instagrama. W wiadomości warto podać usługę, preferowany termin i krótki opis oczekiwanego efektu.",
       },
     ],
   },
@@ -46,27 +46,27 @@ export const faqContent: Record<Language, FaqContent> = {
     eyebrow: "FAQ",
     title: "Common questions before the first visit.",
     description:
-      "This section answers basic concerns and shortens the path to contact or booking.",
+      "A short section that helps answer key concerns and makes the decision to contact or book easier.",
     items: [
       {
         question: "Do I need to know exactly which service to choose?",
         answer:
-          "No. You can describe what you need or what result you want, and the studio can help choose the right service.",
+          "No. It is enough to describe what you need or what result you want. Based on that, the right service or a short consultation can be recommended.",
       },
       {
         question: "Are the prices on the website final?",
         answer:
-          "At this stage, prices are examples. In the final version, we can add real pricing, price ranges or individual quotation notes.",
+          "The pricing page shows base prices and approximate service scope. The final price may depend on the selected variant, work time, skin condition or additional service elements.",
       },
       {
-        question: "Does the contact form already send messages?",
+        question: "How should I prepare for my first visit?",
         answer:
-          "Currently, the form works as a safe frontend placeholder. It shows a message after submit, but it does not send data by e-mail yet.",
+          "It is best to arrive without rushing and, if possible, without heavy makeup for facial treatments. For occasion makeup, inspiration photos or outfit references are helpful.",
       },
       {
-        question: "Can the website be connected with a booking system?",
+        question: "What is the best way to book an appointment?",
         answer:
-          "Yes. In the next stage, we can add a Booksy, WhatsApp, Calendly, Google Forms link or a custom backend-powered form.",
+          "The easiest way is to use the contact form, phone, e-mail or Instagram. In the message, it helps to include the service, preferred date and a short description of the desired result.",
       },
     ],
   },

@@ -1,23 +1,27 @@
 "use client";
 
 import Link from "next/link";
+import { clientValuesContent } from "@/content/clientValuesContent";
 import { faqContent } from "@/content/faqContent";
 import { featuredContent } from "@/content/featuredContent";
+import { homeGalleryPreviewContent } from "@/content/homeGalleryPreviewContent";
 import { siteContent } from "@/content/siteContent";
-import { testimonialsContent } from "@/content/testimonialsContent";
 import { useSitePreferences } from "@/components/providers/SitePreferencesProvider";
+import { ClientValuesSection } from "@/components/sections/ClientValuesSection";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { FeaturedTreatmentSection } from "@/components/sections/FeaturedTreatmentSection";
+import { HomeGalleryPreviewSection } from "@/components/sections/HomeGalleryPreviewSection";
 import { SectionHeader } from "@/components/sections/SectionHeader";
-import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 
 export default function Home() {
   const { language } = useSitePreferences();
+
   const content = siteContent[language].home;
-  const faq = faqContent[language];
-  const testimonials = testimonialsContent[language];
   const featured = featuredContent[language];
+  const clientValues = clientValuesContent[language];
+  const galleryPreview = homeGalleryPreviewContent[language];
+  const faq = faqContent[language];
 
   return (
     <>
@@ -171,11 +175,19 @@ export default function Home() {
         </div>
       </section>
 
-      <TestimonialsSection
-        eyebrow={testimonials.eyebrow}
-        title={testimonials.title}
-        description={testimonials.description}
-        items={testimonials.items}
+      <HomeGalleryPreviewSection
+        eyebrow={galleryPreview.eyebrow}
+        title={galleryPreview.title}
+        description={galleryPreview.description}
+        buttonLabel={galleryPreview.buttonLabel}
+        items={galleryPreview.items}
+      />
+
+      <ClientValuesSection
+        eyebrow={clientValues.eyebrow}
+        title={clientValues.title}
+        description={clientValues.description}
+        items={clientValues.items}
       />
 
       <FaqSection

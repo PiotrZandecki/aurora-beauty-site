@@ -14,7 +14,7 @@ export const featuredContent: Record<Language, FeaturedContent> = {
     eyebrow: "Wyróżniona usługa",
     title: "Signature Glow Treatment",
     description:
-      "Przykładowy zabieg flagowy salonu — połączenie konsultacji, delikatnego oczyszczenia i regenerującej pielęgnacji twarzy. To dobra sekcja do promowania najważniejszej usługi albo sezonowej oferty.",
+      "Autorska propozycja dla skóry, która potrzebuje odświeżenia, ukojenia i naturalnego blasku. Zabieg łączy krótką konsultację, delikatne oczyszczenie oraz regenerującą pielęgnację dobraną do aktualnych potrzeb skóry.",
     badge: "Najczęściej wybierane",
     details: [
       "czas trwania: około 75 minut",
@@ -28,7 +28,7 @@ export const featuredContent: Record<Language, FeaturedContent> = {
     eyebrow: "Featured service",
     title: "Signature Glow Treatment",
     description:
-      "A sample flagship treatment — combining consultation, gentle cleansing and regenerating facial care. This section is a good place to promote the most important service or seasonal offer.",
+      "A signature choice for skin that needs refreshment, comfort and natural glow. The treatment combines a short consultation, gentle cleansing and regenerating care selected according to current skin needs.",
     badge: "Most requested",
     details: [
       "duration: around 75 minutes",
