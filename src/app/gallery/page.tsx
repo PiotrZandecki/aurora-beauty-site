@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Reveal } from "@/components/animations/Reveal";
 import { galleryContent } from "@/content/galleryContent";
 import { siteContent } from "@/content/siteContent";
@@ -54,11 +54,76 @@ export default function GalleryPage() {
       ? content.items
       : content.items.filter((item) => item.categoryId === selectedCategoryId);
 
-  const selectedItem = content.items.find((item) => item.id === selectedItemId);
+  const selectedItemIndex = visibleItems.findIndex(
+    (item) => item.id === selectedItemId,
+  );
+
+  const selectedItem =
+    selectedItemIndex >= 0 ? visibleItems[selectedItemIndex] : null;
 
   const closeLightbox = () => {
     setSelectedItemId(null);
   };
+
+  const goToPreviousItem = () => {
+    if (selectedItemIndex < 0) {
+      return;
+    }
+
+    const previousIndex =
+      selectedItemIndex === 0 ? visibleItems.length - 1 : selectedItemIndex - 1;
+
+    setSelectedItemId(visibleItems[previousIndex]?.id ?? null);
+  };
+
+  const goToNextItem = () => {
+    if (selectedItemIndex < 0) {
+      return;
+    }
+
+    const nextIndex =
+      selectedItemIndex === visibleItems.length - 1 ? 0 : selectedItemIndex + 1;
+
+    setSelectedItemId(visibleItems[nextIndex]?.id ?? null);
+  };
+
+  useEffect(() => {
+    if (!selectedItem) {
+      return;
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        closeLightbox();
+      }
+
+      if (event.key === "ArrowLeft") {
+        goToPreviousItem();
+      }
+
+      if (event.key === "ArrowRight") {
+        goToNextItem();
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedItem, selectedItemIndex, visibleItems]);
+
+  useEffect(() => {
+    if (!selectedItem) {
+      return;
+    }
+
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedItem]);
 
   return (
     <>
@@ -87,7 +152,7 @@ export default function GalleryPage() {
                       key={filter.id}
                       type="button"
                       onClick={() => setSelectedCategoryId(filter.id)}
-                      className={`interactive-press rounded-full px-4 py-2 text-sm font-semibold transition ${
+                      className={`interactive-press focus-ring rounded-full px-4 py-2 text-sm font-semibold transition ${
                         isActive
                           ? "bg-stone-950 text-white shadow-sm dark:bg-rose-100 dark:text-stone-950"
                           : "border border-rose-200 bg-rose-50 text-stone-700 hover:border-rose-400 hover:text-rose-700 dark:border-stone-700 dark:bg-stone-950 dark:text-stone-300 dark:hover:border-rose-300 dark:hover:text-rose-200"
@@ -102,6 +167,7 @@ export default function GalleryPage() {
           </Reveal>
 
           <Reveal
+            key={selectedCategoryId}
             stagger
             className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3"
           >
@@ -110,7 +176,7 @@ export default function GalleryPage() {
                 key={item.id}
                 type="button"
                 onClick={() => setSelectedItemId(item.id)}
-                className={`group interactive-lift overflow-hidden rounded-4xl border border-rose-200 bg-rose-50 text-left shadow-sm hover:shadow-xl hover:shadow-rose-200/60 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 focus:ring-offset-rose-50 dark:border-stone-800 dark:bg-stone-950 dark:hover:shadow-black/30 dark:focus:ring-rose-300 dark:focus:ring-offset-stone-950 ${
+                className={`group interactive-lift focus-ring overflow-hidden rounded-4xl border border-rose-200 bg-rose-50 text-left shadow-sm hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-950 dark:hover:shadow-black/30 ${
                   selectedCategoryId === "all" && index === 0
                     ? "md:col-span-2 lg:col-span-2"
                     : ""
@@ -225,7 +291,7 @@ export default function GalleryPage() {
           onClick={closeLightbox}
         >
           <div
-            className="max-h-[90vh] w-full max-w-5xl animate-[fade-in_180ms_ease-out] overflow-y-auto rounded-4xl border border-rose-200 bg-rose-50 p-5 shadow-2xl dark:border-stone-800 dark:bg-stone-950 md:p-6"
+            className="animate-modal-pop max-h-[90vh] w-full max-w-5xl overflow-y-auto rounded-4xl border border-rose-200 bg-rose-50 p-5 shadow-2xl dark:border-stone-800 dark:bg-stone-950 md:p-6"
             onClick={(event) => event.stopPropagation()}
           >
             <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
@@ -251,6 +317,38 @@ export default function GalleryPage() {
                     </p>
                   </div>
                 </div>
+
+                <div className="absolute inset-x-4 top-4 flex items-center justify-between">
+                  <span className="rounded-full bg-white/85 px-4 py-2 text-xs font-semibold text-stone-700 shadow-sm backdrop-blur dark:bg-stone-950/75 dark:text-stone-200">
+                    {selectedItemIndex + 1} / {visibleItems.length}
+                  </span>
+
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        goToPreviousItem();
+                      }}
+                      className="interactive-press focus-ring flex size-10 items-center justify-center rounded-full bg-white/85 text-lg font-semibold text-stone-700 shadow-sm backdrop-blur hover:text-rose-700 dark:bg-stone-950/75 dark:text-stone-200 dark:hover:text-rose-200"
+                      aria-label="Previous image"
+                    >
+                      ←
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        goToNextItem();
+                      }}
+                      className="interactive-press focus-ring flex size-10 items-center justify-center rounded-full bg-white/85 text-lg font-semibold text-stone-700 shadow-sm backdrop-blur hover:text-rose-700 dark:bg-stone-950/75 dark:text-stone-200 dark:hover:text-rose-200"
+                      aria-label="Next image"
+                    >
+                      →
+                    </button>
+                  </div>
+                </div>
               </div>
 
               <div className="rounded-3xl bg-white p-6 dark:bg-stone-900">
@@ -272,7 +370,7 @@ export default function GalleryPage() {
                   <button
                     type="button"
                     onClick={closeLightbox}
-                    className="interactive-press shrink-0 rounded-full border border-rose-200 bg-rose-50 px-4 py-2 text-sm font-semibold text-stone-700 transition hover:border-rose-400 hover:text-rose-700 dark:border-stone-700 dark:bg-stone-950 dark:text-stone-300 dark:hover:border-rose-300 dark:hover:text-rose-200"
+                    className="interactive-press focus-ring shrink-0 rounded-full border border-rose-200 bg-rose-50 px-4 py-2 text-sm font-semibold text-stone-700 transition hover:border-rose-400 hover:text-rose-700 dark:border-stone-700 dark:bg-stone-950 dark:text-stone-300 dark:hover:border-rose-300 dark:hover:text-rose-200"
                   >
                     {content.closeLabel}
                   </button>
@@ -301,7 +399,7 @@ export default function GalleryPage() {
 
                   <Link
                     href="/contact"
-                    className="interactive-press mt-2 inline-flex w-fit rounded-full bg-stone-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-rose-700 dark:bg-rose-100 dark:text-stone-950 dark:hover:bg-rose-200"
+                    className="interactive-press focus-ring mt-2 inline-flex w-fit rounded-full bg-stone-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-rose-700 dark:bg-rose-100 dark:text-stone-950 dark:hover:bg-rose-200"
                   >
                     {content.modalCtaLabel}
                   </Link>

@@ -138,7 +138,7 @@ export default function ContactPage() {
                 <a
                   key={method.label}
                   href={method.href}
-                  className="group interactive-lift rounded-4xl border border-rose-200 bg-white p-6 shadow-sm hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-900 dark:hover:shadow-black/30"
+                  className="group interactive-lift focus-ring rounded-4xl border border-rose-200 bg-white p-6 shadow-sm hover:border-rose-300 hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-900 dark:hover:border-stone-700 dark:hover:shadow-black/30"
                 >
                   <p className="text-sm font-semibold uppercase tracking-[0.25em] text-rose-600 dark:text-rose-300">
                     {method.label}
@@ -239,7 +239,7 @@ export default function ContactPage() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
+                    className="focus-ring w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
                   />
                 </div>
 
@@ -259,7 +259,7 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
+                      className="focus-ring w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
                     />
                   </div>
 
@@ -277,7 +277,7 @@ export default function ContactPage() {
                       type="tel"
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
+                      className="focus-ring w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
                     />
                   </div>
                 </div>
@@ -296,7 +296,7 @@ export default function ContactPage() {
                       name="service"
                       value={formData.service}
                       onChange={handleChange}
-                      className="w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
+                      className="focus-ring w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
                     >
                       {content.serviceOptions.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -325,7 +325,7 @@ export default function ContactPage() {
                           ? "np. piątek po 16:00"
                           : "e.g. Friday after 4 PM"
                       }
-                      className="w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
+                      className="focus-ring w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
                     />
                   </div>
                 </div>
@@ -345,13 +345,13 @@ export default function ContactPage() {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="w-full resize-none rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
+                    className="focus-ring w-full resize-none rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="interactive-press rounded-full bg-stone-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-rose-700 dark:bg-rose-100 dark:text-stone-950 dark:hover:bg-rose-200"
+                  className="interactive-press focus-ring rounded-full bg-stone-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-rose-700 dark:bg-rose-100 dark:text-stone-950 dark:hover:bg-rose-200"
                 >
                   {content.formLabels.submit}
                 </button>
@@ -359,7 +359,7 @@ export default function ContactPage() {
 
               {hasSubmitted && (
                 <div
-                  className="mt-6 rounded-3xl border border-rose-200 bg-rose-50 p-5 dark:border-stone-800 dark:bg-stone-950"
+                  className="animate-success mt-6 rounded-3xl border border-rose-200 bg-rose-50 p-5 dark:border-stone-800 dark:bg-stone-950"
                   role="status"
                 >
                   <h3 className="text-lg font-semibold text-stone-950 dark:text-rose-50">
