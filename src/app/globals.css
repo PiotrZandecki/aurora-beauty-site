@@ -10,14 +10,176 @@
   color-scheme: dark;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(251, 207, 232, 0.32),
+      transparent 34rem
+    ),
+    radial-gradient(
+      circle at top right,
+      rgba(254, 205, 211, 0.28),
+      transparent 32rem
+    ),
+    #fff7f5;
+  color: #1c1917;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.dark body {
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(136, 19, 55, 0.18),
+      transparent 34rem
+    ),
+    radial-gradient(
+      circle at top right,
+      rgba(68, 64, 60, 0.28),
+      transparent 32rem
+    ),
+    #0c0a09;
+  color: #fff1f2;
+}
+
+::selection {
+  background: rgba(244, 63, 94, 0.25);
+}
+
+button,
+a,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes aurora-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(0, -14px, 0) scale(1.03);
+  }
+}
+
+@keyframes aurora-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.75;
+    transform: scale(1.08);
+  }
+}
+
+.reveal,
+.reveal-child {
+  opacity: 0;
+  transition:
+    opacity 700ms ease,
+    transform 700ms ease,
+    filter 700ms ease;
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform, filter;
+}
+
+.reveal-fade-up,
+.reveal-child {
+  transform: translateY(28px);
+  filter: blur(4px);
+}
+
+.reveal-fade-in {
+  transform: translateY(0);
+  filter: blur(4px);
+}
+
+.reveal-scale-in {
+  transform: scale(0.96);
+  filter: blur(4px);
+}
+
+.reveal.is-visible,
+.reveal-child.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+.animation-soft-float {
+  animation: aurora-float 7s ease-in-out infinite;
+}
+
+.animation-soft-pulse {
+  animation: aurora-pulse 6s ease-in-out infinite;
+}
+
+.interactive-lift {
+  transition:
+    transform 260ms ease,
+    box-shadow 260ms ease,
+    border-color 260ms ease;
+}
+
+.interactive-lift:hover {
+  transform: translateY(-4px);
+}
+
+.interactive-press {
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+.interactive-press:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.image-soft-zoom {
+  transition: transform 700ms ease;
+}
+
+.group:hover .image-soft-zoom {
+  transform: scale(1.045);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .reveal,
+  .reveal-child {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
 }
