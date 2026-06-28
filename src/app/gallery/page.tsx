@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Reveal } from "@/components/animations/Reveal";
 import { galleryContent } from "@/content/galleryContent";
 import { siteContent } from "@/content/siteContent";
@@ -49,10 +49,15 @@ export default function GalleryPage() {
     ];
   }, [content.allFilterLabel, content.items]);
 
-  const visibleItems =
-    selectedCategoryId === "all"
-      ? content.items
-      : content.items.filter((item) => item.categoryId === selectedCategoryId);
+  const visibleItems = useMemo(() => {
+    if (selectedCategoryId === "all") {
+      return content.items;
+    }
+
+    return content.items.filter(
+      (item) => item.categoryId === selectedCategoryId,
+    );
+  }, [content.items, selectedCategoryId]);
 
   const selectedItemIndex = visibleItems.findIndex(
     (item) => item.id === selectedItemId,
@@ -61,12 +66,12 @@ export default function GalleryPage() {
   const selectedItem =
     selectedItemIndex >= 0 ? visibleItems[selectedItemIndex] : null;
 
-  const closeLightbox = () => {
+  const closeLightbox = useCallback(() => {
     setSelectedItemId(null);
-  };
+  }, []);
 
-  const goToPreviousItem = () => {
-    if (selectedItemIndex < 0) {
+  const goToPreviousItem = useCallback(() => {
+    if (selectedItemIndex < 0 || visibleItems.length === 0) {
       return;
     }
 
@@ -74,10 +79,10 @@ export default function GalleryPage() {
       selectedItemIndex === 0 ? visibleItems.length - 1 : selectedItemIndex - 1;
 
     setSelectedItemId(visibleItems[previousIndex]?.id ?? null);
-  };
+  }, [selectedItemIndex, visibleItems]);
 
-  const goToNextItem = () => {
-    if (selectedItemIndex < 0) {
+  const goToNextItem = useCallback(() => {
+    if (selectedItemIndex < 0 || visibleItems.length === 0) {
       return;
     }
 
@@ -85,7 +90,7 @@ export default function GalleryPage() {
       selectedItemIndex === visibleItems.length - 1 ? 0 : selectedItemIndex + 1;
 
     setSelectedItemId(visibleItems[nextIndex]?.id ?? null);
-  };
+  }, [selectedItemIndex, visibleItems]);
 
   useEffect(() => {
     if (!selectedItem) {
@@ -111,7 +116,7 @@ export default function GalleryPage() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [selectedItem, selectedItemIndex, visibleItems]);
+  }, [selectedItem, closeLightbox, goToPreviousItem, goToNextItem]);
 
   useEffect(() => {
     if (!selectedItem) {
