@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "Aurora Beauty Studio",
-  url: "https://aurorabeauty.pl",
+  url: "https://aurora.zandeckidev.pl",
   creator: "Piotr Zandecki",
   email: "hello@aurorabeauty.pl",
   phone: "+48 123 456 789",
