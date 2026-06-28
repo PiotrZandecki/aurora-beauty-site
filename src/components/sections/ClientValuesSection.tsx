@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/animations/Reveal";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 
 type ClientValue = {
@@ -27,11 +28,11 @@ export function ClientValuesSection({
           description={description}
         />
 
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
+        <Reveal stagger className="mt-10 grid gap-5 md:grid-cols-3">
           {items.map((item, index) => (
             <article
               key={item.title}
-              className="rounded-4xl border border-rose-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-900 dark:hover:shadow-black/30"
+              className="interactive-lift rounded-4xl border border-rose-200 bg-white p-6 shadow-sm hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-900 dark:hover:shadow-black/30"
             >
               <div className="mb-6 flex size-12 items-center justify-center rounded-full bg-rose-100 text-sm font-semibold text-rose-700 dark:bg-rose-950 dark:text-rose-200">
                 0{index + 1}
@@ -46,7 +47,7 @@ export function ClientValuesSection({
               </p>
             </article>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

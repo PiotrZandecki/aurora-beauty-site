@@ -1,7 +1,9 @@
+import { Reveal } from "@/components/animations/Reveal";
+
 type SectionHeaderProps = {
   eyebrow: string;
   title: string;
-  description?: string;
+  description: string;
   align?: "left" | "center";
 };
 
@@ -14,7 +16,9 @@ export function SectionHeader({
   const isCentered = align === "center";
 
   return (
-    <div className={isCentered ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
+    <Reveal
+      className={isCentered ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}
+    >
       <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-rose-600 dark:text-rose-300">
         {eyebrow}
       </p>
@@ -23,11 +27,9 @@ export function SectionHeader({
         {title}
       </h2>
 
-      {description && (
-        <p className="mt-5 text-lg leading-8 text-stone-600 dark:text-stone-300">
-          {description}
-        </p>
-      )}
-    </div>
+      <p className="mt-5 text-lg leading-8 text-stone-600 dark:text-stone-300">
+        {description}
+      </p>
+    </Reveal>
   );
 }

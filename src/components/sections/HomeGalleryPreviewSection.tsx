@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Reveal } from "@/components/animations/Reveal";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 
 type GalleryPreviewItem = {
@@ -35,21 +36,21 @@ export function HomeGalleryPreviewSection({
             description={description}
           />
 
-          <div className="md:text-right">
+          <Reveal delay={160} className="md:text-right">
             <Link
               href="/gallery"
-              className="inline-flex rounded-full border border-rose-300 px-6 py-3 text-sm font-semibold text-stone-950 transition hover:border-rose-500 hover:text-rose-700 dark:border-stone-700 dark:text-rose-50 dark:hover:border-rose-300 dark:hover:text-rose-200"
+              className="interactive-press inline-flex rounded-full border border-rose-300 px-6 py-3 text-sm font-semibold text-stone-950 transition hover:border-rose-500 hover:text-rose-700 dark:border-stone-700 dark:text-rose-50 dark:hover:border-rose-300 dark:hover:text-rose-200"
             >
               {buttonLabel}
             </Link>
-          </div>
+          </Reveal>
         </div>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
+        <Reveal stagger className="mt-10 grid gap-5 md:grid-cols-3">
           {items.map((item) => (
             <article
               key={item.title}
-              className="overflow-hidden rounded-4xl border border-rose-200 bg-rose-50 shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-950 dark:hover:shadow-black/30"
+              className="group interactive-lift overflow-hidden rounded-4xl border border-rose-200 bg-rose-50 shadow-sm hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-950 dark:hover:shadow-black/30"
             >
               <div className="relative aspect-4/5 overflow-hidden">
                 <Image
@@ -57,10 +58,10 @@ export function HomeGalleryPreviewSection({
                   alt={item.imageAlt}
                   fill
                   sizes="(min-width: 768px) 33vw, 100vw"
-                  className="object-cover transition duration-500 hover:scale-105"
+                  className="image-soft-zoom object-cover"
                 />
 
-                <div className="absolute inset-0 bg-linear-to-t from-stone-950/55 via-stone-950/5 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-stone-950/60 via-stone-950/5 to-transparent" />
 
                 <div className="absolute inset-x-0 bottom-0 p-5">
                   <div className="rounded-3xl bg-white/85 px-4 py-3 shadow-sm backdrop-blur dark:bg-stone-950/75">
@@ -82,7 +83,7 @@ export function HomeGalleryPreviewSection({
               </div>
             </article>
           ))}
-        </div>
+        </Reveal>
       </div>
     </section>
   );
