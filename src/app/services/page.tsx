@@ -30,7 +30,7 @@ export default function ServicesPage() {
           <div className="mt-12 space-y-10">
             {content.categories.map((category, categoryIndex) => (
               <Reveal key={category.title} delay={categoryIndex * 80}>
-                <article className="overflow-hidden rounded-4xl border border-rose-200 bg-rose-50 shadow-sm dark:border-stone-800 dark:bg-stone-950">
+                <article className="shimmer-surface overflow-hidden rounded-4xl border border-rose-200 bg-rose-50 shadow-sm transition hover:border-rose-300 dark:border-stone-800 dark:bg-stone-950 dark:hover:border-stone-700">
                   <div className="grid gap-0 lg:grid-cols-[0.38fr_0.62fr]">
                     <div className="flex flex-col justify-between border-b border-rose-200 bg-white p-6 dark:border-stone-800 dark:bg-stone-900 lg:border-r lg:border-b-0 md:p-8">
                       <div>
@@ -46,7 +46,7 @@ export default function ServicesPage() {
                           {category.description}
                         </p>
 
-                        <div className="group relative mt-8 aspect-4/5 overflow-hidden rounded-3xl">
+                        <div className="group relative mt-8 aspect-4/5 overflow-hidden rounded-3xl shadow-lg shadow-rose-200/50 dark:shadow-black/25">
                           <Image
                             src={category.imageSrc}
                             alt={category.imageAlt}
@@ -82,7 +82,7 @@ export default function ServicesPage() {
                       {category.services.map((service) => (
                         <div
                           key={service.title}
-                          className="interactive-lift group rounded-3xl border border-rose-200 bg-white p-5 shadow-sm hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-900 dark:hover:shadow-black/30"
+                          className="interactive-lift group rounded-3xl border border-rose-200 bg-white p-5 shadow-sm hover:border-rose-300 hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-900 dark:hover:border-stone-700 dark:hover:shadow-black/30"
                         >
                           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                             <div>
@@ -96,7 +96,7 @@ export default function ServicesPage() {
                                 </span>
                               </div>
 
-                              <h4 className="text-xl font-semibold text-stone-950 dark:text-rose-50">
+                              <h4 className="text-xl font-semibold text-stone-950 transition group-hover:text-rose-700 dark:text-rose-50 dark:group-hover:text-rose-200">
                                 {service.title}
                               </h4>
 
@@ -131,7 +131,7 @@ export default function ServicesPage() {
                           <div className="mt-5">
                             <Link
                               href="/contact"
-                              className="interactive-press inline-flex rounded-full border border-rose-300 px-5 py-2.5 text-sm font-semibold text-stone-950 transition hover:border-rose-500 hover:text-rose-700 dark:border-stone-700 dark:text-rose-50 dark:hover:border-rose-300 dark:hover:text-rose-200"
+                              className="interactive-press focus-ring inline-flex rounded-full border border-rose-300 px-5 py-2.5 text-sm font-semibold text-stone-950 transition hover:border-rose-500 hover:bg-rose-50 hover:text-rose-700 dark:border-stone-700 dark:text-rose-50 dark:hover:border-rose-300 dark:hover:bg-stone-950 dark:hover:text-rose-200"
                             >
                               {content.detailsButton}
                             </Link>
@@ -159,7 +159,7 @@ export default function ServicesPage() {
             {content.processSteps.map((step, index) => (
               <article
                 key={step.title}
-                className="interactive-lift rounded-4xl border border-rose-200 bg-white p-6 shadow-sm dark:border-stone-800 dark:bg-stone-900"
+                className="interactive-lift rounded-4xl border border-rose-200 bg-white p-6 shadow-sm hover:border-rose-300 hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-900 dark:hover:border-stone-700 dark:hover:shadow-black/30"
               >
                 <div className="mb-6 flex size-12 items-center justify-center rounded-full bg-rose-100 text-sm font-semibold text-rose-700 dark:bg-rose-950 dark:text-rose-200">
                   0{index + 1}

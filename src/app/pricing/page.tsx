@@ -28,7 +28,7 @@ export default function PricingPage() {
           <div className="mt-12 grid gap-6">
             {content.categories.map((category, categoryIndex) => (
               <Reveal key={category.title} delay={categoryIndex * 80}>
-                <article className="overflow-hidden rounded-4xl border border-rose-200 bg-rose-50 shadow-sm dark:border-stone-800 dark:bg-stone-950">
+                <article className="shimmer-surface overflow-hidden rounded-4xl border border-rose-200 bg-rose-50 shadow-sm transition hover:border-rose-300 dark:border-stone-800 dark:bg-stone-950 dark:hover:border-stone-700">
                   <div className="grid gap-0 lg:grid-cols-[0.35fr_0.65fr]">
                     <div className="border-b border-rose-200 bg-white p-6 dark:border-stone-800 dark:bg-stone-900 lg:border-r lg:border-b-0 md:p-8">
                       <h3 className="text-3xl font-semibold tracking-tight text-stone-950 dark:text-rose-50">
@@ -75,7 +75,7 @@ export default function PricingPage() {
                             </p>
                           </div>
 
-                          <div className="rounded-3xl bg-stone-950 px-5 py-4 text-center text-white transition hover:-translate-y-1 dark:bg-rose-100 dark:text-stone-950">
+                          <div className="interactive-lift rounded-3xl bg-stone-950 px-5 py-4 text-center text-white shadow-lg shadow-stone-950/10 dark:bg-rose-100 dark:text-stone-950 dark:shadow-black/20">
                             <p className="text-xs font-semibold uppercase tracking-[0.2em] opacity-70">
                               {content.priceNote}
                             </p>
@@ -107,7 +107,7 @@ export default function PricingPage() {
             {content.packages.map((packageItem) => (
               <article
                 key={packageItem.title}
-                className="interactive-lift rounded-4xl border border-rose-200 bg-white p-6 shadow-sm hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-900 dark:hover:shadow-black/30"
+                className="interactive-lift shimmer-surface rounded-4xl border border-rose-200 bg-white p-6 shadow-sm hover:border-rose-300 hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-900 dark:hover:border-stone-700 dark:hover:shadow-black/30"
               >
                 <span className="rounded-full bg-rose-100 px-3 py-1 text-xs font-semibold text-rose-700 dark:bg-rose-950 dark:text-rose-200">
                   {packageItem.badge}
