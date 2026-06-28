@@ -32,6 +32,23 @@ type SitePreferencesProviderProps = {
 const languageListeners = new Set<() => void>();
 const themeListeners = new Set<() => void>();
 
+function getDevicePreferredLanguage(): Language {
+  if (typeof window === "undefined") {
+    return "pl";
+  }
+
+  const browserLanguages =
+    navigator.languages && navigator.languages.length > 0
+      ? navigator.languages
+      : [navigator.language];
+
+  const hasPolishLanguage = browserLanguages.some((browserLanguage) =>
+    browserLanguage.toLowerCase().startsWith("pl"),
+  );
+
+  return hasPolishLanguage ? "pl" : "en";
+}
+
 function getStoredLanguage(): Language {
   if (typeof window === "undefined") {
     return "pl";
@@ -43,7 +60,7 @@ function getStoredLanguage(): Language {
     return storedLanguage;
   }
 
-  return "pl";
+  return getDevicePreferredLanguage();
 }
 
 function getStoredTheme(): ThemeMode {
