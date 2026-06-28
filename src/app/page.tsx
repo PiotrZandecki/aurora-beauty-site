@@ -6,7 +6,6 @@ import { Reveal } from "@/components/animations/Reveal";
 import { clientValuesContent } from "@/content/clientValuesContent";
 import { faqContent } from "@/content/faqContent";
 import { featuredContent } from "@/content/featuredContent";
-import { feedbackContent } from "@/content/feedbackContent";
 import { homeGalleryPreviewContent } from "@/content/homeGalleryPreviewContent";
 import { siteContent } from "@/content/siteContent";
 import { useSitePreferences } from "@/components/providers/SitePreferencesProvider";
@@ -14,7 +13,6 @@ import { ClientValuesSection } from "@/components/sections/ClientValuesSection";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { FeaturedTreatmentSection } from "@/components/sections/FeaturedTreatmentSection";
-import { FeedbackSection } from "@/components/sections/FeedbackSection";
 import { HomeGalleryPreviewSection } from "@/components/sections/HomeGalleryPreviewSection";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { WelcomeScreen } from "@/components/sections/WelcomeScreen";
@@ -26,25 +24,11 @@ export default function Home() {
   const featured = featuredContent[language];
   const clientValues = clientValuesContent[language];
   const galleryPreview = homeGalleryPreviewContent[language];
-  const feedback = feedbackContent[language];
   const faq = faqContent[language];
 
   return (
     <>
-      <WelcomeScreen
-        eyebrow="Aurora Beauty Studio"
-        title={
-          language === "pl"
-            ? "Super Cię tu widzieć."
-            : "It’s lovely to see you here."
-        }
-        description={
-          language === "pl"
-            ? "Wejdź do spokojnej przestrzeni stworzonej wokół naturalnego piękna, dopracowanych detali i premium doświadczenia."
-            : "Step into a calm space built around natural beauty, refined details and a premium client experience."
-        }
-        buttonLabel={language === "pl" ? "Przejdź do strony" : "Enter website"}
-      />
+      <WelcomeScreen />
 
       <section className="relative mx-auto grid min-h-[calc(100vh-73px)] max-w-6xl items-center gap-12 overflow-hidden px-5 py-20 md:grid-cols-[1.05fr_0.95fr]">
         <div className="pointer-events-none absolute -left-24 top-20 size-72 rounded-full bg-rose-200/30 blur-3xl animation-soft-float dark:bg-rose-900/20" />
@@ -243,17 +227,6 @@ export default function Home() {
         title={clientValues.title}
         description={clientValues.description}
         items={clientValues.items}
-      />
-
-      <FeedbackSection
-        eyebrow={feedback.eyebrow}
-        title={feedback.title}
-        description={feedback.description}
-        sourceLabel={feedback.sourceLabel}
-        ctaTitle={feedback.ctaTitle}
-        ctaDescription={feedback.ctaDescription}
-        ctaButton={feedback.ctaButton}
-        groups={feedback.groups}
       />
 
       <FaqSection

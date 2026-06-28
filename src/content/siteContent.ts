@@ -1,59 +1,70 @@
-import type { Language, NavigationItem } from "@/types/site";
+import type { Language } from "@/types/site";
 
-type PageContent = {
+type NavigationItem = {
+  label: string;
+  href: string;
+};
+
+type PageIntroContent = {
   eyebrow: string;
   title: string;
   description: string;
 };
 
-type HomeService = {
-  title: string;
-  description: string;
-};
-
-type HomeBenefit = {
-  title: string;
-  description: string;
-};
-
-type HomeStat = {
+type StatItem = {
   value: string;
   label: string;
+};
+
+type HomeServiceItem = {
+  title: string;
+  description: string;
+};
+
+type HomeBenefitItem = {
+  title: string;
+  description: string;
+};
+
+type HomeContent = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  primaryCta: string;
+  secondaryCta: string;
+  stats: StatItem[];
+  highlights: string[];
+
+  servicesEyebrow: string;
+  servicesTitle: string;
+  servicesDescription: string;
+  services: HomeServiceItem[];
+
+  benefitsEyebrow: string;
+  benefitsTitle: string;
+  benefitsDescription: string;
+  benefits: HomeBenefitItem[];
+
+  ctaTitle: string;
+  ctaDescription: string;
+  ctaButton: string;
 };
 
 type SiteContent = {
   brand: string;
   languageLabel: string;
   themeLabel: string;
-  nav: NavigationItem[];
-  home: {
-    eyebrow: string;
-    title: string;
-    description: string;
-    primaryCta: string;
-    secondaryCta: string;
-    highlights: string[];
-    stats: HomeStat[];
-    servicesEyebrow: string;
-    servicesTitle: string;
-    servicesDescription: string;
-    services: HomeService[];
-    benefitsEyebrow: string;
-    benefitsTitle: string;
-    benefitsDescription: string;
-    benefits: HomeBenefit[];
-    ctaTitle: string;
-    ctaDescription: string;
-    ctaButton: string;
-  };
-  pages: {
-    about: PageContent;
-    services: PageContent;
-    pricing: PageContent;
-    gallery: PageContent;
-    contact: PageContent;
-  };
   footer: string;
+  nav: NavigationItem[];
+  pages: {
+    about: PageIntroContent;
+    services: PageIntroContent;
+    pricing: PageIntroContent;
+    gallery: PageIntroContent;
+    feedback: PageIntroContent;
+    contact: PageIntroContent;
+  };
+  home: HomeContent;
 };
 
 export const siteContent: Record<Language, SiteContent> = {
@@ -61,226 +72,245 @@ export const siteContent: Record<Language, SiteContent> = {
     brand: "Aurora Beauty Studio",
     languageLabel: "EN",
     themeLabel: "Motyw",
+    footer: "Natural beauty, refined with care.",
     nav: [
-      { href: "/", label: "Start" },
-      { href: "/about", label: "O nas" },
-      { href: "/services", label: "Usługi" },
-      { href: "/pricing", label: "Cennik" },
-      { href: "/gallery", label: "Galeria" },
-      { href: "/contact", label: "Kontakt" },
+      { label: "Home", href: "/" },
+      { label: "O nas", href: "/about" },
+      { label: "Usługi", href: "/services" },
+      { label: "Cennik", href: "/pricing" },
+      { label: "Galeria", href: "/gallery" },
+      { label: "Opinie", href: "/feedback" },
+      { label: "Kontakt", href: "/contact" },
     ],
+    pages: {
+      about: {
+        eyebrow: "O nas",
+        title:
+          "Beauty studio stworzone dla naturalnych efektów i spokojnego doświadczenia.",
+        description:
+          "Aurora Beauty Studio łączy pielęgnację, estetykę i komfort wizyty. To przestrzeń, w której usługa ma być nie tylko skuteczna, ale też spokojna, dopracowana i przyjemna.",
+      },
+      services: {
+        eyebrow: "Usługi",
+        title: "Pielęgnacja, brwi, rzęsy i makijaż w dopracowanym wydaniu.",
+        description:
+          "Oferta skupia się na usługach, które podkreślają naturalną urodę, poprawiają komfort skóry i pomagają przygotować się do ważnych okazji.",
+      },
+      pricing: {
+        eyebrow: "Cennik",
+        title: "Przejrzyste ceny i pakiety dopasowane do potrzeb.",
+        description:
+          "Cennik został zaprojektowany tak, aby łatwo porównać zakres usług, czas trwania i kierunek efektu przed rezerwacją wizyty.",
+      },
+      gallery: {
+        eyebrow: "Galeria",
+        title: "Zobacz efekty, atmosferę i estetykę salonu.",
+        description:
+          "Galeria pokazuje kierunek wizualny Aurora Beauty Studio: naturalne efekty, spokojne detale, elegancką przestrzeń i dopracowane doświadczenie klientki.",
+      },
+      feedback: {
+        eyebrow: "Opinie",
+        title: "Feedback z różnych źródeł, jeden spójny obraz doświadczenia.",
+        description:
+          "Zobacz opinie wysłane przez formularz strony, komentarze z Facebooka oraz recenzje Google. To przekrojowy obraz tego, jak klientki odbierają usługę, atmosferę i efekty.",
+      },
+      contact: {
+        eyebrow: "Kontakt",
+        title: "Umów wizytę albo zapytaj o najlepszy kierunek usługi.",
+        description:
+          "Napisz, czego potrzebujesz, wybierz lokalizację albo sprawdź główny salon. Aurora Beauty Studio ułatwia kontakt, rezerwację i wybór właściwej usługi.",
+      },
+    },
     home: {
       eyebrow: "Premium beauty studio",
-      title: "Naturalne piękno dopracowane z uważnością.",
+      title: "Naturalne piękno, dopracowane z troską.",
       description:
-        "Studio beauty specjalizujące się w pielęgnacji twarzy, stylizacji brwi i rzęs oraz makijażu okazjonalnym — z naciskiem na subtelny efekt, komfort i dopracowane doświadczenie od pierwszego kontaktu po finalny rezultat.",
+        "Aurora Beauty Studio to spokojna przestrzeń dla pielęgnacji twarzy, stylizacji brwi i rzęs oraz makijażu okazjonalnego. Wszystko po to, aby efekt był świeży, naturalny i dopasowany do Ciebie.",
       primaryCta: "Zobacz usługi",
       secondaryCta: "Umów wizytę",
-      highlights: [
-        "Pielęgnacja twarzy",
-        "Stylizacja brwi i rzęs",
-        "Makijaż okazjonalny",
-      ],
       stats: [
-        { value: "3", label: "obszary specjalizacji" },
-        { value: "1:1", label: "indywidualne podejście" },
-        { value: "Soft", label: "naturalny efekt premium" },
+        { value: "3", label: "główne obszary usług" },
+        { value: "5★", label: "standard doświadczenia" },
+        { value: "60+", label: "minut spokojnej wizyty" },
       ],
+      highlights: [
+        "indywidualne podejście do skóry",
+        "naturalny, elegancki efekt",
+        "spokojna atmosfera wizyty",
+      ],
+
       servicesEyebrow: "Oferta",
-      servicesTitle:
-        "Usługi stworzone z myślą o naturalnym, dopracowanym efekcie.",
+      servicesTitle: "Usługi, które budują świeży i dopracowany wygląd.",
       servicesDescription:
-        "Wybierz obszar, który najlepiej odpowiada Twoim potrzebom — pielęgnacja skóry, oprawa oczu albo makijaż na ważną okazję.",
+        "Najważniejsze obszary pracy salonu skupiają się na cerze, oprawie oczu i makijażu dopasowanym do okazji.",
       services: [
         {
           title: "Pielęgnacja twarzy",
           description:
-            "Zabiegi oczyszczające, regenerujące i odżywcze dobierane do aktualnych potrzeb skóry.",
+            "Zabiegi dla skóry, która potrzebuje oczyszczenia, ukojenia, regeneracji albo naturalnego blasku.",
         },
         {
           title: "Brwi i rzęsy",
           description:
-            "Stylizacja oprawy oczu, która porządkuje rysy twarzy i podkreśla spojrzenie bez przerysowania.",
+            "Stylizacja oprawy oczu nastawiona na naturalny, schludny i elegancki efekt bez przerysowania.",
         },
         {
           title: "Makijaż okazjonalny",
           description:
-            "Makijaż dopasowany do urody, światła, stylizacji i charakteru wydarzenia.",
+            "Makijaż dopasowany do urody, stylizacji, światła i charakteru wydarzenia.",
         },
       ],
+
       benefitsEyebrow: "Dlaczego Aurora",
       benefitsTitle:
-        "Spokojna wizyta, jasna komunikacja i efekt, który pasuje do Ciebie.",
+        "Spokojna wizyta, jasny proces i efekt, który wygląda naturalnie.",
       benefitsDescription:
-        "W branży beauty zaufanie powstaje z detali: sposobu rozmowy, standardu pracy, atmosfery oraz efektu, który wygląda dobrze nie tylko po wyjściu z salonu.",
+        "Strona prowadzi klientkę od pierwszego wrażenia, przez ofertę i cennik, aż do kontaktu i wyboru lokalizacji.",
       benefits: [
         {
-          title: "Naturalny efekt",
+          title: "Naturalny kierunek",
           description:
-            "Zabiegi i stylizacje mają podkreślać urodę, nie ją przytłaczać. Stawiamy na świeżość, proporcje i elegancję.",
+            "Efekty są dopasowane do urody i potrzeb, bez ciężkiego lub przypadkowego rezultatu.",
         },
         {
-          title: "Indywidualny dobór",
+          title: "Czytelna oferta",
           description:
-            "Przed usługą omawiamy potrzeby, oczekiwania i ewentualne ograniczenia, aby dobrać odpowiednią ścieżkę.",
+            "Każda usługa ma opis, czas, efekt i wskazanie, dla kogo będzie najlepsza.",
         },
         {
-          title: "Komfort od początku",
+          title: "Premium doświadczenie",
           description:
-            "Strona, kontakt i sama wizyta prowadzą użytkowniczkę prostą drogą: od zainteresowania do spokojnej decyzji.",
+            "Wizualny styl, język, animacje i kontakt wspierają wrażenie spokojnej marki beauty.",
         },
       ],
-      ctaTitle: "Chcesz dobrać usługę do swoich potrzeb?",
+
+      ctaTitle: "Gotowa/gotowy sprawdzić, która usługa będzie najlepsza?",
       ctaDescription:
-        "Napisz, jaki efekt chcesz uzyskać albo wybierz interesującą Cię usługę. Pomożemy dobrać najlepszy kierunek przed wizytą.",
-      ctaButton: "Przejdź do kontaktu",
+        "Przejdź do kontaktu, opisz potrzeby i wybierz najlepszy kierunek wizyty w Aurora Beauty Studio.",
+      ctaButton: "Skontaktuj się",
     },
-    pages: {
-      about: {
-        eyebrow: "O salonie",
-        title:
-          "Studio beauty, w którym najważniejsze są spokój, detal i naturalny efekt.",
-        description:
-          "Poznaj podejście Aurora Beauty Studio — miejsce stworzone dla osób, które chcą wyglądać świeżo, elegancko i nadal jak najlepsza wersja siebie.",
-      },
-      services: {
-        eyebrow: "Usługi",
-        title:
-          "Pielęgnacja, stylizacja i makijaż dopasowane do Twoich potrzeb.",
-        description:
-          "Oferta obejmuje najważniejsze obszary beauty: pielęgnację twarzy, stylizację brwi i rzęs oraz makijaż okazjonalny.",
-      },
-      pricing: {
-        eyebrow: "Cennik",
-        title: "Przejrzyste ceny i usługi opisane bez zbędnego chaosu.",
-        description:
-          "Sprawdź orientacyjne ceny, czas trwania oraz pakiety usług. Finalny zakres może zostać dopasowany po krótkiej konsultacji.",
-      },
-      gallery: {
-        eyebrow: "Galeria",
-        title: "Efekty, klimat i detale, które pokazują styl salonu.",
-        description:
-          "Galeria pomaga zobaczyć kierunek estetyczny: naturalne efekty, spokojną atmosferę i dopracowane detale pracy.",
-      },
-      contact: {
-        eyebrow: "Kontakt",
-        title: "Umów wizytę albo zapytaj, która usługa będzie najlepsza.",
-        description:
-          "Skontaktuj się telefonicznie, mailowo, przez social media albo formularz kontaktowy. Odpowiemy i pomożemy dobrać najlepszą opcję.",
-      },
-    },
-    footer:
-      "Premium beauty studio — pielęgnacja twarzy, brwi, rzęsy i makijaż okazjonalny.",
   },
 
   en: {
     brand: "Aurora Beauty Studio",
     languageLabel: "PL",
     themeLabel: "Theme",
+    footer: "Natural beauty, refined with care.",
     nav: [
-      { href: "/", label: "Home" },
-      { href: "/about", label: "About" },
-      { href: "/services", label: "Services" },
-      { href: "/pricing", label: "Pricing" },
-      { href: "/gallery", label: "Gallery" },
-      { href: "/contact", label: "Contact" },
+      { label: "Home", href: "/" },
+      { label: "About", href: "/about" },
+      { label: "Services", href: "/services" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "Gallery", href: "/gallery" },
+      { label: "Feedback", href: "/feedback" },
+      { label: "Contact", href: "/contact" },
     ],
+    pages: {
+      about: {
+        eyebrow: "About",
+        title:
+          "A beauty studio created for natural results and a calm experience.",
+        description:
+          "Aurora Beauty Studio combines care, aesthetics and visit comfort. It is a space where the service should feel effective, calm, refined and pleasant.",
+      },
+      services: {
+        eyebrow: "Services",
+        title: "Facial care, brows, lashes and makeup in a refined form.",
+        description:
+          "The offer focuses on services that enhance natural beauty, improve skin comfort and help prepare for important occasions.",
+      },
+      pricing: {
+        eyebrow: "Pricing",
+        title: "Clear pricing and packages tailored to client needs.",
+        description:
+          "The pricing page is designed to make it easy to compare service scope, duration and expected result before booking.",
+      },
+      gallery: {
+        eyebrow: "Gallery",
+        title: "See the results, atmosphere and studio aesthetic.",
+        description:
+          "The gallery presents the visual direction of Aurora Beauty Studio: natural results, calm details, elegant space and a polished client experience.",
+      },
+      feedback: {
+        eyebrow: "Feedback",
+        title: "Reviews from different sources, one consistent experience.",
+        description:
+          "See feedback submitted through the website form, Facebook comments and Google reviews. Together, they show how clients experience the service, atmosphere and results.",
+      },
+      contact: {
+        eyebrow: "Contact",
+        title: "Book a visit or ask about the best service direction.",
+        description:
+          "Describe what you need, choose a location or check the main studio. Aurora Beauty Studio makes contact, booking and choosing the right service easier.",
+      },
+    },
     home: {
       eyebrow: "Premium beauty studio",
       title: "Natural beauty, refined with care.",
       description:
-        "A beauty studio specializing in facial care, brows, lashes and occasion makeup — focused on subtle results, comfort and a polished experience from the first message to the final effect.",
+        "Aurora Beauty Studio is a calm space for facial care, brow and lash styling, and occasion makeup. Everything is designed to create a fresh, natural result tailored to you.",
       primaryCta: "View services",
       secondaryCta: "Book a visit",
-      highlights: ["Facial care", "Brows and lashes", "Occasion makeup"],
       stats: [
-        { value: "3", label: "specialized service areas" },
-        { value: "1:1", label: "individual approach" },
-        { value: "Soft", label: "natural premium result" },
+        { value: "3", label: "main service areas" },
+        { value: "5★", label: "experience standard" },
+        { value: "60+", label: "minutes of calm care" },
       ],
-      servicesEyebrow: "Services",
-      servicesTitle: "Services designed for a natural, polished result.",
+      highlights: [
+        "individual skin-focused approach",
+        "natural, elegant result",
+        "calm visit atmosphere",
+      ],
+
+      servicesEyebrow: "Offer",
+      servicesTitle: "Services that create a fresh and polished look.",
       servicesDescription:
-        "Choose the area that best matches your needs — skin care, eye-area styling or makeup for an important occasion.",
+        "The studio’s key service areas focus on skin, eye-area styling and makeup tailored to the occasion.",
       services: [
         {
           title: "Facial care",
           description:
-            "Cleansing, regenerating and nourishing treatments selected according to current skin needs.",
+            "Treatments for skin that needs cleansing, soothing, regeneration or a natural glow boost.",
         },
         {
           title: "Brows and lashes",
           description:
-            "Eye-area styling that brings structure to the face and enhances the look without an overdone effect.",
+            "Eye-area styling focused on a natural, clean and elegant effect without overdoing the result.",
         },
         {
           title: "Occasion makeup",
           description:
-            "Makeup adjusted to natural features, lighting, styling and the character of the event.",
+            "Makeup tailored to natural features, outfit, lighting and the character of the event.",
         },
       ],
+
       benefitsEyebrow: "Why Aurora",
       benefitsTitle:
-        "A calm visit, clear communication and a result that feels like you.",
+        "A calm visit, clear process and a result that looks natural.",
       benefitsDescription:
-        "In beauty, trust is built through details: communication, work standards, atmosphere and a result that looks good beyond the salon visit.",
+        "The website guides the client from first impression, through offer and pricing, to contact and location choice.",
       benefits: [
         {
-          title: "Natural result",
+          title: "Natural direction",
           description:
-            "Treatments and styling are designed to enhance beauty, not overpower it. We focus on freshness, proportion and elegance.",
+            "Results are adjusted to natural features and needs, without a heavy or random effect.",
         },
         {
-          title: "Individual selection",
+          title: "Clear offer",
           description:
-            "Before the service, needs, expectations and possible limitations are discussed to choose the right direction.",
+            "Each service includes description, duration, result and guidance on who it is best for.",
         },
         {
-          title: "Comfort from the start",
+          title: "Premium experience",
           description:
-            "The website, contact and visit experience guide the client through a simple path from interest to confident decision.",
+            "Visual style, copy, animations and contact flow support the feeling of a calm beauty brand.",
         },
       ],
-      ctaTitle: "Want to choose the right service for your needs?",
+
+      ctaTitle: "Ready to check which service will suit you best?",
       ctaDescription:
-        "Describe the result you want or choose the service you are interested in. We will help select the best direction before your visit.",
-      ctaButton: "Go to contact",
+        "Go to contact, describe your needs and choose the best direction for your visit at Aurora Beauty Studio.",
+      ctaButton: "Contact us",
     },
-    pages: {
-      about: {
-        eyebrow: "About the studio",
-        title:
-          "A beauty studio where calm, detail and natural results matter most.",
-        description:
-          "Discover the approach behind Aurora Beauty Studio — a place created for people who want to look fresh, elegant and still like the best version of themselves.",
-      },
-      services: {
-        eyebrow: "Services",
-        title: "Care, styling and makeup tailored to your needs.",
-        description:
-          "The offer covers the key beauty areas: facial care, brow and lash styling, and occasion makeup.",
-      },
-      pricing: {
-        eyebrow: "Pricing",
-        title:
-          "Clear prices and services described without unnecessary clutter.",
-        description:
-          "Check approximate prices, duration and service packages. The final scope may be adjusted after a short consultation.",
-      },
-      gallery: {
-        eyebrow: "Gallery",
-        title: "Results, atmosphere and details that show the studio style.",
-        description:
-          "The gallery helps present the aesthetic direction: natural results, calm atmosphere and carefully refined details.",
-      },
-      contact: {
-        eyebrow: "Contact",
-        title: "Book a visit or ask which service will suit you best.",
-        description:
-          "Get in touch by phone, e-mail, social media or the contact form. We will reply and help you choose the best option.",
-      },
-    },
-    footer:
-      "Premium beauty studio — facial care, brows, lashes and occasion makeup.",
   },
 };
