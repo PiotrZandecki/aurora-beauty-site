@@ -176,35 +176,21 @@ export default function GalleryPage() {
             stagger
             className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3"
           >
-            {visibleItems.map((item, index) => (
+            {visibleItems.map((item) => (
               <button
                 key={item.id}
                 type="button"
                 onClick={() => setSelectedItemId(item.id)}
-                className={`group interactive-lift focus-ring overflow-hidden rounded-4xl border border-rose-200 bg-rose-50 text-left shadow-sm hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-950 dark:hover:shadow-black/30 ${
-                  selectedCategoryId === "all" && index === 0
-                    ? "md:col-span-2 lg:col-span-2"
-                    : ""
-                }`}
+                className="group interactive-lift focus-ring overflow-hidden rounded-4xl border border-rose-200 bg-rose-50 text-left shadow-sm hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-950 dark:hover:shadow-black/30"
                 aria-label={`${content.openLabel}: ${item.title}`}
               >
-                <div
-                  className={`relative overflow-hidden ${
-                    selectedCategoryId === "all" && index === 0
-                      ? "aspect-video"
-                      : "aspect-4/5"
-                  }`}
-                >
+                <div className="relative aspect-4/5 overflow-hidden">
                   <Image
                     src={item.imageSrc}
                     alt={item.imageAlt}
                     fill
-                    sizes={
-                      selectedCategoryId === "all" && index === 0
-                        ? "(min-width: 1024px) 66vw, 100vw"
-                        : "(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                    }
-                    className="image-soft-zoom object-cover"
+                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                    className="image-soft-zoom object-cover object-center"
                   />
 
                   <div className="absolute inset-0 bg-linear-to-t from-stone-950/60 via-stone-950/10 to-transparent" />
@@ -306,7 +292,7 @@ export default function GalleryPage() {
                   alt={selectedItem.imageAlt}
                   fill
                   sizes="(min-width: 1024px) 50vw, 100vw"
-                  className="object-cover"
+                  className="object-cover object-center"
                 />
 
                 <div className="absolute inset-0 bg-linear-to-t from-stone-950/60 via-stone-950/10 to-transparent" />

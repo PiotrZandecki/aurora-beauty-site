@@ -17,38 +17,35 @@ type FormOption = {
   label: string;
 };
 
-type Location = {
-  name: string;
-  eyebrow: string;
-  address: string;
-  city: string;
-  description: string;
-  mapQuery: string;
-  specialties: string[];
-  isMain?: boolean;
-};
-
 type ContactContent = {
   detailsEyebrow: string;
   detailsTitle: string;
   detailsDescription: string;
   contactMethods: ContactMethod[];
 
-  mainSalonEyebrow: string;
-  mainSalonTitle: string;
-  mainSalonDescription: string;
-  mainSalonMapTitle: string;
-  mainSalonGoogleMapsLabel: string;
+  nearestSalonEyebrow: string;
+  nearestSalonTitle: string;
+  nearestSalonDescription: string;
+  fallbackSalonTitle: string;
+  fallbackSalonDescription: string;
+  locationLoading: string;
+  locationGranted: string;
+  locationDenied: string;
+  locationUnavailable: string;
+  useLocationButton: string;
+  selectedSalonMapTitle: string;
+  googleMapsLabel: string;
+  distanceLabel: string;
   allLocationsButton: string;
+
+  nearbyEyebrow: string;
+  nearbyTitle: string;
+  nearbyDescription: string;
+  nearbyFallbackDescription: string;
+  nearbyGoogleMapsLabel: string;
 
   openingHoursTitle: string;
   openingHours: OpeningHour[];
-
-  locationsEyebrow: string;
-  locationsTitle: string;
-  locationsDescription: string;
-  locationsGoogleMapsLabel: string;
-  locations: Location[];
 
   formEyebrow: string;
   formTitle: string;
@@ -104,80 +101,38 @@ export const contactContent: Record<Language, ContactContent> = {
       },
     ],
 
-    mainSalonEyebrow: "Główny salon",
-    mainSalonTitle: "Aurora Warsaw Flagship",
-    mainSalonDescription:
-      "Główna lokalizacja Aurora Beauty Studio to spokojna, elegancka przestrzeń w Warszawie, zaprojektowana z myślą o naturalnych efektach, komforcie klientki i dopracowanym doświadczeniu wizyty.",
-    mainSalonMapTitle: "Mapa głównego salonu",
-    mainSalonGoogleMapsLabel: "Otwórz w Google Maps",
-    allLocationsButton: "Zobacz wszystkie lokacje",
+    nearestSalonEyebrow: "Najbliższy salon",
+    nearestSalonTitle: "Salon Aurora najbliżej Ciebie",
+    nearestSalonDescription:
+      "Po zgodzie na użycie lokalizacji urządzenia pokażemy salon znajdujący się najbliżej Ciebie. Jeśli lokalizacja nie będzie dostępna, pokażemy główną siedzibę marki.",
+    fallbackSalonTitle: "Główny salon Aurora",
+    fallbackSalonDescription:
+      "Nie mamy dostępu do lokalizacji urządzenia, więc jako punkt domyślny pokazujemy główną siedzibę Aurora Beauty Studio.",
+    locationLoading: "Sprawdzamy lokalizację urządzenia...",
+    locationGranted: "Lokalizacja urządzenia została uwzględniona.",
+    locationDenied:
+      "Nie uzyskaliśmy dostępu do lokalizacji. Pokazujemy główną siedzibę.",
+    locationUnavailable:
+      "Geolokalizacja nie jest dostępna w tej przeglądarce. Pokazujemy główną siedzibę.",
+    useLocationButton: "Użyj mojej lokalizacji",
+    selectedSalonMapTitle: "Mapa wybranego salonu",
+    googleMapsLabel: "Otwórz w Google Maps",
+    distanceLabel: "Szacowana odległość",
+    allLocationsButton: "Zobacz wszystkie lokalizacje",
+
+    nearbyEyebrow: "W pobliżu",
+    nearbyTitle: "Dwa kolejne salony najbliżej Ciebie.",
+    nearbyDescription:
+      "Poniżej pokazujemy dwie kolejne lokalizacje, które są najbliżej Twojej pozycji — z pominięciem salonu wyświetlonego wyżej.",
+    nearbyFallbackDescription:
+      "Ponieważ nie mamy dostępu do Twojej lokalizacji, pokazujemy dwie lokalizacje najbliższe głównej siedzibie.",
+    nearbyGoogleMapsLabel: "Zobacz na mapie",
 
     openingHoursTitle: "Godziny otwarcia",
     openingHours: [
       { days: "Poniedziałek — Piątek", hours: "10:00 — 19:00" },
       { days: "Sobota", hours: "10:00 — 15:00" },
       { days: "Niedziela", hours: "Zamknięte" },
-    ],
-
-    locationsEyebrow: "Wszystkie lokacje",
-    locationsTitle:
-      "Aurora Beauty Studio w najbardziej inspirujących miastach.",
-    locationsDescription:
-      "Przykładowa sieć lokalizacji pokazuje, jak marka może skalować swoją obecność: od głównego salonu w Warszawie po globalne punkty premium w dużych miastach.",
-    locationsGoogleMapsLabel: "Zobacz na mapie",
-    locations: [
-      {
-        name: "Aurora Warsaw Flagship",
-        eyebrow: "Główny salon",
-        address: "ul. Różana 12, 00-001 Warszawa",
-        city: "Warszawa, Polska",
-        description:
-          "Główna lokalizacja marki: konsultacje, pielęgnacja twarzy, brwi i rzęsy oraz makijaż okazjonalny.",
-        mapQuery: "ul. Różana 12, 00-001 Warszawa, Polska",
-        specialties: ["Facial care", "Brows & lashes", "Occasion makeup"],
-        isMain: true,
-      },
-      {
-        name: "Aurora Paris Studio",
-        eyebrow: "European concept",
-        address: "14 Rue Saint-Honoré, 75001 Paris",
-        city: "Paryż, Francja",
-        description:
-          "Elegancka lokalizacja inspirowana francuskim minimalizmem i naturalnym beauty lookiem.",
-        mapQuery: "14 Rue Saint-Honoré, 75001 Paris, France",
-        specialties: ["Skin rituals", "Soft glam", "Consultations"],
-      },
-      {
-        name: "Aurora London Atelier",
-        eyebrow: "Editorial beauty",
-        address: "22 Mayfair Place, London W1J",
-        city: "Londyn, Wielka Brytania",
-        description:
-          "Atelier nastawione na makijaż okazjonalny, sesje zdjęciowe i dopracowane stylizacje eventowe.",
-        mapQuery: "22 Mayfair Place, London W1J, United Kingdom",
-        specialties: ["Event makeup", "Photo-ready skin", "Brow styling"],
-      },
-      {
-        name: "Aurora Dubai Lounge",
-        eyebrow: "Luxury lounge",
-        address: "Downtown Dubai, Sheikh Mohammed bin Rashid Blvd",
-        city: "Dubaj, ZEA",
-        description:
-          "Lokalizacja premium z naciskiem na luksusowe rytuały, komfort i intensywną regenerację skóry.",
-        mapQuery:
-          "Downtown Dubai, Sheikh Mohammed bin Rashid Boulevard, Dubai, United Arab Emirates",
-        specialties: ["Glow rituals", "Luxury care", "Premium packages"],
-      },
-      {
-        name: "Aurora Singapore Room",
-        eyebrow: "Urban calm",
-        address: "2 Orchard Turn, Singapore 238801",
-        city: "Singapur",
-        description:
-          "Nowoczesna lokalizacja w miejskim stylu, łącząca szybkie usługi beauty z atmosferą spokoju.",
-        mapQuery: "2 Orchard Turn, Singapore 238801",
-        specialties: ["Express care", "Natural glow", "Lash styling"],
-      },
     ],
 
     formEyebrow: "Zapytanie",
@@ -249,80 +204,38 @@ export const contactContent: Record<Language, ContactContent> = {
       },
     ],
 
-    mainSalonEyebrow: "Main studio",
-    mainSalonTitle: "Aurora Warsaw Flagship",
-    mainSalonDescription:
-      "The main Aurora Beauty Studio location is a calm, elegant space in Warsaw, designed around natural results, client comfort and a refined visit experience.",
-    mainSalonMapTitle: "Main studio map",
-    mainSalonGoogleMapsLabel: "Open in Google Maps",
+    nearestSalonEyebrow: "Nearest studio",
+    nearestSalonTitle: "The Aurora studio closest to you",
+    nearestSalonDescription:
+      "After permission to use your device location, we will show the studio closest to you. If location access is unavailable, the main headquarters will be displayed.",
+    fallbackSalonTitle: "Aurora main studio",
+    fallbackSalonDescription:
+      "We do not have access to your device location, so the Aurora Beauty Studio main headquarters is displayed as the default location.",
+    locationLoading: "Checking device location...",
+    locationGranted: "Your device location has been included.",
+    locationDenied:
+      "Location access was not granted. Showing the main headquarters.",
+    locationUnavailable:
+      "Geolocation is not available in this browser. Showing the main headquarters.",
+    useLocationButton: "Use my location",
+    selectedSalonMapTitle: "Selected studio map",
+    googleMapsLabel: "Open in Google Maps",
+    distanceLabel: "Estimated distance",
     allLocationsButton: "See all locations",
+
+    nearbyEyebrow: "Nearby",
+    nearbyTitle: "Two more studios closest to you.",
+    nearbyDescription:
+      "Below we show the next two locations closest to your position, excluding the studio already displayed above.",
+    nearbyFallbackDescription:
+      "Because we do not have access to your location, we show two locations closest to the main headquarters.",
+    nearbyGoogleMapsLabel: "View on map",
 
     openingHoursTitle: "Opening hours",
     openingHours: [
       { days: "Monday — Friday", hours: "10:00 — 19:00" },
       { days: "Saturday", hours: "10:00 — 15:00" },
       { days: "Sunday", hours: "Closed" },
-    ],
-
-    locationsEyebrow: "All locations",
-    locationsTitle:
-      "Aurora Beauty Studio in the world’s most inspiring cities.",
-    locationsDescription:
-      "This sample location network shows how the brand can scale its presence: from the Warsaw flagship to premium global beauty spaces.",
-    locationsGoogleMapsLabel: "View on map",
-    locations: [
-      {
-        name: "Aurora Warsaw Flagship",
-        eyebrow: "Main studio",
-        address: "12 Różana Street, 00-001 Warsaw",
-        city: "Warsaw, Poland",
-        description:
-          "The main brand location: consultations, facial care, brows and lashes, and occasion makeup.",
-        mapQuery: "ul. Różana 12, 00-001 Warsaw, Poland",
-        specialties: ["Facial care", "Brows & lashes", "Occasion makeup"],
-        isMain: true,
-      },
-      {
-        name: "Aurora Paris Studio",
-        eyebrow: "European concept",
-        address: "14 Rue Saint-Honoré, 75001 Paris",
-        city: "Paris, France",
-        description:
-          "An elegant location inspired by French minimalism and natural beauty direction.",
-        mapQuery: "14 Rue Saint-Honoré, 75001 Paris, France",
-        specialties: ["Skin rituals", "Soft glam", "Consultations"],
-      },
-      {
-        name: "Aurora London Atelier",
-        eyebrow: "Editorial beauty",
-        address: "22 Mayfair Place, London W1J",
-        city: "London, United Kingdom",
-        description:
-          "An atelier focused on occasion makeup, photoshoots and polished event styling.",
-        mapQuery: "22 Mayfair Place, London W1J, United Kingdom",
-        specialties: ["Event makeup", "Photo-ready skin", "Brow styling"],
-      },
-      {
-        name: "Aurora Dubai Lounge",
-        eyebrow: "Luxury lounge",
-        address: "Downtown Dubai, Sheikh Mohammed bin Rashid Blvd",
-        city: "Dubai, UAE",
-        description:
-          "A premium location focused on luxury rituals, comfort and intensive skin recovery.",
-        mapQuery:
-          "Downtown Dubai, Sheikh Mohammed bin Rashid Boulevard, Dubai, United Arab Emirates",
-        specialties: ["Glow rituals", "Luxury care", "Premium packages"],
-      },
-      {
-        name: "Aurora Singapore Room",
-        eyebrow: "Urban calm",
-        address: "2 Orchard Turn, Singapore 238801",
-        city: "Singapore",
-        description:
-          "A modern city location combining efficient beauty services with a calm atmosphere.",
-        mapQuery: "2 Orchard Turn, Singapore 238801",
-        specialties: ["Express care", "Natural glow", "Lash styling"],
-      },
     ],
 
     formEyebrow: "Inquiry",
