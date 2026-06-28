@@ -30,6 +30,18 @@ const initialFormData: FormData = {
 
 const CONTACT_EMAIL = "hello@aurorabeauty.pl";
 
+function getGoogleMapsSearchUrl(mapQuery: string) {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    mapQuery,
+  )}`;
+}
+
+function getGoogleMapsEmbedUrl(mapQuery: string) {
+  return `https://maps.google.com/maps?q=${encodeURIComponent(
+    mapQuery,
+  )}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
+}
+
 export default function ContactPage() {
   const { language } = useSitePreferences();
   const page = siteContent[language].pages.contact;
@@ -38,6 +50,14 @@ export default function ContactPage() {
 
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [hasSubmitted, setHasSubmitted] = useState(false);
+
+  const mainSalon =
+    content.locations.find((location) => location.isMain) ??
+    content.locations[0];
+
+  if (!mainSalon) {
+    return null;
+  }
 
   function handleChange(
     event: ChangeEvent<
@@ -138,7 +158,7 @@ export default function ContactPage() {
                 <a
                   key={method.label}
                   href={method.href}
-                  className="group interactive-lift focus-ring rounded-4xl border border-rose-200 bg-white p-6 shadow-sm hover:border-rose-300 hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-900 dark:hover:border-stone-700 dark:hover:shadow-black/30"
+                  className="group interactive-lift rounded-4xl border border-rose-200 bg-white p-6 shadow-sm focus-ring hover:border-rose-300 hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-900 dark:hover:border-stone-700 dark:hover:shadow-black/30"
                 >
                   <p className="text-sm font-semibold uppercase tracking-[0.25em] text-rose-600 dark:text-rose-300">
                     {method.label}
@@ -159,17 +179,59 @@ export default function ContactPage() {
           <Reveal variant="scale-in" delay={120}>
             <div className="rounded-4xl border border-rose-200 bg-rose-50 p-5 shadow-sm dark:border-stone-800 dark:bg-stone-950 md:p-8">
               <div className="rounded-3xl bg-white p-6 shadow-sm dark:bg-stone-900">
-                <h3 className="text-2xl font-semibold text-stone-950 dark:text-rose-50">
-                  {content.addressTitle}
+                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-rose-600 dark:text-rose-300">
+                  {content.mainSalonEyebrow}
+                </p>
+
+                <h3 className="mt-4 text-3xl font-semibold tracking-tight text-stone-950 dark:text-rose-50">
+                  {content.mainSalonTitle}
                 </h3>
 
                 <p className="mt-3 text-lg font-medium text-stone-700 dark:text-stone-200">
-                  {content.address}
+                  {mainSalon.address}
                 </p>
 
-                <p className="mt-3 leading-7 text-stone-600 dark:text-stone-300">
-                  {content.addressDescription}
+                <p className="mt-4 leading-7 text-stone-600 dark:text-stone-300">
+                  {content.mainSalonDescription}
                 </p>
+
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                  <a
+                    href={getGoogleMapsSearchUrl(mainSalon.mapQuery)}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="interactive-press focus-ring inline-flex rounded-full bg-stone-950 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-rose-700 dark:bg-rose-100 dark:text-stone-950 dark:hover:bg-rose-200"
+                  >
+                    {content.mainSalonGoogleMapsLabel}
+                  </a>
+
+                  <a
+                    href="#all-locations"
+                    className="interactive-press focus-ring inline-flex rounded-full border border-rose-300 px-5 py-2.5 text-sm font-semibold text-stone-950 transition hover:border-rose-500 hover:bg-rose-50 hover:text-rose-700 dark:border-stone-700 dark:text-rose-50 dark:hover:border-rose-300 dark:hover:bg-stone-900 dark:hover:text-rose-200"
+                  >
+                    {content.allLocationsButton}
+                  </a>
+                </div>
+              </div>
+
+              <div className="mt-5 overflow-hidden rounded-3xl border border-rose-200 bg-white shadow-sm dark:border-stone-800 dark:bg-stone-900">
+                <div className="flex items-center justify-between gap-4 border-b border-rose-100 px-5 py-4 dark:border-stone-800">
+                  <h3 className="text-lg font-semibold text-stone-950 dark:text-rose-50">
+                    {content.mainSalonMapTitle}
+                  </h3>
+
+                  <span className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-600 dark:text-rose-300">
+                    Google Maps
+                  </span>
+                </div>
+
+                <iframe
+                  title={content.mainSalonMapTitle}
+                  src={getGoogleMapsEmbedUrl(mainSalon.mapQuery)}
+                  className="aspect-video w-full border-0"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
               </div>
 
               <div className="mt-5 rounded-3xl bg-white p-6 shadow-sm dark:bg-stone-900">
@@ -194,26 +256,85 @@ export default function ContactPage() {
                   ))}
                 </div>
               </div>
-
-              <div className="mt-5 flex aspect-video items-end rounded-3xl bg-linear-to-br from-rose-100 via-pink-100 to-stone-100 p-6 dark:from-stone-800 dark:via-stone-900 dark:to-rose-950">
-                <div className="rounded-3xl bg-white/80 px-4 py-3 shadow-sm backdrop-blur dark:bg-stone-950/70">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-600 dark:text-rose-300">
-                    Aurora Beauty Studio
-                  </p>
-
-                  <p className="mt-1 text-sm font-semibold text-stone-950 dark:text-rose-50">
-                    {language === "pl"
-                      ? "Warszawa — spokojna lokalizacja i wygodny kontakt"
-                      : "Warsaw — calm location and easy contact"}
-                  </p>
-                </div>
-              </div>
             </div>
           </Reveal>
         </div>
       </section>
 
-      <section className="px-5 py-20">
+      <section id="all-locations" className="px-5 py-20">
+        <div className="mx-auto max-w-6xl">
+          <SectionHeader
+            eyebrow={content.locationsEyebrow}
+            title={content.locationsTitle}
+            description={content.locationsDescription}
+          />
+
+          <Reveal stagger className="mt-10 grid gap-5 lg:grid-cols-2">
+            {content.locations.map((location) => (
+              <article
+                key={location.name}
+                className="interactive-lift overflow-hidden rounded-4xl border border-rose-200 bg-white shadow-sm hover:border-rose-300 hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-900 dark:hover:border-stone-700 dark:hover:shadow-black/30"
+              >
+                <div className="grid gap-0 md:grid-cols-[0.95fr_1.05fr]">
+                  <div className="p-6">
+                    <p className="text-xs font-semibold uppercase tracking-[0.25em] text-rose-600 dark:text-rose-300">
+                      {location.eyebrow}
+                    </p>
+
+                    <h3 className="mt-4 text-2xl font-semibold text-stone-950 dark:text-rose-50">
+                      {location.name}
+                    </h3>
+
+                    <p className="mt-2 font-medium text-stone-700 dark:text-stone-200">
+                      {location.city}
+                    </p>
+
+                    <p className="mt-4 leading-7 text-stone-600 dark:text-stone-300">
+                      {location.description}
+                    </p>
+
+                    <p className="mt-4 text-sm leading-6 text-stone-500 dark:text-stone-400">
+                      {location.address}
+                    </p>
+
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {location.specialties.map((specialty) => (
+                        <span
+                          key={specialty}
+                          className="rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700 dark:bg-rose-950 dark:text-rose-200"
+                        >
+                          {specialty}
+                        </span>
+                      ))}
+                    </div>
+
+                    <a
+                      href={getGoogleMapsSearchUrl(location.mapQuery)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="interactive-press focus-ring mt-6 inline-flex rounded-full border border-rose-300 px-5 py-2.5 text-sm font-semibold text-stone-950 transition hover:border-rose-500 hover:bg-rose-50 hover:text-rose-700 dark:border-stone-700 dark:text-rose-50 dark:hover:border-rose-300 dark:hover:bg-stone-950 dark:hover:text-rose-200"
+                    >
+                      {content.locationsGoogleMapsLabel}
+                    </a>
+                  </div>
+
+                  <div className="min-h-70 border-t border-rose-200 dark:border-stone-800 md:border-l md:border-t-0">
+                    <iframe
+                      title={`${location.name} map`}
+                      src={getGoogleMapsEmbedUrl(location.mapQuery)}
+                      className="h-full min-h-70 w-full border-0"
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    />
+                  </div>
+                </div>
+              </article>
+            ))}
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="border-y border-rose-200/70 bg-white/60 px-5 py-20 dark:border-stone-800 dark:bg-stone-900/40">
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
           <Reveal>
             <div className="rounded-4xl border border-rose-200 bg-white p-6 shadow-sm dark:border-stone-800 dark:bg-stone-900 md:p-8">
@@ -239,7 +360,7 @@ export default function ContactPage() {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="focus-ring w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
+                    className="w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus-ring focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
                   />
                 </div>
 
@@ -259,7 +380,7 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="focus-ring w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
+                      className="w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus-ring focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
                     />
                   </div>
 
@@ -277,7 +398,7 @@ export default function ContactPage() {
                       type="tel"
                       value={formData.phone}
                       onChange={handleChange}
-                      className="focus-ring w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
+                      className="w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus-ring focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
                     />
                   </div>
                 </div>
@@ -296,7 +417,7 @@ export default function ContactPage() {
                       name="service"
                       value={formData.service}
                       onChange={handleChange}
-                      className="focus-ring w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
+                      className="w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus-ring focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
                     >
                       {content.serviceOptions.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -325,7 +446,7 @@ export default function ContactPage() {
                           ? "np. piątek po 16:00"
                           : "e.g. Friday after 4 PM"
                       }
-                      className="focus-ring w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
+                      className="w-full rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus-ring focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
                     />
                   </div>
                 </div>
@@ -345,7 +466,7 @@ export default function ContactPage() {
                     onChange={handleChange}
                     required
                     rows={6}
-                    className="focus-ring w-full resize-none rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
+                    className="w-full resize-none rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-stone-950 outline-none transition focus-ring focus:border-rose-500 focus:ring-4 focus:ring-rose-200/60 dark:border-stone-700 dark:bg-stone-950 dark:text-rose-50 dark:focus:ring-rose-950"
                   />
                 </div>
 
