@@ -61,6 +61,7 @@ type SiteContent = {
     services: PageIntroContent;
     pricing: PageIntroContent;
     gallery: PageIntroContent;
+    locations: PageIntroContent;
     feedback: PageIntroContent;
     contact: PageIntroContent;
   };
@@ -79,6 +80,7 @@ export const siteContent: Record<Language, SiteContent> = {
       { label: "Usługi", href: "/services" },
       { label: "Cennik", href: "/pricing" },
       { label: "Galeria", href: "/gallery" },
+      { label: "Lokalizacje", href: "/locations" },
       { label: "Opinie", href: "/feedback" },
       { label: "Kontakt", href: "/contact" },
     ],
@@ -107,6 +109,12 @@ export const siteContent: Record<Language, SiteContent> = {
         title: "Zobacz efekty, atmosferę i estetykę salonu.",
         description:
           "Galeria pokazuje kierunek wizualny Aurora Beauty Studio: naturalne efekty, spokojne detale, elegancką przestrzeń i dopracowane doświadczenie klientki.",
+      },
+      locations: {
+        eyebrow: "Lokalizacje",
+        title: "Znajdź najbliższy salon Aurora Beauty Studio.",
+        description:
+          "Sprawdź najbliższą lokalizację na podstawie położenia urządzenia albo przejrzyj pełną listę salonów Aurora na całym świecie.",
       },
       feedback: {
         eyebrow: "Opinie",
@@ -202,6 +210,7 @@ export const siteContent: Record<Language, SiteContent> = {
       { label: "Services", href: "/services" },
       { label: "Pricing", href: "/pricing" },
       { label: "Gallery", href: "/gallery" },
+      { label: "Locations", href: "/locations" },
       { label: "Feedback", href: "/feedback" },
       { label: "Contact", href: "/contact" },
     ],
@@ -230,6 +239,12 @@ export const siteContent: Record<Language, SiteContent> = {
         title: "See the results, atmosphere and studio aesthetic.",
         description:
           "The gallery presents the visual direction of Aurora Beauty Studio: natural results, calm details, elegant space and a polished client experience.",
+      },
+      locations: {
+        eyebrow: "Locations",
+        title: "Find your nearest Aurora Beauty Studio.",
+        description:
+          "Check the nearest location using your device position or browse the full list of Aurora studios around the world.",
       },
       feedback: {
         eyebrow: "Feedback",
