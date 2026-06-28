@@ -69,21 +69,18 @@ function dismissWelcome() {
   emitWelcomeChange();
 }
 
-function getDeviceLanguage(): Language {
+function getDevicePrimaryLanguage(): Language {
   if (typeof window === "undefined") {
     return "en";
   }
 
-  const browserLanguages =
-    navigator.languages && navigator.languages.length > 0
-      ? navigator.languages
-      : [navigator.language];
+  const primaryBrowserLanguage = navigator.language;
 
-  const hasPolishLanguage = browserLanguages.some((browserLanguage) =>
-    browserLanguage.toLowerCase().startsWith("pl"),
-  );
+  if (primaryBrowserLanguage?.toLowerCase().startsWith("pl")) {
+    return "pl";
+  }
 
-  return hasPolishLanguage ? "pl" : "en";
+  return "en";
 }
 
 export function WelcomeScreen() {
@@ -93,7 +90,7 @@ export function WelcomeScreen() {
     getServerWelcomeSnapshot,
   );
 
-  const deviceLanguage = getDeviceLanguage();
+  const deviceLanguage = getDevicePrimaryLanguage();
   const content = welcomeContent[deviceLanguage];
 
   useEffect(() => {
@@ -105,20 +102,6 @@ export function WelcomeScreen() {
 
     return () => {
       document.body.style.overflow = "";
-    };
-  }, [isVisible]);
-
-  useEffect(() => {
-    if (!isVisible) {
-      return;
-    }
-
-    const timeoutId = window.setTimeout(() => {
-      dismissWelcome();
-    }, 3200);
-
-    return () => {
-      window.clearTimeout(timeoutId);
     };
   }, [isVisible]);
 

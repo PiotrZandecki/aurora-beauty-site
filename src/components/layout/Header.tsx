@@ -90,7 +90,7 @@ export function Header() {
                 Aurora
               </span>
 
-              <span className="text-xs font-medium uppercase tracking-[0.22em] text-stone-500 dark:text-stone-400">
+              <span className="hidden text-xs font-medium uppercase tracking-[0.22em] text-stone-500 dark:text-stone-400 sm:block">
                 Beauty Studio
               </span>
             </span>
@@ -163,41 +163,79 @@ export function Header() {
             </button>
           </div>
 
-          <button
-            type="button"
-            onClick={() => setIsMenuOpen((currentValue) => !currentValue)}
-            className="interactive-press flex size-11 items-center justify-center rounded-full border border-rose-200 bg-white shadow-sm transition focus-ring hover:border-rose-400 dark:border-stone-700 dark:bg-stone-900 lg:hidden"
-            aria-label={
-              isMenuOpen
-                ? language === "pl"
-                  ? "Zamknij menu"
-                  : "Close menu"
-                : language === "pl"
-                  ? "Otwórz menu"
-                  : "Open menu"
-            }
-            aria-expanded={isMenuOpen}
-          >
-            <span className="relative block size-5">
-              <span
-                className={`absolute left-0 top-1 block h-0.5 w-5 rounded-full bg-stone-950 transition duration-300 dark:bg-rose-50 ${
-                  isMenuOpen ? "translate-y-2 rotate-45" : ""
-                }`}
-              />
+          <div className="flex items-center gap-2 lg:hidden">
+            <button
+              type="button"
+              onClick={toggleLanguage}
+              className="interactive-press flex size-11 items-center justify-center rounded-full border border-rose-200 bg-white text-xs font-bold text-stone-700 shadow-sm transition focus-ring hover:border-rose-400 hover:text-rose-700 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-200 dark:hover:border-rose-300 dark:hover:text-rose-200"
+              aria-label={
+                language === "pl"
+                  ? "Switch language to English"
+                  : "Zmień język na polski"
+              }
+            >
+              {content.languageLabel}
+            </button>
 
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="interactive-press flex size-11 items-center justify-center rounded-full border border-rose-200 bg-white shadow-sm transition focus-ring hover:border-rose-400 dark:border-stone-700 dark:bg-stone-900 dark:hover:border-rose-300"
+              aria-label={
+                theme === "light"
+                  ? language === "pl"
+                    ? "Włącz ciemny motyw"
+                    : "Turn on dark theme"
+                  : language === "pl"
+                    ? "Włącz jasny motyw"
+                    : "Turn on light theme"
+              }
+            >
               <span
-                className={`absolute left-0 top-2.5 block h-0.5 w-5 rounded-full bg-stone-950 transition duration-300 dark:bg-rose-50 ${
-                  isMenuOpen ? "opacity-0" : "opacity-100"
+                className={`block size-4 rounded-full transition ${
+                  theme === "light"
+                    ? "bg-amber-300 shadow-[0_0_16px_rgba(252,211,77,0.8)]"
+                    : "bg-rose-200 shadow-[0_0_16px_rgba(251,113,133,0.8)]"
                 }`}
               />
+            </button>
 
-              <span
-                className={`absolute left-0 top-4 block h-0.5 w-5 rounded-full bg-stone-950 transition duration-300 dark:bg-rose-50 ${
-                  isMenuOpen ? "-translate-y-1.5 -rotate-45" : ""
-                }`}
-              />
-            </span>
-          </button>
+            <button
+              type="button"
+              onClick={() => setIsMenuOpen((currentValue) => !currentValue)}
+              className="interactive-press flex size-11 items-center justify-center rounded-full border border-rose-200 bg-white shadow-sm transition focus-ring hover:border-rose-400 dark:border-stone-700 dark:bg-stone-900"
+              aria-label={
+                isMenuOpen
+                  ? language === "pl"
+                    ? "Zamknij menu"
+                    : "Close menu"
+                  : language === "pl"
+                    ? "Otwórz menu"
+                    : "Open menu"
+              }
+              aria-expanded={isMenuOpen}
+            >
+              <span className="relative block size-5">
+                <span
+                  className={`absolute left-0 top-1 block h-0.5 w-5 rounded-full bg-stone-950 transition duration-300 dark:bg-rose-50 ${
+                    isMenuOpen ? "translate-y-2 rotate-45" : ""
+                  }`}
+                />
+
+                <span
+                  className={`absolute left-0 top-2.5 block h-0.5 w-5 rounded-full bg-stone-950 transition duration-300 dark:bg-rose-50 ${
+                    isMenuOpen ? "opacity-0" : "opacity-100"
+                  }`}
+                />
+
+                <span
+                  className={`absolute left-0 top-4 block h-0.5 w-5 rounded-full bg-stone-950 transition duration-300 dark:bg-rose-50 ${
+                    isMenuOpen ? "-translate-y-1.5 -rotate-45" : ""
+                  }`}
+                />
+              </span>
+            </button>
+          </div>
         </div>
 
         <div
@@ -234,31 +272,6 @@ export function Header() {
                   </Link>
                 );
               })}
-
-              <div className="grid grid-cols-2 gap-3 pt-2">
-                <button
-                  type="button"
-                  onClick={toggleLanguage}
-                  className="interactive-press rounded-3xl border border-rose-200 bg-white px-5 py-4 text-sm font-semibold text-stone-700 shadow-sm transition focus-ring hover:border-rose-400 hover:text-rose-700 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-200 dark:hover:border-rose-300 dark:hover:text-rose-200"
-                >
-                  {content.languageLabel}
-                </button>
-
-                <button
-                  type="button"
-                  onClick={toggleTheme}
-                  className="interactive-press flex items-center justify-center gap-2 rounded-3xl border border-rose-200 bg-white px-5 py-4 text-sm font-semibold text-stone-700 shadow-sm transition focus-ring hover:border-rose-400 hover:text-rose-700 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-200 dark:hover:border-rose-300 dark:hover:text-rose-200"
-                >
-                  <span
-                    className={`block size-4 rounded-full transition ${
-                      theme === "light"
-                        ? "bg-amber-300 shadow-[0_0_16px_rgba(252,211,77,0.8)]"
-                        : "bg-rose-200 shadow-[0_0_16px_rgba(251,113,133,0.8)]"
-                    }`}
-                  />
-                  {content.themeLabel}
-                </button>
-              </div>
             </div>
           </div>
         </div>

@@ -20,6 +20,7 @@ type SitePreferencesContextValue = {
 };
 
 const LANGUAGE_STORAGE_KEY = "aurora-language";
+const LANGUAGE_USER_SELECTED_KEY = "aurora-language-user-selected";
 const THEME_STORAGE_KEY = "aurora-theme";
 
 const SitePreferencesContext =
@@ -32,35 +33,41 @@ type SitePreferencesProviderProps = {
 const languageListeners = new Set<() => void>();
 const themeListeners = new Set<() => void>();
 
-function getDevicePreferredLanguage(): Language {
+function getDevicePrimaryLanguage(): Language {
   if (typeof window === "undefined") {
+    return "en";
+  }
+
+  const primaryBrowserLanguage =
+    navigator.languages && navigator.languages.length > 0
+      ? navigator.languages[0]
+      : navigator.language;
+
+  if (primaryBrowserLanguage?.toLowerCase().startsWith("pl")) {
     return "pl";
   }
 
-  const browserLanguages =
-    navigator.languages && navigator.languages.length > 0
-      ? navigator.languages
-      : [navigator.language];
-
-  const hasPolishLanguage = browserLanguages.some((browserLanguage) =>
-    browserLanguage.toLowerCase().startsWith("pl"),
-  );
-
-  return hasPolishLanguage ? "pl" : "en";
+  return "en";
 }
 
 function getStoredLanguage(): Language {
   if (typeof window === "undefined") {
-    return "pl";
+    return "en";
   }
 
   const storedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
+  const userSelectedLanguage = window.localStorage.getItem(
+    LANGUAGE_USER_SELECTED_KEY,
+  );
 
-  if (storedLanguage === "pl" || storedLanguage === "en") {
+  if (
+    userSelectedLanguage === "true" &&
+    (storedLanguage === "pl" || storedLanguage === "en")
+  ) {
     return storedLanguage;
   }
 
-  return getDevicePreferredLanguage();
+  return getDevicePrimaryLanguage();
 }
 
 function getStoredTheme(): ThemeMode {
@@ -78,7 +85,7 @@ function getStoredTheme(): ThemeMode {
 }
 
 function getServerLanguageSnapshot(): Language {
-  return "pl";
+  return "en";
 }
 
 function getServerThemeSnapshot(): ThemeMode {
@@ -97,7 +104,10 @@ function subscribeLanguage(listener: () => void) {
   languageListeners.add(listener);
 
   function handleStorage(event: StorageEvent) {
-    if (event.key === LANGUAGE_STORAGE_KEY) {
+    if (
+      event.key === LANGUAGE_STORAGE_KEY ||
+      event.key === LANGUAGE_USER_SELECTED_KEY
+    ) {
       listener();
     }
   }
@@ -129,6 +139,7 @@ function subscribeTheme(listener: () => void) {
 
 function setStoredLanguage(language: Language) {
   window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
+  window.localStorage.setItem(LANGUAGE_USER_SELECTED_KEY, "true");
   document.documentElement.lang = language;
   emitLanguageChange();
 }
