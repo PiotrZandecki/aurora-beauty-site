@@ -15,11 +15,51 @@ type FeedbackGroup = {
   items: FeedbackItem[];
 };
 
+type FeedbackFormOption = {
+  value: string;
+  label: string;
+};
+
 type FeedbackContent = {
   eyebrow: string;
   title: string;
   description: string;
   sourceLabel: string;
+
+  summaryEyebrow: string;
+  summaryTitle: string;
+  summaryDescription: string;
+  summaryStats: Array<{
+    value: string;
+    label: string;
+  }>;
+
+  externalLinksTitle: string;
+  externalLinksDescription: string;
+  googleReviewsLabel: string;
+  facebookReviewsLabel: string;
+  googleReviewsUrl: string;
+  facebookReviewsUrl: string;
+
+  formEyebrow: string;
+  formTitle: string;
+  formDescription: string;
+  formLabels: {
+    name: string;
+    email: string;
+    source: string;
+    service: string;
+    rating: string;
+    message: string;
+    submit: string;
+    successTitle: string;
+    successMessage: string;
+    noteTitle: string;
+    noteDescription: string;
+  };
+  sourceOptions: FeedbackFormOption[];
+  serviceOptions: FeedbackFormOption[];
+
   ctaTitle: string;
   ctaDescription: string;
   ctaButton: string;
@@ -28,15 +68,77 @@ type FeedbackContent = {
 
 export const feedbackContent: Record<Language, FeedbackContent> = {
   pl: {
-    eyebrow: "Feedback",
-    title: "Opinie z różnych źródeł, jeden spójny obraz doświadczenia.",
+    eyebrow: "Opinie",
+    title: "Feedback z różnych źródeł, jeden spójny obraz doświadczenia.",
     description:
-      "Sekcja feedbacku pokazuje trzy typy opinii: wiadomości wysłane przez formularz strony, opinie z Facebooka oraz recenzje z Google. Dzięki temu użytkownik widzi zarówno spontaniczne komentarze, jak i bardziej publiczne rekomendacje.",
+      "Opinie zostały podzielone według źródła: wiadomości wysłane przez formularz strony, rekomendacje z Facebooka i recenzje z Google. Dzięki temu łatwiej ocenić zarówno efekt usług, jak i atmosferę wizyty.",
     sourceLabel: "Źródło opinii",
-    ctaTitle: "Chcesz podzielić się swoją opinią?",
+
+    summaryEyebrow: "Zaufanie",
+    summaryTitle: "Opinie mają pokazywać doświadczenie, nie tylko ocenę.",
+    summaryDescription:
+      "Dobrze zaprojektowana sekcja opinii pomaga klientce zrozumieć, czego może się spodziewać: naturalnych efektów, spokojnej atmosfery, jasnej komunikacji i dopracowanej obsługi.",
+    summaryStats: [
+      {
+        value: "3",
+        label: "źródła feedbacku",
+      },
+      {
+        value: "5★",
+        label: "kierunek doświadczenia",
+      },
+      {
+        value: "6+",
+        label: "przykładowych opinii",
+      },
+    ],
+
+    externalLinksTitle: "Sprawdź opinie w zewnętrznych kanałach",
+    externalLinksDescription:
+      "W realnym projekcie te przyciski prowadziłyby bezpośrednio do profilu Google Business oraz strony Facebook salonu.",
+    googleReviewsLabel: "Opinie Google",
+    facebookReviewsLabel: "Opinie Facebook",
+    googleReviewsUrl: "https://www.google.com/search?q=Aurora+Beauty+Studio",
+    facebookReviewsUrl: "https://www.facebook.com",
+
+    formEyebrow: "Zostaw opinię",
+    formTitle: "Podziel się swoim doświadczeniem po wizycie.",
+    formDescription:
+      "Formularz przygotowuje wiadomość e-mail z opinią. To rozwiązanie działa bez backendu, a jednocześnie pokazuje, jak można rozbudować stronę o zbieranie feedbacku od klientek.",
+    formLabels: {
+      name: "Imię",
+      email: "Adres e-mail",
+      source: "Źródło opinii",
+      service: "Usługa",
+      rating: "Ocena",
+      message: "Treść opinii",
+      submit: "Przygotuj opinię e-mail",
+      successTitle: "Opinia została przygotowana",
+      successMessage:
+        "Jeśli aplikacja pocztowa nie otworzyła się automatycznie, możesz skopiować opinię i wysłać ją bezpośrednio na adres hello@aurorabeauty.pl.",
+      noteTitle: "Jaką opinię warto zostawić?",
+      noteDescription:
+        "Najbardziej pomocne są opinie, które opisują konkretną usługę, efekt, atmosferę wizyty i to, czy komunikacja przed zabiegiem była jasna.",
+    },
+    sourceOptions: [
+      { value: "website-form", label: "Formularz strony" },
+      { value: "google", label: "Google" },
+      { value: "facebook", label: "Facebook" },
+    ],
+    serviceOptions: [
+      { value: "facial-care", label: "Pielęgnacja twarzy" },
+      { value: "brows-lashes", label: "Brwi i rzęsy" },
+      { value: "makeup", label: "Makijaż okazjonalny" },
+      { value: "signature-glow", label: "Signature Glow Treatment" },
+      { value: "consultation", label: "Konsultacja" },
+      { value: "other", label: "Inna usługa" },
+    ],
+
+    ctaTitle: "Chcesz najpierw umówić wizytę?",
     ctaDescription:
-      "Po wizycie możesz wysłać krótką wiadomość przez formularz kontaktowy albo zostawić recenzję w wybranym kanale.",
+      "Jeśli dopiero wybierasz usługę, przejdź do kontaktu i opisz, czego potrzebujesz. Na podstawie wiadomości łatwiej będzie dobrać najlepszy kierunek.",
     ctaButton: "Przejdź do kontaktu",
+
     groups: [
       {
         id: "website-form",
@@ -114,12 +216,74 @@ export const feedbackContent: Record<Language, FeedbackContent> = {
     eyebrow: "Feedback",
     title: "Reviews from different sources, one consistent client experience.",
     description:
-      "The feedback section shows three types of reviews: messages submitted through the website form, Facebook opinions and Google reviews. This gives visitors a more complete view of both private and public recommendations.",
+      "Feedback is divided by source: messages submitted through the website form, Facebook recommendations and Google reviews. This makes it easier to evaluate both service results and the atmosphere of the visit.",
     sourceLabel: "Review source",
-    ctaTitle: "Would you like to share your feedback?",
+
+    summaryEyebrow: "Trust",
+    summaryTitle: "Feedback should show the experience, not just the score.",
+    summaryDescription:
+      "A well-designed review section helps clients understand what to expect: natural results, calm atmosphere, clear communication and refined service.",
+    summaryStats: [
+      {
+        value: "3",
+        label: "feedback sources",
+      },
+      {
+        value: "5★",
+        label: "experience direction",
+      },
+      {
+        value: "6+",
+        label: "sample reviews",
+      },
+    ],
+
+    externalLinksTitle: "Check reviews in external channels",
+    externalLinksDescription:
+      "In a real project, these buttons would lead directly to the Google Business profile and the studio’s Facebook page.",
+    googleReviewsLabel: "Google reviews",
+    facebookReviewsLabel: "Facebook reviews",
+    googleReviewsUrl: "https://www.google.com/search?q=Aurora+Beauty+Studio",
+    facebookReviewsUrl: "https://www.facebook.com",
+
+    formEyebrow: "Leave feedback",
+    formTitle: "Share your experience after the visit.",
+    formDescription:
+      "The form prepares an e-mail message with your review. It works without backend and shows how the website could support collecting client feedback.",
+    formLabels: {
+      name: "Name",
+      email: "E-mail address",
+      source: "Review source",
+      service: "Service",
+      rating: "Rating",
+      message: "Review message",
+      submit: "Prepare feedback e-mail",
+      successTitle: "Feedback has been prepared",
+      successMessage:
+        "If your e-mail app did not open automatically, you can copy the review and send it directly to hello@aurorabeauty.pl.",
+      noteTitle: "What makes a helpful review?",
+      noteDescription:
+        "The most helpful reviews describe the service, result, visit atmosphere and whether communication before the treatment was clear.",
+    },
+    sourceOptions: [
+      { value: "website-form", label: "Website form" },
+      { value: "google", label: "Google" },
+      { value: "facebook", label: "Facebook" },
+    ],
+    serviceOptions: [
+      { value: "facial-care", label: "Facial care" },
+      { value: "brows-lashes", label: "Brows and lashes" },
+      { value: "makeup", label: "Occasion makeup" },
+      { value: "signature-glow", label: "Signature Glow Treatment" },
+      { value: "consultation", label: "Consultation" },
+      { value: "other", label: "Other service" },
+    ],
+
+    ctaTitle: "Would you like to book a visit first?",
     ctaDescription:
-      "After your visit, you can send a short message through the contact form or leave a review in your preferred channel.",
+      "If you are still choosing a service, go to contact and describe what you need. Your message will help select the best direction.",
     ctaButton: "Go to contact",
+
     groups: [
       {
         id: "website-form",
