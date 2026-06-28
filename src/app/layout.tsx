@@ -23,19 +23,19 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/favicon.ico",
+        url: "/aurora-favicon.ico",
         sizes: "any",
       },
       {
-        url: "/favicon.png",
+        url: "/aurora-favicon.png",
         type: "image/png",
         sizes: "512x512",
       },
     ],
-    shortcut: "/favicon.ico",
+    shortcut: "/aurora-favicon.ico",
     apple: [
       {
-        url: "/apple-touch-icon.png",
+        url: "/aurora-apple-touch-icon.png",
         sizes: "180x180",
         type: "image/png",
       },

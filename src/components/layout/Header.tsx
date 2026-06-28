@@ -71,12 +71,12 @@ export function Header() {
           <Link
             href="/"
             onClick={closeMenu}
-            className="group flex rounded-2xl focus-ring items-center gap-3"
+            className="group flex items-center gap-3 rounded-2xl focus-ring"
             aria-label={content.brand}
           >
-            <span className="relative flex size-10 overflow-hidden rounded-2xl bg-rose-50 shadow-lg shadow-rose-200/70 ring-1 ring-rose-200/80 transition duration-300 group-hover:-rotate-3 group-hover:scale-105 dark:bg-stone-900 dark:ring-stone-700 dark:shadow-black/30">
+            <span className="relative flex size-10 overflow-hidden rounded-2xl bg-rose-50 shadow-lg shadow-rose-200/70 ring-1 ring-rose-200/80 transition duration-300 group-hover:-rotate-3 group-hover:scale-105 dark:bg-stone-900 dark:shadow-black/30 dark:ring-stone-700">
               <Image
-                src="/brand-icon.png"
+                src="/aurora-brand-icon.png"
                 alt=""
                 width={40}
                 height={40}
@@ -128,7 +128,7 @@ export function Header() {
             <button
               type="button"
               onClick={toggleLanguage}
-              className="interactive-press focus-ring rounded-full border border-rose-200 bg-white px-4 py-2 text-sm font-semibold text-stone-700 shadow-sm transition hover:border-rose-400 hover:text-rose-700 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-200 dark:hover:border-rose-300 dark:hover:text-rose-200"
+              className="interactive-press rounded-full border border-rose-200 bg-white px-4 py-2 text-sm font-semibold text-stone-700 shadow-sm transition focus-ring hover:border-rose-400 hover:text-rose-700 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-200 dark:hover:border-rose-300 dark:hover:text-rose-200"
               aria-label={
                 language === "pl"
                   ? "Switch language to English"
@@ -141,7 +141,7 @@ export function Header() {
             <button
               type="button"
               onClick={toggleTheme}
-              className="interactive-press focus-ring flex items-center gap-2 rounded-full border border-rose-200 bg-white px-4 py-2 text-sm font-semibold text-stone-700 shadow-sm transition hover:border-rose-400 hover:text-rose-700 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-200 dark:hover:border-rose-300 dark:hover:text-rose-200"
+              className="interactive-press flex items-center gap-2 rounded-full border border-rose-200 bg-white px-4 py-2 text-sm font-semibold text-stone-700 shadow-sm transition focus-ring hover:border-rose-400 hover:text-rose-700 dark:border-stone-700 dark:bg-stone-900 dark:text-stone-200 dark:hover:border-rose-300 dark:hover:text-rose-200"
               aria-label={
                 theme === "light"
                   ? language === "pl"
@@ -166,7 +166,7 @@ export function Header() {
           <button
             type="button"
             onClick={() => setIsMenuOpen((currentValue) => !currentValue)}
-            className="interactive-press focus-ring flex size-11 items-center justify-center rounded-full border border-rose-200 bg-white shadow-sm transition hover:border-rose-400 dark:border-stone-700 dark:bg-stone-900 lg:hidden"
+            className="interactive-press flex size-11 items-center justify-center rounded-full border border-rose-200 bg-white shadow-sm transition focus-ring hover:border-rose-400 dark:border-stone-700 dark:bg-stone-900 lg:hidden"
             aria-label={
               isMenuOpen
                 ? language === "pl"
@@ -220,7 +220,7 @@ export function Header() {
                     style={{
                       transitionDelay: isMenuOpen ? `${index * 35}ms` : "0ms",
                     }}
-                    className={`focus-ring rounded-3xl border px-5 py-4 text-sm font-semibold transition duration-300 ${
+                    className={`rounded-3xl border px-5 py-4 text-sm font-semibold transition duration-300 focus-ring ${
                       isMenuOpen
                         ? "translate-y-0 opacity-100"
                         : "translate-y-3 opacity-0"
@@ -239,7 +239,7 @@ export function Header() {
                 <button
                   type="button"
                   onClick={toggleLanguage}
-                  className="interactive-press focus-ring rounded-3xl border border-rose-200 bg-white px-5 py-4 text-sm font-semibold text-stone-700 shadow-sm transition hover:border-rose-400 hover:text-rose-700 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-200 dark:hover:border-rose-300 dark:hover:text-rose-200"
+                  className="interactive-press rounded-3xl border border-rose-200 bg-white px-5 py-4 text-sm font-semibold text-stone-700 shadow-sm transition focus-ring hover:border-rose-400 hover:text-rose-700 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-200 dark:hover:border-rose-300 dark:hover:text-rose-200"
                 >
                   {content.languageLabel}
                 </button>
@@ -247,7 +247,7 @@ export function Header() {
                 <button
                   type="button"
                   onClick={toggleTheme}
-                  className="interactive-press focus-ring flex items-center justify-center gap-2 rounded-3xl border border-rose-200 bg-white px-5 py-4 text-sm font-semibold text-stone-700 shadow-sm transition hover:border-rose-400 hover:text-rose-700 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-200 dark:hover:border-rose-300 dark:hover:text-rose-200"
+                  className="interactive-press flex items-center justify-center gap-2 rounded-3xl border border-rose-200 bg-white px-5 py-4 text-sm font-semibold text-stone-700 shadow-sm transition focus-ring hover:border-rose-400 hover:text-rose-700 dark:border-stone-800 dark:bg-stone-900 dark:text-stone-200 dark:hover:border-rose-300 dark:hover:text-rose-200"
                 >
                   <span
                     className={`block size-4 rounded-full transition ${
