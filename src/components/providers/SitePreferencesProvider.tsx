@@ -8,86 +8,132 @@ import {
   useSyncExternalStore,
   type ReactNode,
 } from "react";
-import type { Language, Theme } from "@/types/site";
+import type { Language } from "@/types/site";
+
+type ThemeMode = "light" | "dark";
 
 type SitePreferencesContextValue = {
   language: Language;
-  theme: Theme;
+  theme: ThemeMode;
   toggleLanguage: () => void;
   toggleTheme: () => void;
 };
 
+const LANGUAGE_STORAGE_KEY = "aurora-language";
+const THEME_STORAGE_KEY = "aurora-theme";
+
 const SitePreferencesContext =
   createContext<SitePreferencesContextValue | null>(null);
 
-const LANGUAGE_STORAGE_KEY = "beauty-site-language";
-const THEME_STORAGE_KEY = "beauty-site-theme";
-const PREFERENCES_CHANGE_EVENT = "beauty-site-preferences-change";
+type SitePreferencesProviderProps = {
+  children: ReactNode;
+};
 
-function readLanguageFromStorage(): Language {
+const languageListeners = new Set<() => void>();
+const themeListeners = new Set<() => void>();
+
+function getStoredLanguage(): Language {
   if (typeof window === "undefined") {
     return "pl";
   }
 
   const storedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
-  return storedLanguage === "en" ? "en" : "pl";
+
+  if (storedLanguage === "pl" || storedLanguage === "en") {
+    return storedLanguage;
+  }
+
+  return "pl";
 }
 
-function readThemeFromStorage(): Theme {
+function getStoredTheme(): ThemeMode {
   if (typeof window === "undefined") {
     return "light";
   }
 
   const storedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
-  return storedTheme === "dark" ? "dark" : "light";
+
+  if (storedTheme === "light" || storedTheme === "dark") {
+    return storedTheme;
+  }
+
+  return "light";
 }
 
 function getServerLanguageSnapshot(): Language {
   return "pl";
 }
 
-function getServerThemeSnapshot(): Theme {
+function getServerThemeSnapshot(): ThemeMode {
   return "light";
 }
 
-function subscribeToPreferencesChange(callback: () => void) {
-  if (typeof window === "undefined") {
-    return () => {};
+function emitLanguageChange() {
+  languageListeners.forEach((listener) => listener());
+}
+
+function emitThemeChange() {
+  themeListeners.forEach((listener) => listener());
+}
+
+function subscribeLanguage(listener: () => void) {
+  languageListeners.add(listener);
+
+  function handleStorage(event: StorageEvent) {
+    if (event.key === LANGUAGE_STORAGE_KEY) {
+      listener();
+    }
   }
 
-  window.addEventListener("storage", callback);
-  window.addEventListener(PREFERENCES_CHANGE_EVENT, callback);
+  window.addEventListener("storage", handleStorage);
 
   return () => {
-    window.removeEventListener("storage", callback);
-    window.removeEventListener(PREFERENCES_CHANGE_EVENT, callback);
+    languageListeners.delete(listener);
+    window.removeEventListener("storage", handleStorage);
   };
 }
 
-function notifyPreferencesChanged() {
-  window.dispatchEvent(new Event(PREFERENCES_CHANGE_EVENT));
+function subscribeTheme(listener: () => void) {
+  themeListeners.add(listener);
+
+  function handleStorage(event: StorageEvent) {
+    if (event.key === THEME_STORAGE_KEY) {
+      listener();
+    }
+  }
+
+  window.addEventListener("storage", handleStorage);
+
+  return () => {
+    themeListeners.delete(listener);
+    window.removeEventListener("storage", handleStorage);
+  };
 }
 
-function saveLanguage(language: Language) {
+function setStoredLanguage(language: Language) {
   window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
-  notifyPreferencesChanged();
+  document.documentElement.lang = language;
+  emitLanguageChange();
 }
 
-function saveTheme(theme: Theme) {
+function setStoredTheme(theme: ThemeMode) {
   window.localStorage.setItem(THEME_STORAGE_KEY, theme);
-  notifyPreferencesChanged();
+  document.documentElement.classList.toggle("dark", theme === "dark");
+  emitThemeChange();
 }
 
-export function SitePreferencesProvider({ children }: { children: ReactNode }) {
+export function SitePreferencesProvider({
+  children,
+}: SitePreferencesProviderProps) {
   const language = useSyncExternalStore(
-    subscribeToPreferencesChange,
-    readLanguageFromStorage,
+    subscribeLanguage,
+    getStoredLanguage,
     getServerLanguageSnapshot,
   );
 
   const theme = useSyncExternalStore(
-    subscribeToPreferencesChange,
-    readThemeFromStorage,
+    subscribeTheme,
+    getStoredTheme,
     getServerThemeSnapshot,
   );
 
@@ -99,24 +145,29 @@ export function SitePreferencesProvider({ children }: { children: ReactNode }) {
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme]);
 
-  const value = useMemo<SitePreferencesContextValue>(
+  const contextValue = useMemo<SitePreferencesContextValue>(
     () => ({
       language,
       theme,
       toggleLanguage: () => {
-        const nextLanguage = language === "pl" ? "en" : "pl";
-        saveLanguage(nextLanguage);
+        const currentLanguage = getStoredLanguage();
+        const nextLanguage: Language = currentLanguage === "pl" ? "en" : "pl";
+
+        setStoredLanguage(nextLanguage);
       },
       toggleTheme: () => {
-        const nextTheme = theme === "light" ? "dark" : "light";
-        saveTheme(nextTheme);
+        const currentTheme = getStoredTheme();
+        const nextTheme: ThemeMode =
+          currentTheme === "light" ? "dark" : "light";
+
+        setStoredTheme(nextTheme);
       },
     }),
     [language, theme],
   );
 
   return (
-    <SitePreferencesContext.Provider value={value}>
+    <SitePreferencesContext.Provider value={contextValue}>
       {children}
     </SitePreferencesContext.Provider>
   );

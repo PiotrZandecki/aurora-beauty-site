@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { Reveal } from "@/components/animations/Reveal";
 import { aboutContent } from "@/content/aboutContent";
 import { siteContent } from "@/content/siteContent";
 import { useSitePreferences } from "@/components/providers/SitePreferencesProvider";
@@ -20,19 +21,25 @@ export default function AboutPage() {
       <section className="border-y border-rose-200/70 bg-white/60 px-5 py-20 dark:border-stone-800 dark:bg-stone-900/40">
         <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[0.9fr_1.1fr] md:items-start">
           <div>
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-rose-600 dark:text-rose-300">
-              {content.approachEyebrow}
-            </p>
+            <Reveal>
+              <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-rose-600 dark:text-rose-300">
+                {content.approachEyebrow}
+              </p>
 
-            <h2 className="text-3xl font-semibold tracking-tight text-stone-950 md:text-5xl dark:text-rose-50">
-              {content.approachTitle}
-            </h2>
+              <h2 className="text-3xl font-semibold tracking-tight text-stone-950 md:text-5xl dark:text-rose-50">
+                {content.approachTitle}
+              </h2>
+            </Reveal>
 
-            <dl className="mt-10 grid grid-cols-3 gap-3">
+            <Reveal
+              stagger
+              delay={180}
+              className="mt-10 grid grid-cols-3 gap-3"
+            >
               {content.stats.map((stat) => (
                 <div
                   key={`${stat.value}-${stat.label}`}
-                  className="rounded-3xl border border-rose-200 bg-white p-4 text-center shadow-sm dark:border-stone-800 dark:bg-stone-900"
+                  className="interactive-lift rounded-3xl border border-rose-200 bg-white p-4 text-center shadow-sm dark:border-stone-800 dark:bg-stone-900"
                 >
                   <dt className="text-2xl font-semibold text-stone-950 dark:text-rose-50">
                     {stat.value}
@@ -43,21 +50,23 @@ export default function AboutPage() {
                   </dd>
                 </div>
               ))}
-            </dl>
+            </Reveal>
           </div>
 
-          <div className="rounded-4xl border border-rose-200 bg-rose-50 p-6 shadow-sm dark:border-stone-800 dark:bg-stone-950 md:p-8">
-            <div className="space-y-5">
-              {content.approachParagraphs.map((paragraph) => (
-                <p
-                  key={paragraph}
-                  className="text-lg leading-8 text-stone-600 dark:text-stone-300"
-                >
-                  {paragraph}
-                </p>
-              ))}
+          <Reveal variant="scale-in" delay={120}>
+            <div className="rounded-4xl border border-rose-200 bg-rose-50 p-6 shadow-sm dark:border-stone-800 dark:bg-stone-950 md:p-8">
+              <div className="space-y-5">
+                {content.approachParagraphs.map((paragraph) => (
+                  <p
+                    key={paragraph}
+                    className="text-lg leading-8 text-stone-600 dark:text-stone-300"
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -69,11 +78,11 @@ export default function AboutPage() {
             description={content.standardsDescription}
           />
 
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
+          <Reveal stagger className="mt-10 grid gap-5 md:grid-cols-3">
             {content.standards.map((standard, index) => (
               <article
                 key={standard.title}
-                className="rounded-4xl border border-rose-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-900 dark:hover:shadow-black/30"
+                className="interactive-lift rounded-4xl border border-rose-200 bg-white p-6 shadow-sm hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-900 dark:hover:shadow-black/30"
               >
                 <div className="mb-6 flex size-12 items-center justify-center rounded-full bg-rose-100 text-sm font-semibold text-rose-700 dark:bg-rose-950 dark:text-rose-200">
                   0{index + 1}
@@ -88,7 +97,7 @@ export default function AboutPage() {
                 </p>
               </article>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -100,11 +109,11 @@ export default function AboutPage() {
             description={content.specializationDescription}
           />
 
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
+          <Reveal stagger className="mt-10 grid gap-5 md:grid-cols-3">
             {content.specializations.map((specialization) => (
               <article
                 key={specialization.title}
-                className="rounded-4xl border border-rose-200 bg-rose-50 p-6 shadow-sm dark:border-stone-800 dark:bg-stone-950"
+                className="interactive-lift rounded-4xl border border-rose-200 bg-rose-50 p-6 shadow-sm hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-950 dark:hover:shadow-black/30"
               >
                 <div className="mb-6 flex size-12 items-center justify-center rounded-full bg-white text-xl shadow-sm dark:bg-stone-900">
                   ✨
@@ -119,7 +128,7 @@ export default function AboutPage() {
                 </p>
               </article>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -131,11 +140,11 @@ export default function AboutPage() {
             description={content.processDescription}
           />
 
-          <div className="mt-10 grid gap-4 md:grid-cols-4">
+          <Reveal stagger className="mt-10 grid gap-4 md:grid-cols-4">
             {content.processSteps.map((step, index) => (
               <article
                 key={step.title}
-                className="rounded-4xl border border-rose-200 bg-white p-6 shadow-sm dark:border-stone-800 dark:bg-stone-900"
+                className="interactive-lift rounded-4xl border border-rose-200 bg-white p-6 shadow-sm dark:border-stone-800 dark:bg-stone-900"
               >
                 <div className="mb-6 flex size-12 items-center justify-center rounded-full bg-rose-100 text-sm font-semibold text-rose-700 dark:bg-rose-950 dark:text-rose-200">
                   0{index + 1}
@@ -150,63 +159,67 @@ export default function AboutPage() {
                 </p>
               </article>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       <section className="border-y border-rose-200/70 bg-white/60 px-5 py-20 dark:border-stone-800 dark:bg-stone-900/40">
         <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[1fr_1fr] md:items-center">
-          <div className="rounded-4xl border border-rose-200 bg-white p-6 shadow-sm dark:border-stone-800 dark:bg-stone-900 md:p-8">
-            <h2 className="text-3xl font-semibold tracking-tight text-stone-950 md:text-5xl dark:text-rose-50">
-              {content.studioTitle}
-            </h2>
+          <Reveal>
+            <div className="rounded-4xl border border-rose-200 bg-white p-6 shadow-sm dark:border-stone-800 dark:bg-stone-900 md:p-8">
+              <h2 className="text-3xl font-semibold tracking-tight text-stone-950 md:text-5xl dark:text-rose-50">
+                {content.studioTitle}
+              </h2>
 
-            <p className="mt-5 text-lg leading-8 text-stone-600 dark:text-stone-300">
-              {content.studioDescription}
-            </p>
+              <p className="mt-5 text-lg leading-8 text-stone-600 dark:text-stone-300">
+                {content.studioDescription}
+              </p>
 
-            <ul className="mt-8 grid gap-3">
-              {content.studioHighlights.map((highlight) => (
-                <li
-                  key={highlight}
-                  className="flex gap-3 rounded-2xl bg-rose-50 p-4 text-sm font-medium text-stone-700 dark:bg-stone-950 dark:text-stone-300"
-                >
-                  <span className="text-rose-600 dark:text-rose-300">✦</span>
-                  <span>{highlight}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+              <Reveal stagger delay={160} className="mt-8 grid gap-3">
+                {content.studioHighlights.map((highlight) => (
+                  <div
+                    key={highlight}
+                    className="flex gap-3 rounded-2xl bg-rose-50 p-4 text-sm font-medium text-stone-700 dark:bg-stone-950 dark:text-stone-300"
+                  >
+                    <span className="text-rose-600 dark:text-rose-300">✦</span>
+                    <span>{highlight}</span>
+                  </div>
+                ))}
+              </Reveal>
+            </div>
+          </Reveal>
 
-          <div className="rounded-4xl border border-rose-200 bg-white p-4 shadow-2xl shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-900 dark:shadow-black/30">
-            <div className="relative aspect-4/5 overflow-hidden rounded-3xl">
-              <Image
-                src="/images/studio-interior.png"
-                alt={
-                  language === "pl"
-                    ? "Eleganckie wnętrze premium beauty studio"
-                    : "Elegant interior of a premium beauty studio"
-                }
-                fill
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-cover"
-              />
+          <Reveal variant="scale-in" delay={120}>
+            <div className="group rounded-4xl border border-rose-200 bg-white p-4 shadow-2xl shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-900 dark:shadow-black/30">
+              <div className="relative aspect-4/5 overflow-hidden rounded-3xl">
+                <Image
+                  src="/images/studio-interior.png"
+                  alt={
+                    language === "pl"
+                      ? "Eleganckie wnętrze premium beauty studio"
+                      : "Elegant interior of a premium beauty studio"
+                  }
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="image-soft-zoom object-cover"
+                />
 
-              <div className="absolute inset-0 bg-linear-to-t from-stone-950/55 via-stone-950/10 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-stone-950/60 via-stone-950/10 to-transparent" />
 
-              <div className="absolute inset-x-0 bottom-0 p-6">
-                <p className="text-sm uppercase tracking-[0.25em] text-white/75">
-                  Aurora Beauty Studio
-                </p>
+                <div className="absolute inset-x-0 bottom-0 p-6">
+                  <p className="text-sm uppercase tracking-[0.25em] text-white/75">
+                    Aurora Beauty Studio
+                  </p>
 
-                <p className="mt-4 text-2xl font-semibold text-white">
-                  {language === "pl"
-                    ? "Naturalny efekt. Spokojna atmosfera. Dopracowany detal."
-                    : "Natural result. Calm atmosphere. Refined detail."}
-                </p>
+                  <p className="mt-4 text-2xl font-semibold text-white">
+                    {language === "pl"
+                      ? "Naturalny efekt. Spokojna atmosfera. Dopracowany detal."
+                      : "Natural result. Calm atmosphere. Refined detail."}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
