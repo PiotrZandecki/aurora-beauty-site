@@ -132,6 +132,7 @@ Manila|Philippines|Filipiny|14.5995|120.9842|Asia
 Cebu|Philippines|Filipiny|10.3157|123.8854|Asia
 Davao|Philippines|Filipiny|7.1907|125.4553|Asia
 General Santos|Philippines|Filipiny|6.1164|125.1716|Asia
+Barangay Calumpang|Philippines|Filipiny|6.08773|125.15054|Asia
 Kuala Lumpur|Malaysia|Malezja|3.139|101.6869|Asia
 Penang|Malaysia|Malezja|5.4141|100.3288|Asia
 Jakarta|Indonesia|Indonezja|-6.2088|106.8456|Asia
@@ -351,6 +352,14 @@ function getLegacyName(city: string) {
     return "Aurora Singapore Room";
   }
 
+  if (city === "General Santos") {
+    return "Aurora General Santos Studio";
+  }
+
+  if (city === "Barangay Calumpang") {
+    return "Aurora Barangay Calumpang Garden Studio";
+  }
+
   return null;
 }
 
@@ -382,9 +391,29 @@ function getAddress(seed: LocationSeed, index: number) {
     return "2 Orchard Turn, Singapore 238801";
   }
 
+  if (seed.city === "General Santos") {
+    return "Jose Catolico Sr. Avenue, General Santos, South Cotabato";
+  }
+
+  if (seed.city === "Barangay Calumpang") {
+    return "Barangay Calumpang, General Santos City, South Cotabato";
+  }
+
   const number = 8 + ((index * 7) % 89);
 
   return `${number} Aurora Avenue`;
+}
+
+function getDisplayCity(seed: LocationSeed, language: Language) {
+  if (seed.city === "Barangay Calumpang") {
+    return language === "pl"
+      ? "Barangay Calumpang, General Santos City, Filipiny"
+      : "Barangay Calumpang, General Santos City, Philippines";
+  }
+
+  const country = language === "pl" ? seed.countryPl : seed.countryEn;
+
+  return `${seed.city}, ${country}`;
 }
 
 function getDescription(language: Language, seed: LocationSeed, index: number) {
@@ -395,11 +424,19 @@ function getDescription(language: Language, seed: LocationSeed, index: number) {
       return "Główna siedziba marki i punkt odniesienia dla całej sieci Aurora Beauty Studio.";
     }
 
+    if (seed.city === "Barangay Calumpang") {
+      return "Druga lokalizacja Aurora w General Santos City — przeniesiona do Barangay Calumpang jako spokojny punkt beauty dla klientek z południowego Mindanao.";
+    }
+
     return `Lokalizacja premium w mieście ${seed.city}, zaprojektowana jako spokojny punkt beauty dla klientek szukających naturalnego efektu i dopracowanej obsługi. Region: ${regionLabel}.`;
   }
 
   if (index === 0) {
     return "The main brand headquarters and reference point for the entire Aurora Beauty Studio network.";
+  }
+
+  if (seed.city === "Barangay Calumpang") {
+    return "A second Aurora location in General Santos City — moved to Barangay Calumpang as a calm beauty space for clients in southern Mindanao.";
   }
 
   return `A premium location in ${seed.city}, designed as a calm beauty space for clients looking for natural results and refined service. Region: ${regionLabel}.`;
@@ -412,7 +449,7 @@ function createLocations(language: Language): StudioLocation[] {
     const legacyName = getLegacyName(seed.city);
     const name = legacyName ?? getGeneratedName(seed.city, index);
     const region = regionLabels[language][seed.region] ?? seed.region;
-    const city = `${seed.city}, ${country}`;
+    const city = getDisplayCity(seed, language);
 
     return {
       id: `${slugify(seed.city)}-${slugify(seed.countryEn)}`,
@@ -459,7 +496,7 @@ export const locationsContent: Record<Language, LocationsContent> = {
     allLocationsEyebrow: "Wszystkie lokalizacje",
     allLocationsTitle: "Sprawdź wszystkie nasze lokalizacje",
     allLocationsDescription:
-      "Poniżej znajdziesz pełną listę 210 lokalizacji Aurora Beauty Studio. Możesz wyszukać miasto, kraj albo zawęzić listę do regionu.",
+      "Poniżej znajdziesz pełną listę 211 lokalizacji Aurora Beauty Studio. Możesz wyszukać miasto, kraj albo zawęzić listę do regionu.",
     searchPlaceholder: "Szukaj miasta, kraju lub salonu...",
     allRegionsLabel: "Wszystkie regiony",
     locationsCountLabel: "lokalizacji",
@@ -489,7 +526,7 @@ export const locationsContent: Record<Language, LocationsContent> = {
     allLocationsEyebrow: "All locations",
     allLocationsTitle: "Explore all our locations",
     allLocationsDescription:
-      "Below you will find the full list of 210 Aurora Beauty Studio locations. You can search by city, country or narrow the list by region.",
+      "Below you will find the full list of 211 Aurora Beauty Studio locations. You can search by city, country or narrow the list by region.",
     searchPlaceholder: "Search city, country or studio...",
     allRegionsLabel: "All regions",
     locationsCountLabel: "locations",

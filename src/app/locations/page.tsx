@@ -86,6 +86,13 @@ function getNearestLocation(
   }, null);
 }
 
+function normalizeSearchValue(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
 export default function LocationsPage() {
   const { language } = useSitePreferences();
   const page = siteContent[language].pages.locations;
@@ -161,21 +168,21 @@ export default function LocationsPage() {
   }, [content.locations]);
 
   const filteredLocations = useMemo(() => {
-    const normalizedQuery = searchQuery.trim().toLowerCase();
+    const normalizedQuery = normalizeSearchValue(searchQuery.trim());
 
     return content.locations.filter((location) => {
       const matchesRegion =
         selectedRegion === "all" || location.region === selectedRegion;
 
-      const searchableValue = [
-        location.name,
-        location.city,
-        location.country,
-        location.region,
-        location.address,
-      ]
-        .join(" ")
-        .toLowerCase();
+      const searchableValue = normalizeSearchValue(
+        [
+          location.name,
+          location.city,
+          location.country,
+          location.region,
+          location.address,
+        ].join(" "),
+      );
 
       const matchesSearch =
         normalizedQuery.length === 0 ||
@@ -365,16 +372,11 @@ export default function LocationsPage() {
           </Reveal>
 
           {filteredLocations.length > 0 ? (
-            <Reveal
-              key={`${selectedRegion}-${searchQuery}`}
-              stagger
-              className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3"
-              staggerDelay={24}
-            >
+            <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
               {filteredLocations.map((location) => (
                 <article
                   key={location.id}
-                  className="interactive-lift rounded-4xl border border-rose-200 bg-white p-6 shadow-sm hover:border-rose-300 hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-900 dark:hover:border-stone-700 dark:hover:shadow-black/30"
+                  className="interactive-lift rounded-4xl border border-rose-200 bg-white p-6 shadow-sm transition hover:border-rose-300 hover:shadow-xl hover:shadow-rose-200/60 dark:border-stone-800 dark:bg-stone-900 dark:hover:border-stone-700 dark:hover:shadow-black/30"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div>
@@ -423,7 +425,7 @@ export default function LocationsPage() {
                   </a>
                 </article>
               ))}
-            </Reveal>
+            </div>
           ) : (
             <Reveal>
               <div className="mt-8 rounded-4xl border border-rose-200 bg-white p-8 text-center shadow-sm dark:border-stone-800 dark:bg-stone-900">
