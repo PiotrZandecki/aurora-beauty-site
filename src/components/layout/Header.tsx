@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -70,11 +71,18 @@ export function Header() {
           <Link
             href="/"
             onClick={closeMenu}
-            className="group flex items-center gap-3 focus-ring rounded-2xl"
+            className="group flex rounded-2xl focus-ring items-center gap-3"
             aria-label={content.brand}
           >
-            <span className="flex size-10 items-center justify-center rounded-2xl bg-linear-to-br from-rose-300 via-rose-500 to-rose-900 text-sm font-bold text-white shadow-lg shadow-rose-200/70 transition duration-300 group-hover:-rotate-3 group-hover:scale-105 dark:shadow-black/30">
-              A
+            <span className="relative flex size-10 overflow-hidden rounded-2xl bg-rose-50 shadow-lg shadow-rose-200/70 ring-1 ring-rose-200/80 transition duration-300 group-hover:-rotate-3 group-hover:scale-105 dark:bg-stone-900 dark:ring-stone-700 dark:shadow-black/30">
+              <Image
+                src="/brand-icon.png"
+                alt=""
+                width={40}
+                height={40}
+                priority
+                className="size-10 object-cover"
+              />
             </span>
 
             <span className="grid leading-tight">

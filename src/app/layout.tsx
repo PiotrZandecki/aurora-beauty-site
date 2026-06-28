@@ -20,6 +20,27 @@ export const metadata: Metadata = {
   creator: siteConfig.creator,
   publisher: siteConfig.name,
   keywords: siteConfig.keywords,
+  icons: {
+    icon: [
+      {
+        url: "/favicon.ico",
+        sizes: "any",
+      },
+      {
+        url: "/favicon.png",
+        type: "image/png",
+        sizes: "512x512",
+      },
+    ],
+    shortcut: "/favicon.ico",
+    apple: [
+      {
+        url: "/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
+  },
   alternates: {
     canonical: "/",
   },
