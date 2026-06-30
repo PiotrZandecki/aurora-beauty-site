@@ -72,6 +72,7 @@ type BookingContent = {
   employeeLabel: string;
   dayLabel: string;
   timeLabel: string;
+  confirmationStatusLabel: string;
 
   formEyebrow: string;
   formTitle: string;
@@ -85,15 +86,19 @@ type BookingContent = {
     missingLocation: string;
     missingEmployee: string;
     missingSlot: string;
-    successTitle: string;
-    successMessage: string;
   };
+
+  confirmationEyebrow: string;
+  confirmationTitle: string;
+  confirmationDescription: string;
+  bookingReferenceLabel: string;
+  confirmedStatus: string;
+  newBookingButton: string;
 
   visitNoteTitle: string;
   visitNoteDescription: string;
   visitNoteItems: string[];
 
-  email: string;
   services: BookingService[];
   employees: BookingEmployee[];
 };
@@ -103,7 +108,7 @@ export const bookingContent: Record<Language, BookingContent> = {
     pageEyebrow: "Rezerwacja",
     pageTitle: "Umów wizytę w najbliższym salonie Aurora.",
     pageDescription:
-      "Wybierz salon w pobliżu, usługę, osobę obsługującą oraz dogodny termin. Po wysłaniu zapytania zespół salonu potwierdzi dostępność wizyty.",
+      "Wybierz salon w pobliżu, usługę, osobę obsługującą oraz dogodny termin. Po uzupełnieniu danych rezerwacja zostanie automatycznie potwierdzona.",
 
     locationSectionEyebrow: "Krok 1",
     locationSectionTitle: "Wybierz salon, w którym chcesz umówić wizytę.",
@@ -151,33 +156,40 @@ export const bookingContent: Record<Language, BookingContent> = {
     summaryEyebrow: "Podsumowanie",
     summaryTitle: "Twoja wizyta",
     summaryDescription:
-      "Sprawdź szczegóły przed przygotowaniem zapytania. Rezerwacja zostanie potwierdzona przez salon po kontakcie.",
+      "Sprawdź szczegóły przed potwierdzeniem. Po wysłaniu formularza rezerwacja zostanie zaakceptowana automatycznie.",
     locationLabel: "Lokalizacja",
     employeeLabel: "Osoba obsługująca",
     dayLabel: "Dzień",
     timeLabel: "Godzina",
+    confirmationStatusLabel: "Automatyczne potwierdzenie",
 
     formEyebrow: "Krok 5",
     formTitle: "Uzupełnij dane kontaktowe.",
     formDescription:
-      "Podaj dane potrzebne do potwierdzenia wizyty. Wiadomość zostanie przygotowana automatycznie na podstawie wybranych opcji.",
+      "Podaj dane potrzebne do potwierdzenia wizyty. Po kliknięciu przycisku otrzymasz numer rezerwacji i komplet szczegółów wizyty.",
     formLabels: {
       name: "Imię",
       email: "Adres e-mail",
       phone: "Telefon",
       notes: "Dodatkowe informacje",
-      submit: "Przygotuj zapytanie o wizytę",
-      missingLocation: "Wybierz salon przed wysłaniem zapytania.",
-      missingEmployee: "Wybierz osobę obsługującą przed wysłaniem zapytania.",
-      missingSlot: "Wybierz godzinę wizyty przed wysłaniem zapytania.",
-      successTitle: "Zapytanie zostało przygotowane",
-      successMessage:
-        "Jeśli aplikacja pocztowa nie otworzyła się automatycznie, możesz wysłać wiadomość ręcznie na adres hello@aurorabeauty.pl.",
+      submit: "Potwierdź rezerwację",
+      missingLocation: "Wybierz salon przed potwierdzeniem rezerwacji.",
+      missingEmployee:
+        "Wybierz osobę obsługującą przed potwierdzeniem rezerwacji.",
+      missingSlot: "Wybierz godzinę wizyty przed potwierdzeniem rezerwacji.",
     },
+
+    confirmationEyebrow: "Rezerwacja potwierdzona",
+    confirmationTitle: "Twoja wizyta została zarezerwowana.",
+    confirmationDescription:
+      "Poniżej znajdziesz szczegóły potwierdzonej wizyty. Numer rezerwacji zachowaj na wypadek kontaktu z salonem.",
+    bookingReferenceLabel: "Numer rezerwacji",
+    confirmedStatus: "Potwierdzona automatycznie",
+    newBookingButton: "Zarezerwuj kolejną wizytę",
 
     visitNoteTitle: "Dobrze wiedzieć przed wizytą",
     visitNoteDescription:
-      "Dzięki kilku szczegółom łatwiej będzie potwierdzić termin i przygotować usługę pod oczekiwany efekt.",
+      "Dzięki kilku szczegółom łatwiej będzie przygotować usługę pod oczekiwany efekt.",
     visitNoteItems: [
       "wybierz salon najbliżej siebie albo najwygodniejszy dojazdowo",
       "sprawdź, czy wybrana osoba obsługuje konkretną usługę",
@@ -185,7 +197,6 @@ export const bookingContent: Record<Language, BookingContent> = {
       "przy makijażu warto dopisać okazję i preferowany efekt",
     ],
 
-    email: "hello@aurorabeauty.pl",
     services: [
       {
         id: "signature-glow",
@@ -351,7 +362,7 @@ export const bookingContent: Record<Language, BookingContent> = {
     pageEyebrow: "Booking",
     pageTitle: "Book a visit at your nearest Aurora studio.",
     pageDescription:
-      "Choose a nearby studio, service, specialist and preferred appointment time. After submitting your request, the studio team will confirm availability.",
+      "Choose a nearby studio, service, specialist and preferred appointment time. After completing your details, the booking will be confirmed automatically.",
 
     locationSectionEyebrow: "Step 1",
     locationSectionTitle: "Choose the studio where you want to book.",
@@ -399,33 +410,39 @@ export const bookingContent: Record<Language, BookingContent> = {
     summaryEyebrow: "Summary",
     summaryTitle: "Your visit",
     summaryDescription:
-      "Review the details before preparing your request. The appointment will be confirmed by the studio after contact.",
+      "Review the details before confirmation. After submitting the form, the booking will be accepted automatically.",
     locationLabel: "Location",
     employeeLabel: "Specialist",
     dayLabel: "Day",
     timeLabel: "Time",
+    confirmationStatusLabel: "Automatic confirmation",
 
     formEyebrow: "Step 5",
     formTitle: "Add your contact details.",
     formDescription:
-      "Provide the details needed to confirm the visit. The message will be prepared automatically based on your choices.",
+      "Provide the details needed to confirm your visit. After clicking the button, you will receive a booking number and complete appointment details.",
     formLabels: {
       name: "Name",
       email: "E-mail address",
       phone: "Phone",
       notes: "Additional notes",
-      submit: "Prepare appointment request",
-      missingLocation: "Choose a studio before sending the request.",
-      missingEmployee: "Choose a specialist before sending the request.",
-      missingSlot: "Choose an appointment time before sending the request.",
-      successTitle: "Appointment request has been prepared",
-      successMessage:
-        "If your e-mail app did not open automatically, you can send the message manually to hello@aurorabeauty.pl.",
+      submit: "Confirm booking",
+      missingLocation: "Choose a studio before confirming the booking.",
+      missingEmployee: "Choose a specialist before confirming the booking.",
+      missingSlot: "Choose an appointment time before confirming the booking.",
     },
+
+    confirmationEyebrow: "Booking confirmed",
+    confirmationTitle: "Your visit has been booked.",
+    confirmationDescription:
+      "Below are the details of your confirmed appointment. Keep the booking number in case you need to contact the studio.",
+    bookingReferenceLabel: "Booking number",
+    confirmedStatus: "Confirmed automatically",
+    newBookingButton: "Book another visit",
 
     visitNoteTitle: "Good to know before your visit",
     visitNoteDescription:
-      "A few details make it easier to confirm the appointment and prepare the service for your expected result.",
+      "A few details make it easier to prepare the service for your expected result.",
     visitNoteItems: [
       "choose the studio closest to you or the most convenient one",
       "check whether the selected person provides the chosen service",
@@ -433,7 +450,6 @@ export const bookingContent: Record<Language, BookingContent> = {
       "for makeup, mention the occasion and preferred result",
     ],
 
-    email: "hello@aurorabeauty.pl",
     services: [
       {
         id: "signature-glow",

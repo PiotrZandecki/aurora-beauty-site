@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
+import {
+  useCallback,
+  useEffect,
+  useState,
+  type ChangeEvent,
+  type FormEvent,
+} from "react";
 import { Reveal } from "@/components/animations/Reveal";
 import { PageIntro } from "@/components/sections/PageIntro";
 import { SectionHeader } from "@/components/sections/SectionHeader";
@@ -32,6 +38,17 @@ type LocationStatus = "idle" | "loading" | "granted" | "denied" | "unavailable";
 type LocationDistanceResult = {
   location: StudioLocation;
   distance: number;
+};
+
+type ConfirmedBooking = {
+  reference: string;
+  location: string;
+  service: string;
+  employee: string;
+  date: string;
+  time: string;
+  duration: string;
+  customerName: string;
 };
 
 const initialCustomerFormData: CustomerFormData = {
@@ -243,6 +260,13 @@ function formatLongDateLabel(date: Date, language: "pl" | "en") {
   }).format(date);
 }
 
+function createBookingReference() {
+  const timestampPart = Date.now().toString(36).toUpperCase().slice(-6);
+  const randomPart = Math.random().toString(36).toUpperCase().slice(2, 5);
+
+  return `AUR-${timestampPart}-${randomPart}`;
+}
+
 export default function BookingPage() {
   const { language } = useSitePreferences();
   const content = bookingContent[language];
@@ -261,8 +285,9 @@ export default function BookingPage() {
   const [customerFormData, setCustomerFormData] = useState<CustomerFormData>(
     initialCustomerFormData,
   );
-  const [hasSubmitted, setHasSubmitted] = useState(false);
   const [hasTriedSubmit, setHasTriedSubmit] = useState(false);
+  const [confirmedBooking, setConfirmedBooking] =
+    useState<ConfirmedBooking | null>(null);
 
   const mainLocation =
     allLocations.find((location) => location.isMain) ?? allLocations[0];
@@ -346,7 +371,7 @@ export default function BookingPage() {
     return content.locationFallback;
   })();
 
-  function requestUserLocation() {
+  const requestUserLocation = useCallback(() => {
     if (!navigator.geolocation) {
       setLocationStatus("unavailable");
       setUserPosition(null);
@@ -365,6 +390,7 @@ export default function BookingPage() {
         setSelectedEmployeeId("");
         setSelectedDateKey("");
         setSelectedSlotTime(null);
+        setConfirmedBooking(null);
         setLocationStatus("granted");
       },
       () => {
@@ -373,6 +399,7 @@ export default function BookingPage() {
         setSelectedEmployeeId("");
         setSelectedDateKey("");
         setSelectedSlotTime(null);
+        setConfirmedBooking(null);
         setLocationStatus("denied");
       },
       {
@@ -381,7 +408,7 @@ export default function BookingPage() {
         maximumAge: 1000 * 60 * 10,
       },
     );
-  }
+  }, []);
 
   useEffect(() => {
     const timeoutId = window.setTimeout(() => {
@@ -391,13 +418,13 @@ export default function BookingPage() {
     return () => {
       window.clearTimeout(timeoutId);
     };
-  }, []);
+  }, [requestUserLocation]);
 
   function resetAfterLocationChange() {
     setSelectedEmployeeId("");
     setSelectedDateKey("");
     setSelectedSlotTime(null);
-    setHasSubmitted(false);
+    setConfirmedBooking(null);
     setHasTriedSubmit(false);
   }
 
@@ -405,14 +432,14 @@ export default function BookingPage() {
     setSelectedEmployeeId("");
     setSelectedDateKey("");
     setSelectedSlotTime(null);
-    setHasSubmitted(false);
+    setConfirmedBooking(null);
     setHasTriedSubmit(false);
   }
 
   function resetAfterEmployeeChange() {
     setSelectedDateKey("");
     setSelectedSlotTime(null);
-    setHasSubmitted(false);
+    setConfirmedBooking(null);
     setHasTriedSubmit(false);
   }
 
@@ -426,88 +453,45 @@ export default function BookingPage() {
       [name]: value,
     }));
 
-    setHasSubmitted(false);
-  }
-
-  function buildEmailBody() {
-    if (language === "pl") {
-      return [
-        "Dzień dobry,",
-        "",
-        "chciałabym/chciałbym zapytać o rezerwację wizyty w Aurora Beauty Studio.",
-        "",
-        `Salon: ${selectedLocation?.name ?? ""}`,
-        `Miasto: ${selectedLocation?.city ?? ""}`,
-        `Adres: ${selectedLocation?.address ?? ""}`,
-        `Usługa: ${selectedService?.name ?? ""}`,
-        `Osoba obsługująca: ${selectedEmployee?.name ?? ""}`,
-        `Data: ${
-          effectiveSelectedDay
-            ? formatLongDateLabel(effectiveSelectedDay.date, language)
-            : ""
-        }`,
-        `Godzina: ${selectedSlotTime ?? ""}`,
-        `Czas trwania: ${selectedService?.durationMinutes ?? ""} minut`,
-        "",
-        `Imię: ${customerFormData.name}`,
-        `E-mail: ${customerFormData.email}`,
-        `Telefon: ${customerFormData.phone}`,
-        "",
-        "Dodatkowe informacje:",
-        customerFormData.notes || "brak",
-        "",
-        "Pozdrawiam",
-      ].join("\n");
-    }
-
-    return [
-      "Hello,",
-      "",
-      "I would like to ask about booking an appointment at Aurora Beauty Studio.",
-      "",
-      `Studio: ${selectedLocation?.name ?? ""}`,
-      `City: ${selectedLocation?.city ?? ""}`,
-      `Address: ${selectedLocation?.address ?? ""}`,
-      `Service: ${selectedService?.name ?? ""}`,
-      `Specialist: ${selectedEmployee?.name ?? ""}`,
-      `Date: ${
-        effectiveSelectedDay
-          ? formatLongDateLabel(effectiveSelectedDay.date, language)
-          : ""
-      }`,
-      `Time: ${selectedSlotTime ?? ""}`,
-      `Duration: ${selectedService?.durationMinutes ?? ""} minutes`,
-      "",
-      `Name: ${customerFormData.name}`,
-      `E-mail: ${customerFormData.email}`,
-      `Phone: ${customerFormData.phone}`,
-      "",
-      "Additional notes:",
-      customerFormData.notes || "none",
-      "",
-      "Best regards",
-    ].join("\n");
+    setConfirmedBooking(null);
   }
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setHasTriedSubmit(true);
 
-    if (!selectedLocation || !selectedEmployee || !selectedSlotTime) {
+    if (
+      !selectedLocation ||
+      !selectedService ||
+      !selectedEmployee ||
+      !effectiveSelectedDay ||
+      !selectedSlotTime
+    ) {
       return;
     }
 
-    const subject =
-      language === "pl"
-        ? `Zapytanie o wizytę — ${selectedService?.name ?? "Aurora"}`
-        : `Appointment request — ${selectedService?.name ?? "Aurora"}`;
+    setConfirmedBooking({
+      reference: createBookingReference(),
+      location: selectedLocation.name,
+      service: selectedService.name,
+      employee: selectedEmployee.name,
+      date: formatLongDateLabel(effectiveSelectedDay.date, language),
+      time: selectedSlotTime,
+      duration: `${selectedService.durationMinutes} min`,
+      customerName: customerFormData.name,
+    });
 
-    const mailtoUrl = `mailto:${content.email}?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(buildEmailBody())}`;
+    setHasTriedSubmit(false);
+  }
 
-    window.location.assign(mailtoUrl);
-    setHasSubmitted(true);
+  function startNewBooking() {
+    setSelectedLocationId("");
+    setSelectedEmployeeId("");
+    setSelectedDateKey("");
+    setSelectedSlotTime(null);
+    setCustomerFormData(initialCustomerFormData);
+    setConfirmedBooking(null);
+    setHasTriedSubmit(false);
   }
 
   return (
@@ -785,7 +769,7 @@ export default function BookingPage() {
                           onClick={() => {
                             setSelectedDateKey(day.dateKey);
                             setSelectedSlotTime(null);
-                            setHasSubmitted(false);
+                            setConfirmedBooking(null);
                           }}
                           className={`interactive-press focus-ring rounded-3xl border p-4 text-left transition ${
                             isSelected
@@ -824,7 +808,7 @@ export default function BookingPage() {
                               type="button"
                               onClick={() => {
                                 setSelectedSlotTime(slot);
-                                setHasSubmitted(false);
+                                setConfirmedBooking(null);
                                 setHasTriedSubmit(false);
                               }}
                               className={`interactive-press focus-ring rounded-full px-5 py-2.5 text-sm font-semibold transition ${
@@ -851,9 +835,15 @@ export default function BookingPage() {
 
           <Reveal variant="scale-in" delay={120}>
             <aside className="sticky top-24 rounded-4xl border border-rose-200 bg-white p-6 shadow-xl shadow-rose-200/50 dark:border-stone-800 dark:bg-stone-900 dark:shadow-black/30">
-              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-rose-600 dark:text-rose-300">
-                {content.summaryEyebrow}
-              </p>
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <p className="text-sm font-semibold uppercase tracking-[0.25em] text-rose-600 dark:text-rose-300">
+                  {content.summaryEyebrow}
+                </p>
+
+                <span className="rounded-full bg-rose-50 px-3 py-1 text-xs font-semibold text-rose-700 dark:bg-rose-950 dark:text-rose-200">
+                  {content.confirmationStatusLabel}
+                </span>
+              </div>
 
               <h2 className="mt-4 text-3xl font-semibold tracking-tight text-stone-950 dark:text-rose-50">
                 {content.summaryTitle}
@@ -1012,18 +1002,65 @@ export default function BookingPage() {
                 </button>
               </form>
 
-              {hasSubmitted && (
-                <div
-                  className="animate-success mt-6 rounded-3xl border border-rose-200 bg-rose-50 p-5 dark:border-stone-800 dark:bg-stone-950"
-                  role="status"
-                >
-                  <h3 className="text-lg font-semibold text-stone-950 dark:text-rose-50">
-                    {content.formLabels.successTitle}
+              {confirmedBooking && (
+                <div className="animate-success mt-8 rounded-4xl border border-rose-200 bg-rose-50 p-6 dark:border-stone-800 dark:bg-stone-950">
+                  <p className="text-sm font-semibold uppercase tracking-[0.25em] text-rose-600 dark:text-rose-300">
+                    {content.confirmationEyebrow}
+                  </p>
+
+                  <h3 className="mt-4 text-3xl font-semibold text-stone-950 dark:text-rose-50">
+                    {content.confirmationTitle}
                   </h3>
 
-                  <p className="mt-2 leading-7 text-stone-600 dark:text-stone-300">
-                    {content.formLabels.successMessage}
+                  <p className="mt-3 leading-7 text-stone-600 dark:text-stone-300">
+                    {content.confirmationDescription}
                   </p>
+
+                  <div className="mt-6 rounded-3xl bg-white p-5 dark:bg-stone-900">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-600 dark:text-rose-300">
+                      {content.bookingReferenceLabel}
+                    </p>
+
+                    <p className="mt-2 text-2xl font-semibold text-stone-950 dark:text-rose-50">
+                      {confirmedBooking.reference}
+                    </p>
+
+                    <p className="mt-2 text-sm font-semibold text-rose-700 dark:text-rose-200">
+                      {content.confirmedStatus}
+                    </p>
+                  </div>
+
+                  <div className="mt-5 grid gap-3 md:grid-cols-2">
+                    {[
+                      [content.locationLabel, confirmedBooking.location],
+                      [content.serviceLabel, confirmedBooking.service],
+                      [content.employeeLabel, confirmedBooking.employee],
+                      [content.dayLabel, confirmedBooking.date],
+                      [content.timeLabel, confirmedBooking.time],
+                      ["Duration", confirmedBooking.duration],
+                    ].map(([label, value]) => (
+                      <div
+                        key={label}
+                        className="rounded-3xl bg-white p-4 dark:bg-stone-900"
+                      >
+                        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-rose-600 dark:text-rose-300">
+                          {label}
+                        </p>
+
+                        <p className="mt-2 font-semibold text-stone-950 dark:text-rose-50">
+                          {value}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={startNewBooking}
+                    className="interactive-press focus-ring mt-6 rounded-full bg-stone-950 px-6 py-3 text-sm font-semibold text-white transition hover:bg-rose-700 dark:bg-rose-100 dark:text-stone-950 dark:hover:bg-rose-200"
+                  >
+                    {content.newBookingButton}
+                  </button>
                 </div>
               )}
             </div>
