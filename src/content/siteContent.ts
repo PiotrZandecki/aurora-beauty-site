@@ -63,6 +63,7 @@ type SiteContent = {
     gallery: PageIntroContent;
     locations: PageIntroContent;
     feedback: PageIntroContent;
+    booking: PageIntroContent;
     contact: PageIntroContent;
   };
   home: HomeContent;
@@ -82,6 +83,7 @@ export const siteContent: Record<Language, SiteContent> = {
       { label: "Galeria", href: "/gallery" },
       { label: "Lokalizacje", href: "/locations" },
       { label: "Opinie", href: "/feedback" },
+      { label: "Rezerwacja", href: "/booking" },
       { label: "Kontakt", href: "/contact" },
     ],
     pages: {
@@ -122,11 +124,17 @@ export const siteContent: Record<Language, SiteContent> = {
         description:
           "Zobacz opinie wysłane przez formularz strony, komentarze z Facebooka oraz recenzje Google. To przekrojowy obraz tego, jak klientki odbierają usługę, atmosferę i efekty.",
       },
+      booking: {
+        eyebrow: "Rezerwacja",
+        title: "Wybierz usługę, osobę obsługującą i dogodny termin.",
+        description:
+          "Frontendowy moduł rezerwacji gotowy pod backend: wybór usługi, lokalizacji, pracownika oraz dostępnego terminu w kalendarzu najbliższych dni.",
+      },
       contact: {
         eyebrow: "Kontakt",
         title: "Umów wizytę albo zapytaj o najlepszy kierunek usługi.",
         description:
-          "Napisz, czego potrzebujesz, wybierz lokalizację albo sprawdź główny salon. Aurora Beauty Studio ułatwia kontakt, rezerwację i wybór właściwej usługi.",
+          "Napisz, czego potrzebujesz, wybierz lokalizację albo sprawdź najbliższy salon. Aurora Beauty Studio ułatwia kontakt, rezerwację i wybór właściwej usługi.",
       },
     },
     home: {
@@ -173,7 +181,7 @@ export const siteContent: Record<Language, SiteContent> = {
       benefitsTitle:
         "Spokojna wizyta, jasny proces i efekt, który wygląda naturalnie.",
       benefitsDescription:
-        "Strona prowadzi klientkę od pierwszego wrażenia, przez ofertę i cennik, aż do kontaktu i wyboru lokalizacji.",
+        "Strona prowadzi klientkę od pierwszego wrażenia, przez ofertę i cennik, aż do kontaktu, lokalizacji i rezerwacji wizyty.",
       benefits: [
         {
           title: "Naturalny kierunek",
@@ -188,14 +196,14 @@ export const siteContent: Record<Language, SiteContent> = {
         {
           title: "Premium doświadczenie",
           description:
-            "Wizualny styl, język, animacje i kontakt wspierają wrażenie spokojnej marki beauty.",
+            "Wizualny styl, język, animacje i rezerwacja wspierają wrażenie spokojnej marki beauty.",
         },
       ],
 
       ctaTitle: "Gotowa/gotowy sprawdzić, która usługa będzie najlepsza?",
       ctaDescription:
-        "Przejdź do kontaktu, opisz potrzeby i wybierz najlepszy kierunek wizyty w Aurora Beauty Studio.",
-      ctaButton: "Skontaktuj się",
+        "Przejdź do rezerwacji, wybierz usługę, osobę obsługującą i dogodny termin wizyty.",
+      ctaButton: "Zarezerwuj wizytę",
     },
   },
 
@@ -212,6 +220,7 @@ export const siteContent: Record<Language, SiteContent> = {
       { label: "Gallery", href: "/gallery" },
       { label: "Locations", href: "/locations" },
       { label: "Feedback", href: "/feedback" },
+      { label: "Booking", href: "/booking" },
       { label: "Contact", href: "/contact" },
     ],
     pages: {
@@ -252,11 +261,17 @@ export const siteContent: Record<Language, SiteContent> = {
         description:
           "See feedback submitted through the website form, Facebook comments and Google reviews. Together, they show how clients experience the service, atmosphere and results.",
       },
+      booking: {
+        eyebrow: "Booking",
+        title: "Choose a service, specialist and preferred time.",
+        description:
+          "A backend-ready booking frontend: service, location, employee and available appointment time selection with a calendar preview.",
+      },
       contact: {
         eyebrow: "Contact",
         title: "Book a visit or ask about the best service direction.",
         description:
-          "Describe what you need, choose a location or check the main studio. Aurora Beauty Studio makes contact, booking and choosing the right service easier.",
+          "Describe what you need, choose a location or check the nearest studio. Aurora Beauty Studio makes contact, booking and choosing the right service easier.",
       },
     },
     home: {
@@ -303,7 +318,7 @@ export const siteContent: Record<Language, SiteContent> = {
       benefitsTitle:
         "A calm visit, clear process and a result that looks natural.",
       benefitsDescription:
-        "The website guides the client from first impression, through offer and pricing, to contact and location choice.",
+        "The website guides the client from first impression, through offer and pricing, to contact, locations and appointment booking.",
       benefits: [
         {
           title: "Natural direction",
@@ -318,14 +333,14 @@ export const siteContent: Record<Language, SiteContent> = {
         {
           title: "Premium experience",
           description:
-            "Visual style, copy, animations and contact flow support the feeling of a calm beauty brand.",
+            "Visual style, copy, animations and booking flow support the feeling of a calm beauty brand.",
         },
       ],
 
       ctaTitle: "Ready to check which service will suit you best?",
       ctaDescription:
-        "Go to contact, describe your needs and choose the best direction for your visit at Aurora Beauty Studio.",
-      ctaButton: "Contact us",
+        "Go to booking, choose a service, specialist and preferred appointment time.",
+      ctaButton: "Book a visit",
     },
   },
 };
